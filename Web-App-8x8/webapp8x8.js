@@ -27,6 +27,7 @@ function startConnect() {
 
 // Publish a Message
 var messagepayloadjson = new Object();
+	
 messagepayloadjson.pt= document.getElementById('txtbox_Text').value;
 messagepayloadjson.br= document.getElementById('txtbox_Brightness').value;
 messagepayloadjson.r= document.getElementById('txtbox_ColorR').value;
