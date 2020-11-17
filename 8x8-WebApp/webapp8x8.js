@@ -48,7 +48,7 @@ function ToTapToLightPage(){
 }
 
 function ToTapToTextGenerator(){
-	window.location.replace("TapToTextGenerator.html");
+	window.location.replace("TextGenerator.html");
 }
 
 function ToTapToLaunchpad(){

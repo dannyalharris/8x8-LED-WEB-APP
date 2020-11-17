@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<meta name="Description" content=""/>
+    <title>8x8-WebApp</title>
+	 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+   <!-- <link href="css/styles.css" rel="stylesheet" />-->
+  </head>
+	
+  <body>
+	<!--navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="https://www.hs-karlsruhe.de/en/"><img src="images/HsKA Logo.png" height="92" width="277" alt="Hochschule Karlsruhe"></a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav text-uppercase ml-auto">
+					<li class="nav-item active"><a class="nav-link js-scroll-trigger" href="[8x8] Homepage.html">Home <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
+					<li class="nav-item dropdown">
+           			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            		Let's Play
+            		</a>
+            		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              		<a class="dropdown-item" href="#">Tap-To-Light</a>
+              		<a class="dropdown-item" href="#">Text-Generator</a>
+              		<a class="dropdown-item" href="#">Launchpad</a>
+            		</div>
+          			</li>
+<!--					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Tap-To-Light</a> </li>
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToTextGenerator.html">Text-Generator</a> </li>
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Launchpad</a> </li>-->
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
+				</ul>
+			</div>
+		</div>
+	  </nav>
+	  
+	  <section class="page-section" id="functions">
+	  	  <div class="container">
+			  <div class="text-center">
+				  <h2 class="section-heading text-uppercase">Text Generator</h2>
+				  <h3 class="section-subheading text-muted">Create your text here!</h3>
+			  </div>
+			  <div class="row">
+				  <div align="center">
+		<table align="center" style="width: 80">
+			<tr>
+				<td>
+					<strong><span class="auto-style24">Text</span></strong>
+				</td>
+				<td>
+					 : 
+				</td>
+				<td>
+					<input type="text" id="txtbox_Text" class="auto-style24" style="width: 200px; height: 30px;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong><span class="auto-style24">Color (Red)</span></strong>
+				</td>
+				<td>
+					 : 
+				</td>
+				<td>
+					<input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorR" class="auto-style24" style="width: 200px; height: 30px;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong><span class="auto-style24">Color (Green)</span></strong>
+				</td>
+				<td>
+					 : 
+				</td>
+				<td>
+					<input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorG" class="auto-style24" style="width: 200px; height: 30px;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong><span class="auto-style24">Color (Blue)</span></strong>
+				</td>
+				<td>
+					 : 
+				</td>
+				<td>
+					<input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorB" class="auto-style24" style="width: 200px; height: 30px;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong><span class="auto-style24">Brightness</span></strong>
+				</td>
+				<td>
+					 : 
+				</td>
+				<td>
+					<input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_Brightness" class="auto-style24" style="width: 200px; height: 30px;">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br/>
+	<div align="center">
+		<button style="width: 200px;  height: 50px; background-color: gray; border-color: black; font-size: 30px" onClick="startConnect()" >Send</button>
+	</div>
+	<br/>	
+			  </div>
+		  </div>
+	</section>
+	  
+    <footer class="text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p>Copyright © MyCompany. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+	  <script src="WebApp8x8.js"></script>
+  </body>
+</html>
