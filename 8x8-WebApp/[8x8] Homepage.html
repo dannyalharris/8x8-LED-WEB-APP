@@ -1,130 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<meta name="Description" content=""/>
-    <title>8x8-WebApp</title>
-	 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- Bootstrap -->
-    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-   <!-- <link href="css/styles.css" rel="stylesheet" />-->
-  </head>
-	
-  <body>
-	<!--navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header-footer" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="https://www.hs-karlsruhe.de/en/"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item active"><a class="nav-link js-scroll-trigger" href="#mainNav">Home <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
-					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#functions">Let's Play</a> </li>
-					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
-				</ul>
-			</div>
-		</div>
-	  </nav>
-	 <!--Masterhead-->
-  	 <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Welcome To Our WebApp!</div>
-                <div class="masthead-heading">8x8-WebApp</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More »</a>
-            </div>
-        </header>
-	  <!--Functions Grid-->
-	  <section class="page-section" id="functions">
-	  	  <div class="container">
-			  <div class="text-center">
-				  <h2 class="section-heading text-uppercase">Let's play!</h2>
-				  <h3 class="section-subheading text-muted">Control your 8x8 LED from here.</h3>
-			  </div>
-			  <div class="row">
-				<div class="col-sm-6 mb-4 col-lg-4 text-center">
-					<div class="portfolio-item">
-      			<a href="#Tap-to-Light" data-toggle="modal">
-        		<img src="images/Icon_Tap.png" class="img-fluid rounded-circle img-style-1" alt="Tap-To-Light" style="width: 255px; height: 255px;">
-      			</a>
-				<div class="portfolio-caption">
-                    <div class="portfolio-caption-heading">Tap-To-Light</div>
-                     <div class="portfolio-caption-subheading text-muted">Tap and light-up LED</div>
-                     </div>
-				</div>
-   			 </div>
-				  <div class="col-sm-6 mb-4 col-lg-4 text-center">
-					<div class="portfolio-item">
-      			<a href="#TextGenerator" data-toggle="modal">
-        		<img src="images/Icon_Text.png" class="img-fluid rounded-circle img-style-2" alt="TextGenerator" style="width: 255px; height: 255px;" onClick="ToTapToTextGenerator()">
-      			</a>
-				<div class="portfolio-caption">
-                    <div class="portfolio-caption-heading">Text Generator</div>
-                     <div class="portfolio-caption-subheading text-muted">Insert text to be display</div>
-                     </div>
-				</div>
-   			 </div>
-				  <div class="col-sm-6 mb-4 col-lg-4 text-center">
-					<div class="portfolio-item">
-      			<a href="#Launchpad" data-toggle="modal">
-        		<img src="images/Icon_Launchpad.png" class="img-fluid rounded-circle img-style-3" alt="Launchpad" style="width: 255px; height: 255px;">
-      			</a>
-				<div class="portfolio-caption">
-                    <div class="portfolio-caption-heading">Launchpad</div>
-                     <div class="portfolio-caption-subheading text-muted">Play with your LED</div>
-                     </div>
-				</div>
-   			 </div>
-			  </div>
-		  </div>
-	  </section>
-    <footer class="text-center bg-header-footer">
-		<div class="container" align="center">      
-        <table align="center" width="100%" style="margin-left: auto;margin-right: auto;">
-			<tr align= "justify">
-				<th width="100px">Find us on</th>
-				<th width="100px">More information</th>
-				<th width="100px">Contact</th>
-				<th width="100px">Website created by</th>
-			</tr>
-			<tr align="justify">
-			<td width="100px">Youtube</td>
-			<td width="100px">Project documention</td>
-			<td width="100px">Prof. Dipl. -Ing. Jürgen Walter</td>
-			<td width="100px">Danial Hawari</td>
-			</tr>
-			<tr align="justify">
-			<td width="100px" >GitHub</td>
-			<td width="100px">HIT Karlsruhe</td>
-			<td width="100px">Hochscule Karlsruhe</td>
-			<td width="100px">Kai Li Ong</td>
-			</tr>
-        </table>
+<head>
+<meta charset="utf-8"/>
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="Description" content=""/>
+<title>8x8-WebApp</title>
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+<!-- Font Awesome icons (free version)--> 
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> 
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)--> 
+<!-- <link href="css/styles.css" rel="stylesheet" />-->
+</head>
 
-        </div>
-		<div></div><div></div><div></div>
-        <div class="row">
-          <div class="col-12">
-            <p width="auto">Copyright © HIT-Karlsruhe. All rights reserved.</p>
+<body>
+<!--navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
+    <a class="navbar-brand js-scroll-trigger" href="https://www.hs-karlsruhe.de/en/" target="_blank"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="#mainNav">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#functions">Let's Play</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--Masterhead--> 
+<!-- Masthead-->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead-subheading">Welcome To Our WebApp!</div>
+    <div class="masthead-heading">8x8-WebApp</div>
+    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More »</a> </div>
+</header>
+<!--Functions Grid-->
+<section class="page-section" id="functions">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Let's play!</h2>
+      <h3 class="section-subheading text-muted">Control your 8x8 LED from here.</h3>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#Tap-to-Light" data-toggle="modal"> <img src="images/Icon_Tap.png" class="img-fluid rounded-circle img-style-1" alt="Tap-To-Light" style="width: 255px; height: 255px;"> </a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Tap-To-Light</div>
+            <div class="portfolio-caption-subheading text-muted">Tap and light-up LED</div>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-    <script src="js/jquery-3.4.1.min.js"></script> 
-    <!-- Include all compiled plugins (below), or include individual files as needed --> 
-    <script src="js/popper.min.js"></script> 
-    <script src="js/bootstrap-4.4.1.js"></script>
-	<script src="webapp8x8.js"></script>
-  </body>
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#TextGenerator" data-toggle="modal"> <img src="images/Icon_Text.png" class="img-fluid rounded-circle img-style-2" alt="TextGenerator" style="width: 255px; height: 255px;" onClick="ToTapToTextGenerator()"> </a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Text Generator</div>
+            <div class="portfolio-caption-subheading text-muted">Insert text to be display</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#Launchpad" data-toggle="modal"> <img src="images/Icon_Launchpad.png" class="img-fluid rounded-circle img-style-3" alt="Launchpad" style="width: 255px; height: 255px;"> </a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Launchpad</div>
+            <div class="portfolio-caption-subheading text-muted">Play with your LED</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="text-center bg-footer" style="position: relative">
+  <div class="container" align="center">
+    <table align="center" width="100%" style="margin-left: auto;margin-right: auto;">
+      <tr align= "justify">
+        <th width="100px">Find us on</th>
+        <th width="140px">For more information</th>
+        <th width="140px">Contact</th>
+        <th width="100px">Website created by</th>
+      </tr>
+      <tr align="justify">
+        <td width="100px">Youtube</td>
+        <td width="140px">Project documention</td>
+        <td width="140px">Prof. Dipl. -Ing. Jürgen Walter</td>
+        <td width="100px">Danial Hawari</td>
+      </tr>
+      <tr align="justify">
+        <td width="100px" >GitHub</td>
+        <td width="140px">HIT Karlsruhe</td>
+        <td width="140px">Hochscule Karlsruhe</td>
+        <td width="100px">Kai Li Ong</td>
+      </tr>
+    </table>
+  </div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>Copyright © 2020 HIT-Karlsruhe. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-3.4.1.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.4.1.js"></script> 
+<script src="webapp8x8.js"></script>
+</body>
 </html>

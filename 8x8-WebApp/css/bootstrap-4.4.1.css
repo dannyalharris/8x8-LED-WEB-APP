@@ -2673,6 +2673,27 @@ fieldset:disabled a.btn {
   border-color: #17a2b8;
 }
 
+.button-send {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+}
+
+.button-send:hover {background-color: #3e8e41}
+
+.button-send:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .btn-info:hover {
   color: #fff;
   background-color: #138496;
@@ -6840,12 +6861,16 @@ button.bg-danger:focus {
   background-color: #EEEEEE;
 }
 
-.bg-header-footer {
+.bg-header {
   background-color: lavenderblush;box-shadow: 0px 5px 5px #27272780;
 -webkit-box-shadow: 0px 5px 5px #27272780;
 -moz-box-shadow: 0px 5px 5px #27272780;
 position: relative;
 z-index: auto;
+}
+
+.bg-footer {
+  background-color: lavenderblush;
 }
 
 a.bg-light:hover, a.bg-light:focus,
