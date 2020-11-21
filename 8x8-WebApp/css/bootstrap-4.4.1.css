@@ -6792,6 +6792,10 @@ button.bg-secondary:focus {
   background-color: #545b62 !important;
 }
 
+.bg-hska {
+  background-color: #F0F0E1!important;
+}
+
 .bg-success {
   background-color: #28a745 !important;
 }
@@ -6833,7 +6837,15 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: lavender!important;
+  background-color: #EEEEEE;
+}
+
+.bg-header-footer {
+  background-color: lavenderblush;box-shadow: 0px 5px 5px #27272780;
+-webkit-box-shadow: 0px 5px 5px #27272780;
+-moz-box-shadow: 0px 5px 5px #27272780;
+position: relative;
+z-index: auto;
 }
 
 a.bg-light:hover, a.bg-light:focus,
