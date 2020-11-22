@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<!------------------------------------------------
+ * Created by:
+ * Kai Li, Ong
+ * Danial Hawari
+ *
+ * Winter Semester 2020
+ *
+ * 8x8 WepApp Project
+ *
+ * More informations: http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App
+ *
+ ------------------------------------------------>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -52,7 +64,7 @@
     </div>
     <div class="row">
       <div class="col-sm-6 mb-4 col-lg-4 text-center">
-        <div class="portfolio-item"> <a href="#Tap-to-Light" data-toggle="modal"> <img src="images/Icon_Tap.png" class="img-fluid rounded-circle img-style-1" alt="Tap-To-Light" style="width: 255px; height: 255px;"> </a>
+        <div class="portfolio-item"> <a href="#Tap-to-Light" data-toggle="modal"> <img src="images/Icon_Tap.png" class="img-fluid rounded-circle img-style-1" alt="Tap-To-Light" style="width: 255px; height: 255px;" onClick="ToTapToLight()"> </a>
           <div class="portfolio-caption">
             <div class="portfolio-caption-heading">Tap-To-Light</div>
             <div class="portfolio-caption-subheading text-muted">Tap and light-up LED</div>
@@ -80,26 +92,40 @@
 </section>
 <footer class="text-center bg-footer" style="position: relative">
   <div class="container" align="center">
-    <table align="center" width="100%" style="margin-left: auto;margin-right: auto;">
-      <tr align= "justify">
-        <th width="100px">Find us on</th>
-        <th width="140px">For more information</th>
-        <th width="140px">Contact</th>
-        <th width="100px">Website created by</th>
-      </tr>
-      <tr align="justify">
-        <td width="100px">Youtube</td>
-        <td width="140px">Project documention</td>
-        <td width="140px">Prof. Dipl. -Ing. Jürgen Walter</td>
-        <td width="100px">Danial Hawari</td>
-      </tr>
-      <tr align="justify">
-        <td width="100px" >GitHub</td>
-        <td width="140px">HIT Karlsruhe</td>
-        <td width="140px">Hochscule Karlsruhe</td>
-        <td width="100px">Kai Li Ong</td>
-      </tr>
-    </table>
+	  <div class="row">
+		  <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Youtube</div>
+				<div class="portfolio-caption-subheading text-muted" align="left">GitHub</div>
+				<div></div>
+          </div>
+		  </div>
+		  <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Project documentation</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">HIT Karsruhe</div>
+				<div></div>
+          </div>
+	  </div>
+		   <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Prof. Dipl. -Ing. Jürgen  Walter</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">Hochschule Karsruhe</div>
+				<div></div>
+          </div>
+	  </div>
+		   <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Danial Hawari</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">Kai Li Ong</div>
+				<div></div>
+          </div>
+	  </div>
+	  </div>
   </div>
   <pre></pre>
   <pre></pre>

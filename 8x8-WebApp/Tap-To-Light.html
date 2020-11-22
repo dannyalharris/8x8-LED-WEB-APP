@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!------------------------------------------------
+ * Created by:
+ * Kai Li, Ong
+ * Danial Hawari
+ *
+ * Winter Semester 2020
+ *
+ * 8x8 WepApp Project
+ *
+ * More informations: http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App
+ *
+ ------------------------------------------------>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="Description" content=""/>
+<title>8x8-WebApp</title>
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+<!-- Font Awesome icons (free version)--> 
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> 
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)--> 
+<!-- <link href="css/styles.css" rel="stylesheet" />--> 
+<!--Colour Picker--> 
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
+<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+</head>
+
+<body>
+<!--navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
+  <div class="container"> <a class="navbar-brand js-scroll-trigger" href="https://www.hs-karlsruhe.de/en/" target="_blank"><img src="images/HsKA Logo.png" height="92" width="277" alt="Hochschule Karlsruhe"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="[8x8] Homepage.html">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="Tap-To-Light.html">Tap-To-Light</a> <a class="dropdown-item" href="TextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="#">Launchpad</a> </div>
+        </li>
+        <!--					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Tap-To-Light</a> </li>
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToTextGenerator.html">Text-Generator</a> </li>
+					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Launchpad</a> </li>-->
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="page-section" id="functions">
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Tap-To-Light</h2>
+      <h3 class="section-subheading text-muted">
+        <marquee behavior="scroll" direction="left" width="200" align="center">
+        Tap any pixel to light it up!
+        </marquee>
+      </h3>
+    </div>
+    <div align="center">
+      <div class="row" align="center">
+        <div class="col-xs-2">
+          <div class="col-xs-12">
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel">1</button>
+              <button button type="button" class="btn btn-pixel">2</button>
+              <button button type="button" class="btn btn-pixel">3</button>
+              <button button type="button" class="btn btn-pixel">4</button>
+              <button button type="button" class="btn btn-pixel">5</button>
+              <button button type="button" class="btn btn-pixel">6</button>
+              <button button type="button" class="btn btn-pixel">7</button>
+              <button button type="button" class="btn btn-pixel">8</button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+            <div class="portfolio-caption">
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+              <button button type="button" class="btn btn-pixel"></button>
+            </div>
+          </div>
+          <div class="portfolio-caption">
+            <table>
+              <tr style="margin: 5px">
+                <td><strong><span class="portfolio-caption-heading">Brightness</span></strong></td>
+                <td> : </td>
+                <td><input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()">
+                  <span id="range_Brightness_TtLTxt"></span></td>
+              </tr>
+              <tr style="margin: 5px">
+                <td><strong><span class="portfolio-caption-heading">Color</span></strong></td>
+                <td> : </td>
+                <td><button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <pre></pre>
+    </div>
+  </div>
+</section>
+<footer class="text-center bg-footer">
+  <div class="container" align="center">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Youtube</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">GitHub</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Project documentation</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">HIT Karsruhe</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Prof. Dipl. -Ing. Jürgen  Walter</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Hochschule Karsruhe</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Danial Hawari</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Kai Li Ong</div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>Copyright © 2020 HIT-Karlsruhe. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-3.4.1.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.4.1.js"></script> 
+<script src="WebApp8x8.js"></script>
+</body>
+</html>

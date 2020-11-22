@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<!------------------------------------------------
+ * Created by:
+ * Kai Li, Ong
+ * Danial Hawari
+ *
+ * Winter Semester 2020
+ *
+ * 8x8 WepApp Project
+ *
+ * More informations: http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App
+ *
+ ------------------------------------------------>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -18,6 +30,8 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)--> 
 <!-- <link href="css/styles.css" rel="stylesheet" />-->
+<!--Colour Picker--> 
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 
 <body>
@@ -30,7 +44,7 @@
         <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="[8x8] Homepage.html">Home <span class="sr-only">(current)</span></a></li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Tap-To-Light</a> <a class="dropdown-item" href="#">Text-Generator</a> <a class="dropdown-item" href="#">Launchpad</a> </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="Tap-To-Light.html">Tap-To-Light</a> <a class="dropdown-item" href="TextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="#">Launchpad</a> </div>
         </li>
         <!--					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Tap-To-Light</a> </li>
 					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToTextGenerator.html">Text-Generator</a> </li>
@@ -46,78 +60,88 @@
 	<pre></pre>
 	<pre></pre>
 	<pre></pre>
-	<pre></pre>
-	<pre></pre>
 	
   <div class="container">
     <div class="text-center">
       <h2 class="section-heading text-uppercase">Text Generator</h2>
       <h3 class="section-subheading text-muted">
         <marquee behavior="scroll" direction="left" width="200" align="center">
-        create your text here!
+        Create your text here!
         </marquee>
       </h3>
     </div>
-    <div>
-      <div align="center">
-        <table >
-          <tr>
-            <td><strong><span class="auto-style24">Text</span></strong></td>
-            <td> : </td>
-            <td><input type="text" id="txtbox_Text" class="auto-style24" style="width: 200px; height: 30px;"></td>
+      <div align="center" style="background-color: azure;">
+        <table width="80%" cellpadding="15px" >
+          <tr style="margin: 5px">
+            <td width="30%"><strong><span class="portfolio-caption-heading">Text</span></strong></td>
+            <td width="5%"> : </td>
+            <td width="50%"><input type="text" id="txtbox_Text" class="custom-range"></td>
           </tr>
-          <tr>
-            <td><strong><span class="auto-style24">Color (Red)</span></strong></td>
+          <tr style="margin: 5px">
+            <td><strong><span class="portfolio-caption-heading">Brightness</span></strong></td>
             <td> : </td>
-            <td><input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorR" class="auto-style24" style="width: 200px; height: 30px;"></td>
-          </tr>
-          <tr>
-            <td><strong><span class="auto-style24">Color (Green)</span></strong></td>
+            <td><input type="range" min= "0" max="255" id="range_Brightness" class="custom-range" onChange="range_Brightness_txtChange()">
+			 <span id="range_Brightness_txt"></span></td>
+			</tr>
+          <tr style="margin: 5px">
+            <td><strong><span class="portfolio-caption-heading">Color</span></strong></td>
             <td> : </td>
-            <td><input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorG" class="auto-style24" style="width: 200px; height: 30px;"></td>
+            <td><button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
           </tr>
-          <tr>
-            <td><strong><span class="auto-style24">Color (Blue)</span></strong></td>
-            <td> : </td>
-            <td><input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_ColorB" class="auto-style24" style="width: 200px; height: 30px;"></td>
-          </tr>
-          <tr>
-            <td><strong><span class="auto-style24">Brightness</span></strong></td>
-            <td> : </td>
-            <td><input type="number" min= "0" oninput="validity.valid||(value='')" id="txtbox_Brightness" class="auto-style24" style="width: 200px; height: 30px;"></td>
-          </tr>
-          <tr> </tr>
         </table>
+		  <div class="modal" id="colorPicker_Modal">
+		  	<div class="modal-content">
+			  <div id="picker"></div>
+			  <br/> &nbsp;
+			  <div>
+			  <button type="button" class="btn btn-success" onClick="setColorPicker()">Set</button>
+			  <button type="button" class="btn btn-secondary" onClick="closeColorPicker()">Cancel</button>
+			  </div>
+			  </div>
+		  	</div>
         <pre></pre>
         <div align="center">
-          <button class="btn button-send" onClick="startConnect()" >Send</button>
+          <button class="btn button-send" onClick="startConnect()" style="margin: 15px">Send</button>
         </div>
       </div>
     </div>
-  </div>
 </section>
 <footer class="text-center bg-footer">
   <div class="container" align="center">
-    <table align="center" width="100%" style="margin-left: auto;margin-right: auto;">
-      <tr align= "justify">
-        <th width="100px">Find us on</th>
-        <th width="140px">For more information</th>
-        <th width="140px">Contact</th>
-        <th width="100px">Website created by</th>
-      </tr>
-      <tr align="justify">
-        <td width="100px">Youtube</td>
-        <td width="140px">Project documention</td>
-        <td width="140px">Prof. Dipl. -Ing. Jürgen Walter</td>
-        <td width="100px">Danial Hawari</td>
-      </tr>
-      <tr align="justify">
-        <td width="100px" >GitHub</td>
-        <td width="140px">HIT Karlsruhe</td>
-        <td width="140px">Hochscule Karlsruhe</td>
-        <td width="100px">Kai Li Ong</td>
-      </tr>
-    </table>
+    <div class="row">
+		  <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Youtube</div>
+				<div class="portfolio-caption-subheading text-muted" align="left">GitHub</div>
+				<div></div>
+          </div>
+		  </div>
+		  <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Project documentation</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">HIT Karsruhe</div>
+				<div></div>
+          </div>
+	  </div>
+		   <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Prof. Dipl. -Ing. Jürgen  Walter</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">Hochschule Karsruhe</div>
+				<div></div>
+          </div>
+	  </div>
+		   <div class="col-lg-3 col-md-6 col-12">
+			<div class="portfolio-caption">
+            <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
+            <div class="portfolio-caption-subheading text-muted" align="left">Danial Hawari</div>
+			<div class="portfolio-caption-subheading text-muted" align="left">Kai Li Ong</div>
+				<div></div>
+          </div>
+	  </div>
+	  </div>
   </div>
   <pre></pre>
   <pre></pre>

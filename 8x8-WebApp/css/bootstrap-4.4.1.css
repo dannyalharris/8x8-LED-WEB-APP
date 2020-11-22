@@ -2675,21 +2675,23 @@ fieldset:disabled a.btn {
 
 .button-send {
   display: inline-block;
-  padding: 15px 25px;
+  padding:6px 25px;
   font-size: 24px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: #003399;
   border: none;
 }
 
-.button-send:hover {background-color: #3e8e41}
+.button-send:hover {
+	background-color: #00145E;
+color: #A0A0A0}
 
 .button-send:active {
-  background-color: #3e8e41;
+  background-color: #00145E;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -2727,7 +2729,7 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #212529;
-  background-color: #ffc107;
+  background-color: #ffcf07;
   border-color: #ffc107;
 }
 
@@ -4070,7 +4072,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range {
-  width: 100%;
+  width: 85%;
   height: 1.4rem;
   padding: 0;
   background-color: transparent;
@@ -4124,7 +4126,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range::-webkit-slider-runnable-track {
-  width: 100%;
+  width: auto;
   height: 0.5rem;
   color: transparent;
   cursor: pointer;
@@ -6012,12 +6014,19 @@ a.close.disabled {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 1;
   display: none;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   outline: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  -webkit-animation-duration: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+
 }
 
 .modal-dialog {
@@ -6108,13 +6117,15 @@ a.close.disabled {
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #f7f7f7;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #888/*rgba(0, 0, 0, 0.2)*/;
   border-radius: 0.3rem;
   outline: 0;
+  margin: 20% auto;
+  padding: 20px;
 }
 
 .modal-backdrop {
@@ -10514,4 +10525,107 @@ header.masthead .masthead-heading {
   .img-style-3:hover {
     border-color: #FFF1A5;
   }
+
+.btn-color {
+  color: #fff;
+  border-color: #f2f2f2;
+  margin: auto;
+ background-color: #f00;
+}
+
+.btn-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-color:hover {
+  color: #fff;
+  border-color: #d4d4d4;
+}
+
+.btn-color:focus, .btn-color.focus {
+  color: #fff;
+  border-color: #d4d4d4;
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+}
+
+.btn-color.disabled, .btn-color:disabled {
+  color: #fff;
+  border-color: #d4d4d4;
+}
+
+.btn-color:not(:disabled):not(.disabled):active, .btn-color:not(:disabled):not(.disabled).active,
+.show > .btn-color.dropdown-toggle {
+  color: #fff;
+  background-color: #7a7a7a;
+  border-color: #262626;
+}
+
+.btn-color:not(:disabled):not(.disabled):active:focus, .btn-color:not(:disabled):not(.disabled).active:focus,
+.show > .btn-color.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+}
+
+.btn-pixel {
+  	border-color: #f2f2f2;
+  	margin: 2px;
+	width: 50px;
+	height: 50px; 
+	background-color: #E30000; 
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+.btn-pixel:hover {
+  	color: #fff;
+ 	border-color: #6B0D0D;
+	background-color: #B30A0A;
+}
+
+.btn-pixel:focus, .btn-pixel.focus {
+  	color: #fff;
+  	border-color: #6B0D0D;
+	background-color: #B30A0A;
+ 	box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
+}
+
+.btn-pixel.disabled, .btn-pixel:disabled {
+  color: #fff;
+  border-color: #6B0D0D;
+}
+
+.btn-pixel:not(:disabled):not(.disabled):active, .btn-pixel:not(:disabled):not(.disabled).active,
+.show > .btn-pixel.dropdown-toggle {
+  color: #fff;
+  background-color: #7a7a7a;
+  border-color: #262626;
+}
+
+.btn-pixel:not(:disabled):not(.disabled):active:focus, .btn-pixel:not(:disabled):not(.disabled).active:focus,
+.show > .btn-pixel.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+}
+
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
