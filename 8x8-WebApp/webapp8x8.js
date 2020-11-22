@@ -39,7 +39,7 @@ client.connect({
  * Tap the button to home
  ************************************************/
 function ToTapToHome(){
-	window.location.replace("WebApp8x8.html");
+	window.location.replace("TapToHomepage.html");
 }
 
 /*------------------------------------------------
@@ -120,15 +120,23 @@ function range_Brightness_txtChange(){
  ************************************************/
 
 function ToTapToLight(){
-	window.location.replace("Tap-To-Light.html");
+	window.location.replace("TapToLight.html");
 }
 
 function ToTapToTextGenerator(){
-	window.location.replace("TextGenerator.html");
+	window.location.replace("TapToTextGenerator.html");
 }
 
 function ToTapToLaunchpad(){
 	window.location.replace("TapToLaunchpad.html");
+}
+
+function ToTapToSettings(){
+	window.location.replace("TapToSettings.html");
+}
+
+function ToTapToAbout(){
+	window.location.replace("TapToAbout.html");
 }
 
 function ToTapToSettings(){

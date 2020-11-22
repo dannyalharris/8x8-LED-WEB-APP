@@ -29,9 +29,11 @@
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)--> 
-<!-- <link href="css/styles.css" rel="stylesheet" />-->
+<!-- <link href="css/styles.css" rel="stylesheet" />--> 
 <!--Colour Picker--> 
-<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
+<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
 </head>
 
 <body>
@@ -41,27 +43,22 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="[8x8] Homepage.html">Home <span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
+        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToAbout.html">About</a> </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="Tap-To-Light.html">Tap-To-Light</a> <a class="dropdown-item" href="TextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="#">Launchpad</a> </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
         </li>
-        <!--					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Tap-To-Light</a> </li>
-					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToTextGenerator.html">Text-Generator</a> </li>
-					<li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Launchpad</a> </li>-->
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToSettings.html">Settings</a> </li>
       </ul>
     </div>
   </div>
 </nav>
 <section class="page-section" id="functions">
-   <pre></pre>
-   <pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	
-  <div class="container">
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+ <div class="container">
     <div class="text-center">
       <h2 class="section-heading text-uppercase">Text Generator</h2>
       <h3 class="section-subheading text-muted">
@@ -70,7 +67,7 @@
         </marquee>
       </h3>
     </div>
-      <div align="center" style="background-color: azure;">
+      <div align="center">
         <table width="80%" cellpadding="15px" >
           <tr style="margin: 5px">
             <td width="30%"><strong><span class="portfolio-caption-heading">Text</span></strong></td>
@@ -104,44 +101,51 @@
           <button class="btn button-send" onClick="startConnect()" style="margin: 15px">Send</button>
         </div>
       </div>
+	   <pre></pre>
     </div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
 </section>
 <footer class="text-center bg-footer">
   <div class="container" align="center">
     <div class="row">
-		  <div class="col-lg-3 col-md-6 col-12">
-			<div class="portfolio-caption">
-            <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
-            <div class="portfolio-caption-subheading text-muted" align="left">Youtube</div>
-				<div class="portfolio-caption-subheading text-muted" align="left">GitHub</div>
-				<div></div>
-          </div>
-		  </div>
-		  <div class="col-lg-3 col-md-6 col-12">
-			<div class="portfolio-caption">
-            <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
-            <div class="portfolio-caption-subheading text-muted" align="left">Project documentation</div>
-			<div class="portfolio-caption-subheading text-muted" align="left">HIT Karsruhe</div>
-				<div></div>
-          </div>
-	  </div>
-		   <div class="col-lg-3 col-md-6 col-12">
-			<div class="portfolio-caption">
-            <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
-            <div class="portfolio-caption-subheading text-muted" align="left">Prof. Dipl. -Ing. Jürgen  Walter</div>
-			<div class="portfolio-caption-subheading text-muted" align="left">Hochschule Karsruhe</div>
-				<div></div>
-          </div>
-	  </div>
-		   <div class="col-lg-3 col-md-6 col-12">
-			<div class="portfolio-caption">
-            <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
-            <div class="portfolio-caption-subheading text-muted" align="left">Danial Hawari</div>
-			<div class="portfolio-caption-subheading text-muted" align="left">Kai Li Ong</div>
-				<div></div>
-          </div>
-	  </div>
-	  </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Youtube</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">GitHub</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Project documentation</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">HIT Karsruhe</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Prof. Dipl. -Ing. Jürgen  Walter</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Hochschule Karsruhe</div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Danial Hawari</div>
+          <div class="portfolio-caption-subheading text-muted" align="left">Kai Li Ong</div>
+          <div></div>
+        </div>
+      </div>
+    </div>
   </div>
   <pre></pre>
   <pre></pre>
@@ -162,6 +166,5 @@
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.4.1.js"></script> 
 <script src="WebApp8x8.js"></script>
-	
 </body>
 </html>

@@ -33,16 +33,18 @@
 
 <body>
 <!--navigation-->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="functions">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
     <a class="navbar-brand js-scroll-trigger" href="https://www.hs-karlsruhe.de/en/" target="_blank"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="#mainNav">Home <span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">About</a> </li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#functions">Let's Play</a> </li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="...">Settings</a> </li>
+        <li class="nav-item active"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html">Home <span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToAbout.html">About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+        </li>									  
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToSettings.html">Settings</a> </li>
       </ul>
     </div>
   </div>
@@ -80,7 +82,7 @@
         </div>
       </div>
       <div class="col-sm-6 mb-4 col-lg-4 text-center">
-        <div class="portfolio-item"> <a href="#Launchpad" data-toggle="modal"> <img src="images/Icon_Launchpad.png" class="img-fluid rounded-circle img-style-3" alt="Launchpad" style="width: 255px; height: 255px;"> </a>
+        <div class="portfolio-item"> <a href="#Launchpad" data-toggle="modal"> <img src="images/Icon_Launchpad.png" class="img-fluid rounded-circle img-style-3" alt="Launchpad" style="width: 255px; height: 255px;" onClick="ToTapToLauchpad()"> </a>
           <div class="portfolio-caption">
             <div class="portfolio-caption-heading">Launchpad</div>
             <div class="portfolio-caption-subheading text-muted">Play with your LED</div>
@@ -144,6 +146,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.4.1.js"></script> 
-<script src="webapp8x8.js"></script>
+<script src="WebApp8x8.js"></script>
 </body>
 </html>
