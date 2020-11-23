@@ -43,7 +43,34 @@ function ToTapToHome(){
 }
 
 /*------------------------------------------------
- * Tap the button to text generator
+ * Tap the button to Specific Tab
+ ************************************************/
+function ToTapToLight(){
+	window.location.replace("TapToLight.html");
+}
+
+function ToTapToTextGenerator(){
+	window.location.replace("TapToTextGenerator.html");
+}
+
+function ToTapToLaunchpad(){
+	window.location.replace("TapToLaunchpad.html");
+}
+
+function ToTapToSettings(){
+	window.location.replace("TapToSettings.html");
+}
+
+function ToTapToAbout(){
+	window.location.replace("TapToAbout.html");
+}
+
+function ToTapToSettings(){
+	window.location.replace("TapToSettings.html");
+}
+
+/*------------------------------------------------
+ * In the Text Generator
  ************************************************/
 
 function openColorPicker(){	document.getElementById("colorPicker_Modal").style.display = "block";	
@@ -115,31 +142,40 @@ function range_Brightness_txtChange(){
 	document.getElementById('range_Brightness_txt').value = document.getElementById('range_Brightness').value
 }
 
-/*------------------------------------------------
- * Tap the button to Tap-To-Light
- ************************************************/
+var A1 = document.getElementById('A1');
 
-function ToTapToLight(){
-	window.location.replace("TapToLight.html");
+//var rgbLED = []
+var rgbLED = [
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0]
+];
+//rgbLED[0][0] = A1
+
+
+function TapToLightBtn(cell){
+	console.log(cell);
+	var i;
+	for(i= 0; i < 8 ; i++)
+	{
+		if(cell == "A" + i)
+		{
+			if(rgbLED[0][i] == 0)
+			{
+				rgbLED[0][i] = 1;
+			}else if (rgbLED[0][i] == 1)
+			{
+				rgbLED[0][i] = 0;
+			}
+			
+		}
+	}	
+	console.log(rgbLED);
+	var myJSON = JSON.stringify(rgbLED);
+	console.log(myJSON);
+	var message = new Paho.MQTT.Message(myJSON);
+	message.destinationName = "8x8-WebApp/TextErzeugung";
+	message.qos = 0;
+	client.send(message);
 }
-
-function ToTapToTextGenerator(){
-	window.location.replace("TapToTextGenerator.html");
-}
-
-function ToTapToLaunchpad(){
-	window.location.replace("TapToLaunchpad.html");
-}
-
-function ToTapToSettings(){
-	window.location.replace("TapToSettings.html");
-}
-
-function ToTapToAbout(){
-	window.location.replace("TapToAbout.html");
-}
-
-function ToTapToSettings(){
-	window.location.replace("TapToSettings.html");
-}
-
