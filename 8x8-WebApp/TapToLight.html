@@ -32,8 +32,6 @@
 <!-- <link href="css/styles.css" rel="stylesheet" />--> 
 <!--Colour Picker--> 
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
-<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
 </head>
 
 <body>
@@ -180,10 +178,20 @@
               <tr style="margin: 5px">
                 <td><strong><span class="portfolio-caption-heading">Color</span></strong></td>
                 <td> : </td>
-                <td><button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
+                <td><button id="btnColorPicker_TtL" class="btn-color btn-fluid" onClick="openColorPicker_TtL()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
               </tr>
             </table>
           </div>
+	<div class="modal" id="colorPicker_Modal_TtL">
+		  	<div class="modal-content">
+			  <div id="picker"></div>
+			  <br/> &nbsp;
+			  <div>
+			  <button type="button" class="btn btn-success" onClick="setColorPicker_TtL()">Set</button>
+			  <button type="button" class="btn btn-secondary" onClick="closeColorPicker_TtL()">Cancel</button>
+			  </div>
+			  </div>
+		  	</div>
 </section>
 <footer class="text-center bg-footer">
   <div class="container" align="center">

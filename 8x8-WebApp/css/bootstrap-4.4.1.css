@@ -10588,14 +10588,14 @@ header.masthead .masthead-heading {
 
 .btn-pixel:hover {
   	color: white;
- 	border-color: #6B0D0D;
-	background-color: #ED1C24;
+ 	border-color: #222222;
+	background-color: #d1cfcf;
 }
 
 .btn-pixel:focus, .btn-pixel.focus {
   	color: #fff;
-  	border-color: #6B0D0D;
-	background-color: #B30A0A;
+  	border-color: #222222;
+	background-color: #d1cfcf;
  	box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 
