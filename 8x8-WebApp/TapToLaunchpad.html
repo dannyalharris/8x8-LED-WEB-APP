@@ -48,6 +48,23 @@
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item active" href="TapToLaunchpad.html">Launchpad <span class="sr-only">(current)</span></a> </div>
         </li>
+		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			  <div class="dropdown-item-text">
+			  	<span class="text-uppercase">Battery Status: </span> 
+				  <br/>
+				<span id="BatteryStatusTxt"></span>
+				  <span> %</span>
+			  </div>
+			  <div class="dropdown-divider"></div>
+			   <div class="dropdown-item-text">
+			  	<span class="text-uppercase" id="LDRStatus">LDR Status: </span> 
+				   <br/>
+				<span id="LDRStatusTxt"></span>
+				   <span> %</span>
+			  </div>
+          </div>
+        </li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToSettings.html">Settings</a> </li>
       </ul>
     </div>
