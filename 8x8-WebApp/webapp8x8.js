@@ -18,318 +18,252 @@ client = new Paho.MQTT.Client("mqtt.eclipse.org", Number(80), "/mqtt", "clientId
 
 // set callback handlers
 client.onConnectionLost = function (responseObject) {
-    console.log("Connection Lost: "+responseObject.errorMessage);
+  console.log("Connection Lost: " + responseObject.errorMessage);
 }
 
 client.onMessageArrived = function (message) {
-  console.log("Message Arrived: "+message.payloadString);
+  console.log("Message Arrived: " + message.payloadString);
 }
 
 // Called when the connection is made
-function onConnect(){
-	console.log("Connected!");
+function onConnect() {
+  console.log("Connected!");
 }
 
 // Connect the client, providing an onConnect callback
 client.connect({
-	onSuccess: onConnect
+  onSuccess: onConnect
 });
-	
+
 /*------------------------------------------------
  * Tap the button to home
  ************************************************/
-function ToTapToHome(){
-	window.location.replace("TapToHomepage.html");
+function ToTapToHome() {
+  window.location.replace("TapToHomepage.html");
 }
 
 /*------------------------------------------------
  * Tap the button to Specific Tab
  ************************************************/
-function ToTapToLight(){
-	window.location.replace("TapToLight.html");
+function ToTapToLight() {
+  window.location.replace("TapToLight.html");
 }
 
-function ToTapToTextGenerator(){
-	window.location.replace("TapToTextGenerator.html");
+function ToTapToTextGenerator() {
+  window.location.replace("TapToTextGenerator.html");
 }
 
-function ToTapToLaunchpad(){
-	window.location.replace("TapToLaunchpad.html");
+function ToTapToLaunchpad() {
+  window.location.replace("TapToLaunchpad.html");
 }
 
-function ToTapToSettings(){
-	window.location.replace("TapToSettings.html");
+function ToTapToSettings() {
+  window.location.replace("TapToSettings.html");
 }
 
-function ToTapToAbout(){
-	window.location.replace("TapToAbout.html");
+function ToTapToAbout() {
+  window.location.replace("TapToAbout.html");
 }
 
-function ToTapToSettings(){
-	window.location.replace("TapToSettings.html");
+function ToTapToSettings() {
+  window.location.replace("TapToSettings.html");
 }
 
 /*------------------------------------------------
  * In the Text Generator
  ************************************************/
 
-function openColorPicker(){	document.getElementById("colorPicker_Modal").style.display = "block";	
+function openColorPicker() {
+  document.getElementById("colorPicker_Modal").style.display = "block";
 }
 
-function closeColorPicker(){
-	document.getElementById("colorPicker_Modal").style.display = "none";
+function closeColorPicker() {
+  document.getElementById("colorPicker_Modal").style.display = "none";
 }
 
-window.onclick = function(event){
-	if(event.target == document.getElementById("colorPicker_Modal")){
-		document.getElementById("colorPicker_Modal").style.display = "none";
-	}
+window.onclick = function (event) {
+  if (event.target == document.getElementById("colorPicker_Modal")) {
+    document.getElementById("colorPicker_Modal").style.display = "none";
+  }
 }
 
 var color_Hex = "#f0f0f0";
-var color_Hex_TtL = "f00";
+var color_Hex_TtL = "ff0000";
 
 var colorPicker = new iro.ColorPicker("#picker", {
   // Set the size of the color picker
   width: 200,
   // Set the initial color to pure red
-  color: "#f00"
+  color: "#ff0000"
 });
 // listen to a color picker's color:change event
 // color:change callbacks receive the current color
-colorPicker.on('color:change', function(color) {
+colorPicker.on('color:change', function (color) {
   // log the current color as a HEX string
   console.log(color.hexString);
-	color_Hex = color.hexString;
-	color_Hex_TtL = color.hexString;
-	//document.getElementById(cell).style. = color.hexString;
+  color_Hex = color.hexString;
+  color_Hex_TtL = color.hexString;
 });
 
 
 var result;
-function setColorPicker(){
-	document.getElementById("colorPicker_Modal").style.display = "none";
-	document.getElementById("btnColorPicker").style.backgroundColor = color_Hex;
-	var red,green,blue;
-	color_Hex = color_Hex.replace('#','');
-    red = parseInt(color_Hex.substring(0,2), 16);
-    green = parseInt(color_Hex.substring(2,4), 16);
-    blue = parseInt(color_Hex.substring(4,6), 16);
+var Red = 255;
+var Green = 0;
+var Blue = 0;
 
-    result = 'rgba('+red+','+green+','+blue+')';
-	
-	console.log(result);
-	//console.log("rgb("+ +r + "," + +g + "," + +b + ")");
+function setColorPicker() {
+  document.getElementById("colorPicker_Modal").style.display = "none";
+  document.getElementById("btnColorPicker").style.backgroundColor = color_Hex;
+  var red, green, blue;
+  color_Hex = color_Hex.replace('#', '');
+  Red = parseInt(color_Hex.substring(0, 2), 16);
+  Green = parseInt(color_Hex.substring(2, 4), 16);
+  Blue = parseInt(color_Hex.substring(4, 6), 16);
+
+  result = 'rgba(' + Red + ',' + Green + ',' + Blue + ')';
+
+  console.log(result);
+  //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
 }
 
 function startConnect() {
 
-// Publish a Message
-var messagepayloadjson = new Object();
-	
-messagepayloadjson.pt= document.getElementById('txtbox_Text').value;
-messagepayloadjson.br= document.getElementById('range_Brightness').value;
-messagepayloadjson.r= red;
-messagepayloadjson.g= green;
-messagepayloadjson.b= blue
+  // Publish a Message
+  var messagepayloadjson = new Object();
 
-var messagepayloadstring = JSON.stringify(messagepayloadjson);
-var message = new Paho.MQTT.Message(messagepayloadstring);
-message.destinationName = "8x8-WebApp/TextErzeugung";
-message.qos = 0;
-client.send(message);
-	
+  messagepayloadjson.txt = document.getElementById('txtbox_Text').value;
+  //messagepayloadjson.br = document.getElementById('range_Brightness').value;
+  messagepayloadjson.r = Red;
+  messagepayloadjson.g = Green;
+  messagepayloadjson.b = Blue
+  messagepayloadjson.spd = document.getElementById('range_Speed').value;
+
+  var messagepayloadstring = JSON.stringify(messagepayloadjson);
+  console.log(messagepayloadstring);
+  var message = new Paho.MQTT.Message(messagepayloadstring);
+  message.destinationName = "LED88ESP32/TextGenerator";
+  message.qos = 0;
+  client.send(message);
+
 }
 
-function range_Brightness_txtChange(){
-	document.getElementById('range_Brightness_txt').value = document.getElementById('range_Brightness').value;
+function range_Brightness_txtChange() {
+  document.getElementById('range_Brightness_txt').value = document.getElementById('range_Brightness').value;
+}
+function range_Speed_txtChange() {
+  document.getElementById('range_Speed_txt').value = document.getElementById('range_Speed').value;
 }
 
-function range_Brightness_TtLChange(){
-	document.getElementById('range_Brightness_TtLTxt').value = document.getElementById('range_Brightness_TtL').value;
+/*------------------------------------------------
+ * In the Tap-to-Light
+ ************************************************/
+function range_Brightness_TtLChange() {
+  document.getElementById('range_Brightness_TtLTxt').value = document.getElementById('range_Brightness_TtL').value;
 }
 
-//var A1 = document.getElementById('A1');
-
-//var rgbLED = []
-var rgbLED = [
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0]
+var LED_Pixel = [
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]
 ];
 //rgbLED[0][0] = A1
+//var LED_RGB = [
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
+//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)']
+//];
 
-messagepayloadjson.br= document.getElementById('range_Brightness_TtL').value;
-messagepayloadjson.r= red;
-messagepayloadjson.g= green;
-messagepayloadjson.b= blue
+var Row_TtL;
+var Col_TtL;
+var Red_TtL = 255;
+var Green_TtL = 0;
+var Blue_TtL = 0;
+var On_TtL;
 
-
-function openColorPicker_TtL(){	document.getElementById("colorPicker_Modal_TtL").style.display = "block";	
+function openColorPicker_TtL() {
+  document.getElementById("colorPicker_Modal_TtL").style.display = "block";
 }
 
-function closeColorPicker_TtL(){
-	document.getElementById("colorPicker_Modal_TtL").style.display = "none";
+function closeColorPicker_TtL() {
+  document.getElementById("colorPicker_Modal_TtL").style.display = "none";
 }
 // listen to a color picker's color:change event
 // color:change callbacks receive the current color
 var result_TtL;
 
-function setColorPicker_TtL(){
-	
-	console.log(color_Hex_TtL);
-	document.getElementById("colorPicker_Modal_TtL").style.display = "none";
-	document.getElementById("btnColorPicker_TtL").style.backgroundColor = color_Hex_TtL;
-	var red,green,blue;
-	
-	color_Hex_TtL = color_Hex_TtL.replace('#','');
-    red = parseInt(color_Hex_TtL.substring(0,2), 16);
-    green = parseInt(color_Hex_TtL.substring(2,4), 16);
-    blue = parseInt(color_Hex_TtL.substring(4,6), 16);
+function setColorPicker_TtL() {
 
-    result_TtL = 'rgba('+red+','+green+','+blue+')';
-	
-	console.log(result_TtL);
-	console.log(color_Hex_TtL);
+  console.log("Color in Hex of Tap to Light : " + color_Hex_TtL);
+  document.getElementById("colorPicker_Modal_TtL").style.display = "none";
+  document.getElementById("btnColorPicker_TtL").style.backgroundColor = color_Hex_TtL;
+
+  color_Hex_TtL = color_Hex_TtL.replace('#', '');
+  Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
+  Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
+  Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
+
+  result_TtL = 'rgba(' + Red_TtL + ',' + Green_TtL + ',' + Blue_TtL + ')';
+
+  console.log(result_TtL);
+  console.log(color_Hex_TtL);
 }
 
-function TapToLightBtn(cell){
-	console.log(cell);
-	var i;
-	
-	
-	console.log("#" + color_Hex_TtL);
-	
-	for(i= 0; i < 8 ; i++)
-	{
-		if(cell == "A" + i)
-		{
-			if(rgbLED[0][i] == 0)
-			{
-				rgbLED[0][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[0][i] == 1)
-			{
-				rgbLED[0][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "B" + i)
-		{
-			if(rgbLED[1][i] == 0)
-			{
-				rgbLED[1][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[1][i] == 1)
-			{
-				rgbLED[1][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "C" + i)
-		{
-			if(rgbLED[2][i] == 0)
-			{
-				rgbLED[2][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[2][i] == 1)
-			{
-				rgbLED[2][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "D" + i)
-		{
-			if(rgbLED[3][i] == 0)
-			{
-				rgbLED[3][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[3][i] == 1)
-			{
-				rgbLED[3][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "E" + i)
-		{
-			if(rgbLED[4][i] == 0)
-			{
-				rgbLED[4][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[4][i] == 1)
-			{
-				rgbLED[4][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "F" + i)
-		{
-			if(rgbLED[5][i] == 0)
-			{
-				rgbLED[5][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[5][i] == 1)
-			{
-				rgbLED[5][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "G" + i)
-		{
-			if(rgbLED[6][i] == 0)
-			{
-				rgbLED[6][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[6][i] == 1)
-			{
-				rgbLED[6][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-		if(cell == "H" + i)
-		{
-			if(rgbLED[7][i] == 0)
-			{
-				rgbLED[7][i] = 1;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#" + color_Hex_TtL;
-			}else if (rgbLED[7][i] == 1)
-			{
-				rgbLED[7][i] = 0;
-				console.log(cell);
-				document.getElementById(cell).style.background = "#f8f8ff";
-			}
-			
-		}
-	}
-	//console.log(rgbLED);
-	
-	var myJSON = JSON.stringify(rgbLED);
-	console.log(myJSON);
-	var message = new Paho.MQTT.Message(myJSON);
-	message.destinationName = "8x8-WebApp/TextErzeugung";
-	message.qos = 0;
-	client.send(message);
+function TapToLightBtn(cell) {
+  console.log("Cell triggered: " + cell);
+  var i
+  var j;
+
+  for (i = 0; i < 8; i++) {
+    for (j = 0; j < 8; j++) {
+      if ((i.toString() + j.toString()) == cell.toString()) {
+        console.log("String linked: " + i.toString() + j.toString());
+        if (LED_Pixel[i][j] == 0) {
+          LED_Pixel[i][j] = 1;
+          Row_TtL = i;
+          Col_TtL = j;
+          On_TtL = 1;
+          console.log("Cell to on: " + cell);
+          console.log(color_Hex_TtL);
+          document.getElementById(cell).style.background = "#" + color_Hex_TtL;
+        } else if (LED_Pixel[i][j] == 1) {
+          LED_Pixel[i][j] = 0;
+          Row_TtL = i;
+          Col_TtL = j;
+          On_TtL = 0;
+          console.log("Cell to off: " + cell);
+          document.getElementById(cell).style.background = "#f8f8ff";
+        }
+      }
+    }
+
+  }
+
+  console.log("Row_TtL: " + Row_TtL + "Col_TtL: " + Col_TtL + "On_TtL: " + On_TtL);
+  // Publish a Message
+  var messagepayloadjson_TtL = new Object();
+  //messagepayloadjson_TtL.br = document.getElementById('range_Brightness_TtL').value;
+  messagepayloadjson_TtL.col = Col_TtL;
+  messagepayloadjson_TtL.row = Row_TtL;
+  messagepayloadjson_TtL.on = On_TtL;
+  messagepayloadjson_TtL.r = Red_TtL;
+  messagepayloadjson_TtL.g = Green_TtL;
+  messagepayloadjson_TtL.b = Blue_TtL;
+
+  var messagepayloadstring_TtL = JSON.stringify(messagepayloadjson_TtL);
+  console.log(messagepayloadstring_TtL);
+  var message = new Paho.MQTT.Message(messagepayloadstring_TtL);
+  var message = new Paho.MQTT.Message(messagepayloadstring);
+  message.destinationName = "LED88ESP32/Pixels";
+  message.qos = 0;
+  client.send(message);
 }
