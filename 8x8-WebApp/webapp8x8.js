@@ -242,6 +242,9 @@ var Red_TtL = 255;
 var Green_TtL = 0;
 var Blue_TtL = 0;
 var On_TtL;
+var Red_TtL_Inner = 255;
+var Green_TtL_Inner = 0;
+var Blue_TtL_Inner = 0;
 
 function openColorPicker_TtL() {
   document.getElementById("colorPicker_Modal_TtL").style.display = "block";
@@ -261,9 +264,9 @@ function setColorPicker_TtL() {
   document.getElementById("btnColorPicker_TtL").style.backgroundColor = color_Hex_TtL;
 
   color_Hex_TtL = color_Hex_TtL.replace('#', '');
-  Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
-  Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
-  Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
+  Red_TtL_Inner = Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
+  Green_TtL_Inner = Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
+  Blue_TtL_Inner = Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
 	
   result_TtL = 'rgba(' + Red_TtL + ',' + Green_TtL + ',' + Blue_TtL + ')';
 
@@ -285,6 +288,9 @@ function TapToLightBtn(cell) {
           Row_TtL = i;
           Col_TtL = j;
           On_TtL = 1;
+		  Red_TtL = Red_TtL_Inner;
+		  Green_TtL = Green_TtL_Inner;
+		  Blue_TtL = Blue_TtL_Inner;
           console.log("Cell to on: " + cell);
           console.log(color_Hex_TtL);
           document.getElementById(cell).style.background = "#" + color_Hex_TtL;
@@ -293,9 +299,9 @@ function TapToLightBtn(cell) {
           Row_TtL = i;
           Col_TtL = j;
           On_TtL = 0;
-			Red_TtL = 0;
-			Green_TtL = 0;
-			Blue_TtL = 0;
+		  Red_TtL = 0;
+		  Green_TtL = 0;
+		  Blue_TtL = 0;
           console.log("Cell to off: " + cell);
           document.getElementById(cell).style.background = "#f8f8ff";
         }
