@@ -264,7 +264,7 @@ function setColorPicker_TtL() {
   Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
   Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
   Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
-
+	
   result_TtL = 'rgba(' + Red_TtL + ',' + Green_TtL + ',' + Blue_TtL + ')';
 
   console.log(result_TtL);
@@ -293,6 +293,9 @@ function TapToLightBtn(cell) {
           Row_TtL = i;
           Col_TtL = j;
           On_TtL = 0;
+			Red_TtL = 0;
+			Green_TtL = 0;
+			Blue_TtL = 0;
           console.log("Cell to off: " + cell);
           document.getElementById(cell).style.background = "#f8f8ff";
         }
