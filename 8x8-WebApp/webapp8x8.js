@@ -140,10 +140,10 @@ function startConnect() {
 
   var messagepayloadstring = JSON.stringify(messagepayloadjson);
   console.log(messagepayloadstring);
-  var message = new Paho.MQTT.Message(messagepayloadstring);
+  var message_0 = new Paho.MQTT.Message(messagepayloadstring);
   message.destinationName = "LED88ESP32/TextGenerator";
   message.qos = 0;
-  client.send(message);
+  client.send(message_0);
 
 }
 
@@ -261,9 +261,9 @@ function TapToLightBtn(cell) {
 
   var messagepayloadstring_TtL = JSON.stringify(messagepayloadjson_TtL);
   console.log(messagepayloadstring_TtL);
-  var message = new Paho.MQTT.Message(messagepayloadstring_TtL);
-  var message = new Paho.MQTT.Message(messagepayloadstring);
-  message.destinationName = "LED88ESP32/Pixels";
-  message.qos = 0;
-  client.send(message);
+  var message_1 = new Paho.MQTT.Message(messagepayloadstring_TtL);
+  #var message = new Paho.MQTT.Message(messagepayloadstring);
+  message_1.destinationName = "LED88ESP32/Pixels";
+  message_1.qos = 0;
+  client.send(message_1);
 }
