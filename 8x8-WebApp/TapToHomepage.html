@@ -27,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <!-- Core theme CSS (includes Bootstrap)--> 
 <!-- <link href="css/styles.css" rel="stylesheet" />-->
 </head>
@@ -45,6 +46,12 @@
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			  <div class="dropdown-item-text">
+			  	<span class="text-uppercase">MQTT Status: </span> 
+				  <br/>
+				<span id="MQTTStatusTxt"></span>
+				  <span></span>
+			  </div>
+			  <div class="dropdown-item-text">
 			  	<span class="text-uppercase">Battery Status: </span> 
 				  <br/>
 				<span id="BatteryStatusTxt"></span>
@@ -59,11 +66,32 @@
 			  </div>
           </div>
         </li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToSettings.html">Settings</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()">Settings</a> </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right: 0; " id="mySetting">
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+  <button onclick="Setting_Close()" class="w3-bar-item w3-button w3-large closebtn w3-right-align">&times;</button>
+	<div class="w3-bar-item">
+		<span class="text-uppercase">MQTT Status: </span>
+				
+	</div>
+  <a href="#" class="w3-bar-item w3-button">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button">Link 3</a>
+</div>
+	
 <!--Masterhead--> 
 <!-- Masthead-->
 <header class="masthead">

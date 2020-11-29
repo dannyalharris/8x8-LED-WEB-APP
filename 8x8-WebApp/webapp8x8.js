@@ -42,15 +42,20 @@ function ToTapToLaunchpad() {
 }
 
 function ToTapToSettings() {
-  window.location.replace("TapToSettings.html");
+  //window.location.replace("TapToSettings.html");
+	document.getElementById('Settings_sidebar').style.display = "block";
 }
 
 function ToTapToAbout() {
   window.location.replace("TapToAbout.html");
 }
 
-function ToTapToSettings() {
-  window.location.replace("TapToSettings.html");
+function Setting_Open() {
+  document.getElementById("mySetting").style.display = "block";
+}
+
+function Setting_Close() {
+  document.getElementById("mySetting").style.display = "none";
 }
 
 
@@ -353,3 +358,5 @@ function TapToLightBtn(cell) {
   client.send(message_Brightness);
   
 }
+
+
