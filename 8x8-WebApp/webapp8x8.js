@@ -13,44 +13,28 @@
  *
  ************************************************/
 
-// Create a client instance: Broker, Port, Websocket Path, Client ID
-client = new Paho.MQTT.Client("mqtt.eclipse.org", Number(80), "/mqtt", "clientId");
-
-// set callback handlers
-client.onConnectionLost = function (responseObject) {
-  console.log("Connection Lost: " + responseObject.errorMessage);
-}
-
-client.onMessageArrived = function (message) {
-  console.log("Message Arrived: " + message.payloadString);
-}
-
-// Called when the connection is made
-function onConnect() {
-  console.log("Connected!");
-}
-
-// Connect the client, providing an onConnect callback
-client.connect({
-  onSuccess: onConnect
-});
-
-/*------------------------------------------------
- * Tap the button to home
- ************************************************/
-function ToTapToHome() {
-  window.location.replace("TapToHomepage.html");
-}
+var LightOff = "TextGenerator";
+var MACAddress = "ALL";
+var ConnectionStatus;
 
 /*------------------------------------------------
  * Tap the button to Specific Tab
  ************************************************/
 function ToTapToLight() {
   window.location.replace("TapToLight.html");
+  LightOff = "TapToLight";
+  console.log(LightOff);
 }
 
 function ToTapToTextGenerator() {
   window.location.replace("TapToTextGenerator.html");
+  //LightOff = "TextGenerator";
+  //console.log(LightOff);
+}
+
+function TapToLightLoaded(){
+	LightOff="TapToLight";
+	console.log(LightOff);
 }
 
 function ToTapToLaunchpad() {
@@ -67,6 +51,53 @@ function ToTapToAbout() {
 
 function ToTapToSettings() {
   window.location.replace("TapToSettings.html");
+}
+
+
+// Create a client instance: Broker, Port, Websocket Path, Client ID
+client = new Paho.MQTT.Client("mqtt.eclipse.org", Number(80), "/mqtt", "clientId");
+
+// set callback handlers
+client.onConnectionLost = function (responseObject) {
+  console.log("Connection Lost: " + responseObject.errorMessage);
+}
+
+client.onMessageArrived = function (message) {
+  console.log("Message Arrived: " + message.payloadString);
+}
+
+// Called when the connection is made
+function onConnect() {
+  console.log("Connected!");
+  ConnectionStatus = "Connected";
+
+	  console.log(LightOff);
+  var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "LightOff";
+  messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
+	
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+}
+
+// Connect the client, providing an onConnect callback
+client.connect({
+  onSuccess: onConnect
+});
+
+
+
+
+/*------------------------------------------------
+ * Tap the button to home
+ ************************************************/
+function ToTapToHome() {
+  window.location.replace("TapToHomepage.html");
 }
 
 /*------------------------------------------------
@@ -128,11 +159,24 @@ function setColorPicker() {
 
 function startConnect() {
 
+  console.log(LightOff);
+  var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "TextGenerator";
+  messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
+	
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+
+	
   // Publish a Message
   var messagepayloadjson = new Object();
 
   messagepayloadjson.txt = document.getElementById('txtbox_Text').value;
-  //messagepayloadjson.br = document.getElementById('range_Brightness').value;
   messagepayloadjson.r = Red;
   messagepayloadjson.g = Green;
   messagepayloadjson.b = Blue
@@ -140,10 +184,19 @@ function startConnect() {
 
   var messagepayloadstring = JSON.stringify(messagepayloadjson);
   console.log(messagepayloadstring);
-  var message_0 = new Paho.MQTT.Message(messagepayloadstring);
+  var message = new Paho.MQTT.Message(messagepayloadstring);
   message.destinationName = "LED88ESP32/TextGenerator";
   message.qos = 0;
-  client.send(message_0);
+  client.send(message);
+	
+  var messagepayloadjson_Brightness = new Object();
+  messagepayloadjson_Brightness.br = document.getElementById('range_Brightness').value;
+  var messagepayloadstring_Brightness = JSON.stringify(messagepayloadjson_Brightness);
+  console.log(messagepayloadstring_Brightness);
+  var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness);
+  message_Brightness.destinationName = "LED88ESP32/Brightness";
+  message_Brightness.qos = 0;
+  client.send(message_Brightness);
 
 }
 
@@ -189,6 +242,9 @@ var Red_TtL = 255;
 var Green_TtL = 0;
 var Blue_TtL = 0;
 var On_TtL;
+var Red_TtL_Inner = 255;
+var Green_TtL_Inner = 0;
+var Blue_TtL_Inner = 0;
 
 function openColorPicker_TtL() {
   document.getElementById("colorPicker_Modal_TtL").style.display = "block";
@@ -208,10 +264,10 @@ function setColorPicker_TtL() {
   document.getElementById("btnColorPicker_TtL").style.backgroundColor = color_Hex_TtL;
 
   color_Hex_TtL = color_Hex_TtL.replace('#', '');
-  Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
-  Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
-  Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
-
+  Red_TtL_Inner = Red_TtL = parseInt(color_Hex_TtL.substring(0, 2), 16);
+  Green_TtL_Inner = Green_TtL = parseInt(color_Hex_TtL.substring(2, 4), 16);
+  Blue_TtL_Inner = Blue_TtL = parseInt(color_Hex_TtL.substring(4, 6), 16);
+	
   result_TtL = 'rgba(' + Red_TtL + ',' + Green_TtL + ',' + Blue_TtL + ')';
 
   console.log(result_TtL);
@@ -232,6 +288,9 @@ function TapToLightBtn(cell) {
           Row_TtL = i;
           Col_TtL = j;
           On_TtL = 1;
+		  Red_TtL = Red_TtL_Inner;
+		  Green_TtL = Green_TtL_Inner;
+		  Blue_TtL = Blue_TtL_Inner;
           console.log("Cell to on: " + cell);
           console.log(color_Hex_TtL);
           document.getElementById(cell).style.background = "#" + color_Hex_TtL;
@@ -240,6 +299,9 @@ function TapToLightBtn(cell) {
           Row_TtL = i;
           Col_TtL = j;
           On_TtL = 0;
+		  Red_TtL = 0;
+		  Green_TtL = 0;
+		  Blue_TtL = 0;
           console.log("Cell to off: " + cell);
           document.getElementById(cell).style.background = "#f8f8ff";
         }
@@ -247,6 +309,21 @@ function TapToLightBtn(cell) {
     }
 
   }
+	
+
+  console.log(LightOff);
+  var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "TapToLight";
+  messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
+	
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+
 
   console.log("Row_TtL: " + Row_TtL + "Col_TtL: " + Col_TtL + "On_TtL: " + On_TtL);
   // Publish a Message
@@ -261,9 +338,18 @@ function TapToLightBtn(cell) {
 
   var messagepayloadstring_TtL = JSON.stringify(messagepayloadjson_TtL);
   console.log(messagepayloadstring_TtL);
-  var message_1 = new Paho.MQTT.Message(messagepayloadstring_TtL);
-  #var message = new Paho.MQTT.Message(messagepayloadstring);
-  message_1.destinationName = "LED88ESP32/Pixels";
-  message_1.qos = 0;
-  client.send(message_1);
+  var message = new Paho.MQTT.Message(messagepayloadstring_TtL);
+  message.destinationName = "LED88ESP32/Pixels";
+  message.qos = 0;
+  client.send(message);
+	
+  var messagepayloadjson_Brightness_TtL = new Object();
+  messagepayloadjson_Brightness_TtL.br = document.getElementById('range_Brightness_TtL').value;
+  var messagepayloadstring_Brightness_TtL = JSON.stringify(messagepayloadjson_Brightness_TtL);
+  console.log(messagepayloadstring_Brightness_TtL);
+  var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness_TtL);
+  message_Brightness.destinationName = "LED88ESP32/Brightness";
+  message_Brightness.qos = 0;
+  client.send(message_Brightness);
+  
 }

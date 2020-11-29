@@ -100,7 +100,7 @@
 			<tr style="margin: 5px">
             <td><strong><span class="portfolio-caption-heading">Speed</span></strong></td>
             <td> : </td>
-            <td><input type="range" min= "0" max="255" id="range_Speed" class="custom-range" onChange="range_Speed_txtChange()">
+            <td><input type="range" min= "50" max="255" id="range_Speed" class="custom-range" onChange="range_Speed_txtChange()">
 			 <span id="range_Speed_txt"></span></td>
 			</tr>
           <tr style="margin: 5px">
@@ -189,5 +189,22 @@
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.4.1.js"></script> 
 <script src="WebApp8x8.js"></script>
+	<script>
+		addEventListener('load', (event) => {
+            console.log('The TextGenerator page is fully loaded.');
+			
+			  var messagepayloadjson_Command = new Object();
+  			messagepayloadjson_Command.cmd = "TextGenerator";//LightOff"";
+  messagepayloadjson_Command.adr = "ALL";//MACAddress"";//"FF22DDAA0011"
+	
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+        });
+	</script>
 </body>
 </html>
