@@ -52,6 +52,7 @@ function ToTapToAbout() {
 
 function Setting_Open() {
   document.getElementById("mySetting").style.display = "block";
+  document.getElementById("mySetting").style.width = "auto";
 }
 
 function Setting_Close() {

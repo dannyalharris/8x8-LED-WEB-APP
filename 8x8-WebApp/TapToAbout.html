@@ -28,6 +28,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <!-- Core theme CSS (includes Bootstrap)--> 
 <!-- <link href="css/styles.css" rel="stylesheet" />--> 
 <!--Colour Picker--> 
@@ -43,7 +44,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger active" href="TapToAbout.html">About<span class="sr-only">(current)</span></a> </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
@@ -54,6 +55,13 @@
         </li>
 		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			   <div class="dropdown-item-text">
+			  	<span class="text-uppercase">MQTT Status: </span> 
+				  <br/>
+				<span id="MQTTStatusTxt"></span>
+				  <span></span>
+			  </div>
+			   <div class="dropdown-divider"></div>
 			  <div class="dropdown-item-text">
 			  	<span class="text-uppercase">Battery Status: </span> 
 				  <br/>
@@ -69,11 +77,96 @@
 			  </div>
           </div>
         </li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToSettings.html">Settings</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
     </div>
   </div>
 </nav>
+	
+	<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right: 0; " id="mySetting">
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+  <button onclick="Setting_Close()" class="w3-bar-item w3-button w3-large closebtn w3-right-align">&times;</button>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Energy Auto-Optimization: </span>
+		<label class="switch"><input type="checkbox" id="EnergyOpti_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	<div class="w3-bar-divider"></div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align"><strong>8x8 LED ESP32 </strong></span>
+	</div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Set A: </span>
+		<label class="switch"><input type="checkbox" id="SetA_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Set B: </span>
+		<label class="switch"><input type="checkbox" id="SetB_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Set C: </span>
+		<label class="switch"><input type="checkbox" id="SetC_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Set D: </span>
+		<label class="switch"><input type="checkbox" id="SetD_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	<div class="w3-bar-divider"></div>
+		<div class="w3-bar-item">
+		<span class="w3-left-align">8x8x4 LED ESP32: </span>
+		<label class="switch"><input type="checkbox" id="8x8x4_Toggle">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>		
+	</div>
+	</div>
+	
 <section class="page-section" id="functions">
 <pre></pre>
 <pre></pre>
