@@ -23,18 +23,14 @@
 <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
 <!-- Font Awesome icons (free version)--> 
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> 
 <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Core theme CSS (includes Bootstrap)--> 
-<!-- <link href="css/styles.css" rel="stylesheet" />--> 
-<!--Colour Picker--> 
-<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
-<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<!-- <link href="css/styles.css" rel="stylesheet" />-->
 </head>
 
 <body>
@@ -42,24 +38,17 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-    
-	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-    
-	  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
-        
-		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger active" href="#" >About</a> </li>
-        
-		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
-			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="ToTapToAbout()">About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#functions" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item active" href="TapToLight.html">Tap-To-Light <span class="sr-only">(current)</span></a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
         </li>
-		  <!--<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
+<!--		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			   <div class="dropdown-item-text">
+			  <div class="dropdown-item-text">
 			  	<span class="text-uppercase">MQTT Status: </span> 
 				  <br/>
 				<span id="MQTTStatusTxt"></span>
@@ -86,8 +75,8 @@
     </div>
   </div>
 </nav>
-	
-	<!-- Sidebar -->
+
+<!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right: 0; " id="mySetting">
 	<pre></pre>
 	<pre></pre>
@@ -193,58 +182,59 @@
 		</label>		
 	</div>
 	</div>
+
 	
+<!--Masterhead--> 
+<!-- Masthead-->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead-subheading">Welcome To Our</div>
+    <div class="masthead-heading">8x8-WebApp</div>
+    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="TapToAbout.html">Tell Me More »</a> </div>
+</header>
+<!--Functions Grid-->
 <section class="page-section" id="functions">
-<pre></pre>
-<pre></pre>
-<pre></pre>
-<pre></pre>
-<div class="container">
-<div class="text-center">
-  <h2 class="section-heading text-uppercase">ABOUT</h2>
-</div>
-<div>
-  <h3>What is 8x8-WebApp</h3>
-	<pre></pre>
-  <p>8x8-WebApp is a graphical user interface (GUI) web application that is builded in order to monitor and control 8x8 leds which are connected to the microcontroller ESP32.
-  </p>
-	<p> Both 8x8-WebApp and ESP32 are using MQTT protocol to transport the JSON-string type messages between each other. For security and reliability purposes, 8x8-WebApp and ESP32 MQTT clients are connected throughout a local private broker namely Eclipse MQTT Broker.
-	</p>
-  <p>There are a few functions provided by this web application. For example:
-  </p>
-  <p>1. Tap-To-Light
-	</p>
-	<p>2. Text Generator
-	</p>
-	<p>3. Launchpad
-	</p>
-	<p>4. LDR status
-	</p>
-	<p>4. Battery status
-	</p>
-	<p>The development of this 8x8-WebApp web application is done with Bootstrap UI Framework.</p>
-	<pre></pre>
-	<div>
-	<h4>How to use 8x8-WebApp</h4>
-	<pre></pre>
-	<p>1. a) Required device: 8x8 leds and ESP32</p>
-	<p>   b) Additional device: LDR and battery checker module</p>
-	<p>2. Download and install Arduino IDE with ESP32 compatibility:<a href="https://github.com/espressif/arduino-esp32" target="_blank"> link here</a></p>
-	<p>3. Download and upload 8x8 LED ESP32 codes into ESP32:<a href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank"> link here</a></p>
-	<p>4. Open 8x8-WebApp and try with Text Generator function</p>
-	<p>5. If succeeded, kindly try another functions. Enjoy!</p>
-	</div>
-</div>
-	</div>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Let's play!</h2>
+      <h3 class="section-subheading text-muted">Control your 8x8 LED from here!</h3>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#Tap-to-Light" data-toggle="modal"> <img src="images/Icon_Tap.png" class="img-fluid rounded-circle img-style-1" alt="Tap-To-Light" style="width: 255px; height: 255px;" onClick="ToTapToLight()"></a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Tap-To-Light</div>
+            <div class="portfolio-caption-subheading text-muted">Tap and light-up LED</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#TextGenerator" data-toggle="modal"> <img src="images/Icon_Text.png" class="img-fluid rounded-circle img-style-2" alt="TextGenerator" style="width: 255px; height: 255px;" onClick="ToTapToTextGenerator()"></a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Text Generator</div>
+            <div class="portfolio-caption-subheading text-muted">Insert text to be display</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mb-4 col-lg-4 text-center">
+        <div class="portfolio-item"> <a href="#Launchpad" data-toggle="modal"> <img src="images/Icon_Launchpad.png" class="img-fluid rounded-circle img-style-3" alt="Launchpad" style="width: 255px; height: 255px;" onClick="ToTapToLaunchpad()"></a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading">Launchpad</div>
+            <div class="portfolio-caption-subheading text-muted">Play with your LED</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<footer class="text-center bg-footer">
+<footer class="text-center bg-footer" style="position: relative">
   <div class="container" align="center">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
           <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://github.com/AbiyyuMufti/8x8_LED_ESP32" target="_blank">GitHub</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank">GitHub</a></div>
           <div></div>
         </div>
       </div>
@@ -286,7 +276,6 @@
     </div>
   </div>
 </footer>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="js/jquery-3.4.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 

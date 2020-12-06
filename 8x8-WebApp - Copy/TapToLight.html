@@ -38,22 +38,14 @@
 <body id="TapToLight" onLoad="TapToLightLoaded()">
 <!--navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
- <div class="container">
+  <div class="container"> <a class="navbar-brand js-scroll-trigger" ><img src="images/HsKA Logo.png" height="92" width="277" alt="Hochschule Karlsruhe"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-    
-	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-    
-	  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
-        
-		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger" href="#" >About</a> </li>
-        
-		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-			  <a class="dropdown-item active" href="TapToLight.html">Tap-To-Light<span class="sr-only">(current)</span></a> 
-			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToAbout.html">About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item active" href="TapToLight.html">Tap-To-Light <span class="sr-only">(current)</span></a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
         </li>
 		  <!--<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -290,16 +282,12 @@
 	<pre></pre>
 	<pre></pre>
           <div align="center">
-             <table>
+            <table>
               <tr style="margin: 5px">
                 <td><strong><span class="portfolio-caption-heading">Brightness</span></strong></td>
                 <td> : </td>
-
-                <td> <form class="range-wrap">
-					<input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range range" onChange="range_Brightness_TtLChange()">
-                  <span id="range_Brightness_TtLTxt"></span>
-					</form>
-				</td>
+                <td><input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()">
+                  <span id="range_Brightness_TtLTxt"></span></td>
               </tr>
 				<tr>
 				<td></td></tr>
@@ -328,32 +316,32 @@
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank">GitHub</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank">GitHub</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App/" target="_blank">Project documentation</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a  href="http://www.hit-karlsruhe.de/" target="_blank">HIT Karsruhe</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App/" target="_blank">Project documentation</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A  href="http://www.hit-karlsruhe.de/" target="_blank">HIT Karsruhe</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/hochschule/personen-a-z/details/user/juergen-walter/" target="_blank">Prof. Dipl. -Ing. Jürgen  Walter</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/" target="_blank">Hochschule Karlsruhe</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.hs-karlsruhe.de/hochschule/personen-a-z/details/user/juergen-walter/" target="_blank">Prof. Dipl. -Ing. Jürgen  Walter</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.hs-karlsruhe.de/" target="_blank">Hochschule Karlsruhe</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://de.linkedin.com/in/dannyalharris" target="_blank">Danial Hawari</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://my.linkedin.com/in/ong-kai-li-3040b8105" target="_blank">Kai Li Ong</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://de.linkedin.com/in/dannyalharris" target="_blank">Danial Hawari</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://my.linkedin.com/in/ong-kai-li-3040b8105" target="_blank">Kai Li Ong</A></div>
           <div></div>
         </div>
       </div>

@@ -40,22 +40,14 @@
 <body>
 <!--navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
-  <div class="container">
+  <div class="container"> <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="92" width="277" alt="Hochschule Karlsruhe"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-    
-	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-    
-	  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
-        
-		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger active" href="#" >About</a> </li>
-        
-		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
-			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToAbout.html">About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item active" href="TapToLaunchpad.html">Launchpad <span class="sr-only">(current)</span></a> </div>
         </li>
 		  <!--<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -195,80 +187,88 @@
 	</div>
 	
 <section class="page-section" id="functions">
-<pre></pre>
-<pre></pre>
-<pre></pre>
-<pre></pre>
-<div class="container">
-<div class="text-center">
-  <h2 class="section-heading text-uppercase">ABOUT</h2>
-</div>
-<div>
-  <h3>What is 8x8-WebApp</h3>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">lAUNCHPAD&nbsp;</h2>
+      <h3 class="section-subheading text-muted">
+        <marquee behavior="scroll" direction="left" width="200" align="center">
+        Tap any button to see cool led sequence!
+        </marquee>
+      </h3>
+    </div>
+	  <div align="center">
+	  <button button type="button" class="btn btn-pixel">1</button>
+	  <button button type="button" class="btn btn-pixel">2</button>
+	  <button button type="button" class="btn btn-pixel">3</button>
+	 <button button type="button" class="btn btn-pixel">4</button>
+	  </div>
+	  <div align="center">
+	  <button button type="button" class="btn btn-pixel">5</button>
+	  <button button type="button" class="btn btn-pixel">6</button>
+	  <button button type="button" class="btn btn-pixel">7</button>
+	 <button button type="button" class="btn btn-pixel">8</button>
+	  </div>
+    </div>
+	<div align="center">
+	  <button button type="button" class="btn btn-pixel">9</button>
+	  <button button type="button" class="btn btn-pixel">10</button>
+	  <button button type="button" class="btn btn-pixel">11</button>
+	 <button button type="button" class="btn btn-pixel">12</button>
+  </div>
+	<div align="center">
+	  <button button type="button" class="btn btn-pixel">13</button>
+	  <button button type="button" class="btn btn-pixel">14</button>
+	  <button button type="button" class="btn btn-pixel">15</button>
+	 <button button type="button" class="btn btn-pixel">16</button>
+	  </div>
 	<pre></pre>
-  <p>8x8-WebApp is a graphical user interface (GUI) web application that is builded in order to monitor and control 8x8 leds which are connected to the microcontroller ESP32.
-  </p>
-	<p> Both 8x8-WebApp and ESP32 are using MQTT protocol to transport the JSON-string type messages between each other. For security and reliability purposes, 8x8-WebApp and ESP32 MQTT clients are connected throughout a local private broker namely Eclipse MQTT Broker.
-	</p>
-  <p>There are a few functions provided by this web application. For example:
-  </p>
-  <p>1. Tap-To-Light
-	</p>
-	<p>2. Text Generator
-	</p>
-	<p>3. Launchpad
-	</p>
-	<p>4. LDR status
-	</p>
-	<p>4. Battery status
-	</p>
-	<p>The development of this 8x8-WebApp web application is done with Bootstrap UI Framework.</p>
 	<pre></pre>
-	<div>
-	<h4>How to use 8x8-WebApp</h4>
 	<pre></pre>
-	<p>1. a) Required device: 8x8 leds and ESP32</p>
-	<p>   b) Additional device: LDR and battery checker module</p>
-	<p>2. Download and install Arduino IDE with ESP32 compatibility:<a href="https://github.com/espressif/arduino-esp32" target="_blank"> link here</a></p>
-	<p>3. Download and upload 8x8 LED ESP32 codes into ESP32:<a href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank"> link here</a></p>
-	<p>4. Open 8x8-WebApp and try with Text Generator function</p>
-	<p>5. If succeeded, kindly try another functions. Enjoy!</p>
-	</div>
-</div>
-	</div>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
 </section>
+
 <footer class="text-center bg-footer">
   <div class="container" align="center">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://github.com/AbiyyuMufti/8x8_LED_ESP32" target="_blank">GitHub</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank">GitHub</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App/" target="_blank">Project documentation</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a  href="http://www.hit-karlsruhe.de/" target="_blank">HIT Karsruhe</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App/" target="_blank">Project documentation</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A  href="http://www.hit-karlsruhe.de/" target="_blank">HIT Karsruhe</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/hochschule/personen-a-z/details/user/juergen-walter/" target="_blank">Prof. Dipl. -Ing. Jürgen  Walter</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/" target="_blank">Hochschule Karlsruhe</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.hs-karlsruhe.de/hochschule/personen-a-z/details/user/juergen-walter/" target="_blank">Prof. Dipl. -Ing. Jürgen  Walter</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://www.hs-karlsruhe.de/" target="_blank">Hochschule Karlsruhe</A></div>
           <div></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-12">
         <div class="portfolio-caption">
           <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://de.linkedin.com/in/dannyalharris" target="_blank">Danial Hawari</a></div>
-          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://my.linkedin.com/in/ong-kai-li-3040b8105" target="_blank">Kai Li Ong</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://de.linkedin.com/in/dannyalharris" target="_blank">Danial Hawari</A></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><A href="https://my.linkedin.com/in/ong-kai-li-3040b8105" target="_blank">Kai Li Ong</A></div>
           <div></div>
         </div>
       </div>
