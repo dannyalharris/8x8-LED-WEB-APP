@@ -63,21 +63,27 @@ function Setting_Close() {
 // Create a client instance: Broker, Port, Websocket Path, Client ID
 client = new Paho.MQTT.Client("mqtt.eclipse.org", Number(80), "/mqtt", "clientId");
 
-// set callback handlers
-client.onConnectionLost = function (responseObject) {
-  console.log("Connection Lost: " + responseObject.errorMessage);
-}
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
 
-client.onMessageArrived = function (message) {
-  console.log("Message Arrived: " + message.payloadString);
-}
+// set callback handlers
+//client.onConnectionLost = function (responseObject) {
+//  console.log("Connection Lost: " + responseObject.errorMessage);
+//}
+
+//client.onMessageArrived = function (message) {
+//  console.log("Message Arrived: " + message.payloadString);
+//}
+	
 
 // Called when the connection is made
 function onConnect() {
   console.log("Connected!");
   ConnectionStatus = "Connected";
-
-	  console.log(LightOff);
+  client.subscribe("LED88ESP32/BatteryStatus");
+  client.subscribe("LED88ESP32/LDRStatus");
+	
+  console.log(LightOff);
   var messagepayloadjson_Command = new Object();
   messagepayloadjson_Command.cmd = "LightOff";
   messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
@@ -91,14 +97,31 @@ function onConnect() {
   client.send(message_Command);
 }
 
+function onFailure (message){
+	console.log("Connection to host failed");
+	client.connect({onSuccess: onConnect});
+}
+
 // Connect the client, providing an onConnect callback
-client.connect({
-  onSuccess: onConnect
-});
+client.connect({onSuccess: onConnect});
+
+// Connect the client, providing an onFailure callback
+client.connect({onFailure:onFailure});
 
 
-
-
+function onMessageArrived (message){
+	if (message.destinationName = "LED88ESP32/BatteryStatus")
+		{
+			console.log("Message Arrived: " + message.payloadString);
+			var batterystatus= message.payloadstring;
+			//update value to Battery Status
+		}
+	else if (message.destinationName = "LED88ESP32/LDRStatus") {
+		console.log("Message Arrived: " + message.payloadString);
+		var ldrstatus= message.payloadstring;
+		//update value to Battery Status
+	}
+}
 /*------------------------------------------------
  * Tap the button to home
  ************************************************/
@@ -282,7 +305,7 @@ function setColorPicker_TtL() {
 
 function TapToLightBtn(cell) {
   console.log("Cell triggered: " + cell);
-  var i
+  var i;
   var j;
 
   for (i = 0; i < 8; i++) {
@@ -360,4 +383,60 @@ function TapToLightBtn(cell) {
   
 }
 
+function TapToLaunchpadBtn(id) {
+  //disable all buttons dor 5 seconds
+  document.getElementById("00").disabled = true;
+  setTimeout(function(){document.getElementById("00").disabled = false;},5000);
+  document.getElementById("01").disabled = true;
+  setTimeout(function(){document.getElementById("01").disabled = false;},5000);
+  document.getElementById("02").disabled = true;
+  setTimeout(function(){document.getElementById("02").disabled = false;},5000);
+  document.getElementById("03").disabled = true;
+  setTimeout(function(){document.getElementById("03").disabled = false;},5000);
+  document.getElementById("04").disabled = true;
+  setTimeout(function(){document.getElementById("04").disabled = false;},5000);
+  document.getElementById("05").disabled = true;
+  setTimeout(function(){document.getElementById("05").disabled = false;},5000);
+  document.getElementById("06").disabled = true;
+  setTimeout(function(){document.getElementById("06").disabled = false;},5000);
+  document.getElementById("07").disabled = true;
+  setTimeout(function(){document.getElementById("07").disabled = false;},5000);
+  document.getElementById("08").disabled = true;
+  setTimeout(function(){document.getElementById("08").disabled = false;},5000);
+  document.getElementById("09").disabled = true;
+  setTimeout(function(){document.getElementById("09").disabled = false;},5000);
+  document.getElementById("10").disabled = true;
+  setTimeout(function(){document.getElementById("10").disabled = false;},5000);
+  document.getElementById("11").disabled = true;
+  setTimeout(function(){document.getElementById("11").disabled = false;},5000);
+  document.getElementById("12").disabled = true;
+  setTimeout(function(){document.getElementById("12").disabled = false;},5000);
+  document.getElementById("13").disabled = true;
+  setTimeout(function(){document.getElementById("13").disabled = false;},5000);
+  document.getElementById("14").disabled = true;
+  setTimeout(function(){document.getElementById("14").disabled = false;},5000);
+  document.getElementById("15").disabled = true;
+  setTimeout(function(){document.getElementById("15").disabled = false;},5000);
+	
+	
+	
+  console.log(LightOff);
+  var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "LightOff";
+  messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
+	
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+	
+  var number = document.getElementById(id)
+  var message_lightshow = new Paho.MQTT.Message(id);
+  message_lightshow.destinationName = "LED88ESP32/LightShow";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
+}
 
