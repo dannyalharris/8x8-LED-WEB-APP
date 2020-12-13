@@ -38,15 +38,22 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-    <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    
+	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
+    
+	  <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
-        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="TapToAbout.html">About</a> </li>
-        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item active" href="TapToLight.html">Tap-To-Light <span class="sr-only">(current)</span></a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
+        
+		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger" href="#" >About</a> </li>
+        
+		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
+			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
+			  <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
         </li>
-		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
+<!--		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			  <div class="dropdown-item-text">
 			  	<span class="text-uppercase">MQTT Status: </span> 
@@ -69,7 +76,7 @@
 				   <span> %</span>
 			  </div>
           </div>
-        </li>
+        </li>-->
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
     </div>
@@ -86,10 +93,10 @@
 	<pre></pre>
 	<pre></pre>
 	<pre></pre>
-  <button onclick="Setting_Close()" class="w3-bar-item w3-button w3-large closebtn w3-right-align">&times;</button>
+  	<pre></pre>
 	<div class="w3-bar-item">
 		<span class="w3-left-align">Energy Auto-Optimization: </span>
-		<label class="switch"><input type="checkbox" id="EnergyOpti_Toggle">
+		<label class="switch"><input type="checkbox" id="EnergyOpti_Toggle" onClick="EnergyOpti_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>
@@ -103,53 +110,76 @@
 		<span class="w3-left-align"><strong>8x8 LED ESP32 </strong></span>
 	</div>
 	<div class="w3-bar-item">
-		<span class="w3-left-align">Set A: </span>
-		<label class="switch"><input type="checkbox" id="SetA_Toggle">
+		<span class="w3-left-align">All Sets: </span>
+		<label class="switch"><input type="checkbox" id="AllSet_Toggle" onClick="AllSet_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>
 				<span class="off">OFF</span>
 				<!--END-->
 			</div>
-		</label>		
+		</label>
+	</div>
+	<div class="w3-bar-item">
+		<span class="w3-left-align">Set A: </span>
+		<label class="switch"><input type="checkbox" id="SetA_Toggle" onClick="SetA_Toggle()">
+			<div class="slider round">
+				<!--ADDED HTML -->
+				<span class="on">ON</span>
+				<span class="off">OFF</span>
+				<!--END-->
+			</div>
+		</label>
+		<span>&nbsp;&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 30px; height: 30px; align-content: center; vertical-align: middle" id="ConnectionSetA"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="LDRSetA"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="BatterySetA">&nbsp;&nbsp;</span>
 	</div>
 	<div class="w3-bar-item">
 		<span class="w3-left-align">Set B: </span>
-		<label class="switch"><input type="checkbox" id="SetB_Toggle">
+		<label class="switch"><input type="checkbox" id="SetB_Toggle" onClick="SetB_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>
 				<span class="off">OFF</span>
 				<!--END-->
 			</div>
-		</label>		
+		</label>
+		<span>&nbsp;&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 30px; height: 30px; align-content: center; vertical-align: middle" id="ConnectionSetB"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="LDRSetB"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="BatterySetB">&nbsp;&nbsp;</span>
 	</div>
 	<div class="w3-bar-item">
 		<span class="w3-left-align">Set C: </span>
-		<label class="switch"><input type="checkbox" id="SetC_Toggle">
+		<label class="switch"><input type="checkbox" id="SetC_Toggle" onClick="SetC_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>
 				<span class="off">OFF</span>
 				<!--END-->
 			</div>
-		</label>		
+		</label>
+		<span>&nbsp;&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 30px; height: 30px; align-content: center; vertical-align: middle" id="ConnectionSetC"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="LDRSetC"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="BatterySetC">&nbsp;&nbsp;</span>
 	</div>
 	<div class="w3-bar-item">
 		<span class="w3-left-align">Set D: </span>
-		<label class="switch"><input type="checkbox" id="SetD_Toggle">
+		<label class="switch"><input type="checkbox" id="SetD_Toggle" onClick="SetD_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>
 				<span class="off">OFF</span>
 				<!--END-->
 			</div>
-		</label>		
+		</label>
+		<span>&nbsp;&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 30px; height: 30px; align-content: center; vertical-align: middle" id="ConnectionSetD"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="LDRSetD"> &nbsp;</span>
+		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 40px; height: 40px; align-content: center; vertical-align: top" id="BatterySetD">&nbsp;&nbsp;</span>
 	</div>
 	<div class="w3-bar-divider"></div>
 		<div class="w3-bar-item">
 		<span class="w3-left-align">8x8x4 LED ESP32: </span>
-		<label class="switch"><input type="checkbox" id="8x8x4_Toggle">
+		<label class="switch"><input type="checkbox" id="8x8x4_Toggle" onClick="8x8x4_Toggle()">
 			<div class="slider round">
 				<!--ADDED HTML -->
 				<span class="on">ON</span>

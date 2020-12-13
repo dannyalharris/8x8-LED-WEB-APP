@@ -13,9 +13,21 @@
  *
  ************************************************/
 
-var LightOff = "TextGenerator";
-var MACAddress = "ALL";
+var LightOff = localStorage.getItem("LightOff");
+//var MACAddress = "ALL";
+var MACAddress = localStorage.getItem("MACAddress");
 var ConnectionStatus;
+var BatteryStatusA= localStorage.setItem("BatteryStatusA", "0");
+var BatteryStatusB= localStorage.setItem("BatteryStatusB", "0");
+var BatteryStatusC= localStorage.setItem("BatteryStatusC", "0");
+//= localStorage.setItem("BatteryStatusC", "50");
+//console.log("BatteryStatusC : " + localStorage.getItem("BatteryStatusC"));
+var BatteryStatusD= localStorage.setItem("BatteryStatusD", "0");
+var LDRStatusA= localStorage.setItem("LDRStatusA", "20");
+var LDRStatusB= localStorage.setItem("LDRStatusB", "20");
+var LDRStatusC= localStorage.setItem("LDRStatusC", "20");
+var LDRStatusD= localStorage.setItem("LDRStatusD", "20");
+//console.log(localStorage.getItem("MACAddress"));
 
 /*------------------------------------------------
  * Tap the button to Specific Tab
@@ -24,6 +36,7 @@ function ToTapToLight() {
   window.location.replace("TapToLight.html");
   LightOff = "TapToLight";
   console.log(LightOff);
+
 }
 
 function ToTapToTextGenerator() {
@@ -48,16 +61,175 @@ function ToTapToSettings() {
 
 function ToTapToAbout() {
   window.location.replace("TapToAbout.html");
+	console.log(localStorage.getItem("MACAddress"));	
 }
 
 function Setting_Open() {
-  document.getElementById("mySetting").style.display = "block";
-  document.getElementById("mySetting").style.width = "auto";
+	
+	console.log(localStorage.getItem("MACAddress"));
+	if(document.getElementById("mySetting").style.display == "none")
+	{
+		document.getElementById("mySetting").style.display = "block";
+		document.getElementById("mySetting").style.width = "auto";
+	}else 
+	{
+		document.getElementById("mySetting").style.display = "none";
+	}
+	
+	if(localStorage.getItem("MACAddress") == "ALL"){
+		document.getElementById("AllSet_Toggle").checked = true;
+		document.getElementById("SetA_Toggle").checked = true;
+		document.getElementById("SetB_Toggle").checked = true;
+		document.getElementById("SetC_Toggle").checked = true;
+		document.getElementById("SetD_Toggle").checked = true;
+	}//else if (localStorage.getItem("MACAddress") == "SetA"){
+//		document.getElementById("AllSet_Toggle").checked = false;
+//		document.getElementById("SetA_Toggle").checked = true;
+//		document.getElementById("SetB_Toggle").checked = false;
+//		document.getElementById("SetC_Toggle").checked = false;
+//		document.getElementById("SetD_Toggle").checked = false;
+//	}else if (localStorage.getItem("MACAddress") == "SetB"){
+//		document.getElementById("AllSet_Toggle").checked = false;
+//		document.getElementById("SetA_Toggle").checked = false;
+//		document.getElementById("SetB_Toggle").checked = true;
+//		document.getElementById("SetC_Toggle").checked = false;
+//		document.getElementById("SetD_Toggle").checked = false;
+//	}else if (localStorage.getItem("MACAddress") == "SetC"){
+//		document.getElementById("AllSet_Toggle").checked = false;
+//		document.getElementById("SetA_Toggle").checked = false;
+//		document.getElementById("SetB_Toggle").checked = false;
+//		document.getElementById("SetC_Toggle").checked = true;
+//		document.getElementById("SetD_Toggle").checked = false;
+//	}else if (localStorage.getItem("MACAddress") == "SetD"){
+//		document.getElementById("AllSet_Toggle").checked = false;
+//		document.getElementById("SetA_Toggle").checked = false;
+//		document.getElementById("SetB_Toggle").checked = false;
+//		document.getElementById("SetC_Toggle").checked = true;
+//		document.getElementById("SetD_Toggle").checked = false;
+//	}
+	
+	//BatteryStatus
+	BatteryStatusA = parseInt(localStorage.getItem("BatteryStatusA"));
+	BatteryStatusB = parseInt(localStorage.getItem("BatteryStatusB"));
+	BatteryStatusC = parseInt(localStorage.getItem("BatteryStatusC"));
+	BatteryStatusD = parseInt(localStorage.getItem("BatteryStatusD"));
+	
+	//BatteryStatusA
+	if(BatteryStatusA <= 25){
+		document.getElementById("BatterySetA").src = "images/Battery-Empty.png";
+	}else if(BatteryStatusA > 25 && BatteryStatusA <= 50 ){
+		document.getElementById("BatterySetA").src = "images/Battery-Less.png";
+	}else if(BatteryStatusA >50 && BatteryStatusA <= 75){
+		document.getElementById("BatterySetA").src = "images/Battery-Middle.png";
+	}else{
+		document.getElementById("BatterySetA").src = "images/Battery-Full.png";
+	}
+	//BatteryStatusB
+	if(BatteryStatusB <= 25){
+		document.getElementById("BatterySetB").src = "images/Battery-Empty.png";
+	}else if(BatteryStatusB > 25 && BatteryStatusB <= 50 ){
+		document.getElementById("BatterySetB").src = "images/Battery-Less.png";
+	}else if(BatteryStatusB >50 && BatteryStatusB <= 75){
+		document.getElementById("BatterySetB").src = "images/Battery-Middle.png";
+	}else{
+		document.getElementById("BatterySetB").src = "images/Battery-Full.png";
+	}
+	//BatteryStatusC
+	if(BatteryStatusC <= 25){
+		document.getElementById("BatterySetC").src = "images/Battery-Empty.png";
+	}else if(BatteryStatusC > 25 && BatteryStatusC <= 50 ){
+		document.getElementById("BatterySetC").src = "images/Battery-Less.png";
+	}else if(BatteryStatusC >50 && BatteryStatusC <= 75){
+		document.getElementById("BatterySetC").src = "images/Battery-Middle.png";
+	}else{
+		document.getElementById("BatterySetC").src = "images/Battery-Full.png";
+	}
+	//BatteryStatusD
+	if(BatteryStatusD <= 25){
+		document.getElementById("BatterySetD").src = "images/Battery-Empty.png";
+	}else if(BatteryStatusD > 25 && BatteryStatusD <= 50 ){
+		document.getElementById("BatterySetD").src = "images/Battery-Less.png";
+	}else if(BatteryStatusD >50 && BatteryStatusD <= 75){
+		document.getElementById("BatterySetD").src = "images/Battery-Middle.png";
+	}else{
+		document.getElementById("BatterySetD").src = "images/Battery-Full.png";
+	}
+	
+	//LDRStatus
+	LDRStatusA = parseInt(localStorage.getItem("LDRStatusA"));
+	LDRStatusB = parseInt(localStorage.getItem("LDRStatusB"));
+	LDRStatusC = parseInt(localStorage.getItem("LDRStatusC"));
+	LDRStatusD = parseInt(localStorage.getItem("LDRStatusD"));
+	
+	//LDRStatusA
+	if(LDRStatusA <= 20){
+		document.getElementById("LDRSetA").src = "images/Brightness-Dark.png";
+	}else if(LDRStatusA > 20 && LDRStatusA <= 40 ){
+		document.getElementById("LDRSetA").src = "images/Brightness-SlightDark.png";
+	}else if(LDRStatusA >40 && LDRStatusA <= 60){
+		document.getElementById("LDRSetA").src = "images/Brightness-Middle.png";
+	}else if(LDRStatusA >60 && LDRStatusA <= 80){
+		document.getElementById("LDRSetA").src = "images/Brightness-Bright.png";
+	}else{
+		document.getElementById("LDRSetA").src = "images/Brightness-VeryBright.png";
+	}
+	//LDRStatusB
+	if(LDRStatusB <= 20){
+		document.getElementById("LDRSetB").src = "images/Brightness-Dark.png";
+	}else if(LDRStatusB > 20 && LDRStatusB <= 40 ){
+		document.getElementById("LDRSetB").src = "images/Brightness-SlightDark.png";
+	}else if(LDRStatusB >40 && LDRStatusB <= 60){
+		document.getElementById("LDRSetB").src = "images/Brightness-Middle.png";
+	}else if(LDRStatusB >60 && LDRStatusB <= 80){
+		document.getElementById("LDRSetB").src = "images/Brightness-Bright.png";
+	}else{
+		document.getElementById("LDRSetB").src = "images/Brightness-VeryBright.png";
+	}
+	//LDRStatusC
+	if(LDRStatusC <= 20){
+		document.getElementById("LDRSetC").src = "images/Brightness-Dark.png";
+	}else if(LDRStatusC > 20 && LDRStatusC <= 40 ){
+		document.getElementById("LDRSetC").src = "images/Brightness-SlightDark.png";
+	}else if(LDRStatusC >40 && LDRStatusC <= 60){
+		document.getElementById("LDRSetC").src = "images/Brightness-Middle.png";
+	}else if(LDRStatusC >60 && LDRStatusC <= 80){
+		document.getElementById("LDRSetC").src = "images/Brightness-Bright.png";
+	}else{
+		document.getElementById("LDRSetC").src = "images/Brightness-VeryBright.png";
+	}
+	//LDRStatusD
+	if(LDRStatusD <= 20){
+		document.getElementById("LDRSetD").src = "images/Brightness-Dark.png";
+	}else if(LDRStatusD > 20 && LDRStatusD <= 40 ){
+		document.getElementById("LDRSetD").src = "images/Brightness-SlightDark.png";
+	}else if(LDRStatusD >40 && LDRStatusD <= 60){
+		document.getElementById("LDRSetD").src = "images/Brightness-Middle.png";
+	}else if(LDRStatusD >60 && LDRStatusD <= 80){
+		document.getElementById("LDRSetD").src = "images/Brightness-Bright.png";
+	}else{
+		document.getElementById("LDRSetD").src = "images/Brightness-VeryBright.png";
+	}
+  
 }
 
-function Setting_Close() {
-  document.getElementById("mySetting").style.display = "none";
+function AllSet_Toggle(){
+	if(document.getElementById("AllSet_Toggle").checked == true){
+		document.getElementById("SetA_Toggle").checked = true;
+		document.getElementById("SetB_Toggle").checked = true;
+		document.getElementById("SetC_Toggle").checked = true;
+		document.getElementById("SetD_Toggle").checked = true;
+	}else if(document.getElementById("AllSet_Toggle").checked == false){
+		document.getElementById("SetA_Toggle").checked = false;	
+		document.getElementById("SetB_Toggle").checked = false;	
+		document.getElementById("SetC_Toggle").checked = false;	
+		document.getElementById("SetD_Toggle").checked = false;	
+	}
+	localStorage.setItem("MACAddress", "ALL");
 }
+
+//function Setting_Close() {
+//  document.getElementById("mySetting").style.display = "none";
+//}
 
 
 // Create a client instance: Broker, Port, Websocket Path, Client ID
@@ -65,6 +237,7 @@ client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "/mqtt", "clien
 
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
+//client.statusdisplay = function(evt) {StatusDisplay(evt);};
 
 // set callback handlers
 //client.onConnectionLost = function (responseObject) {
@@ -83,6 +256,7 @@ function onConnect() {
   client.subscribe("LED88ESP32/BatteryStatus");
   client.subscribe("LED88ESP32/LDRStatus");
 	
+	
   console.log(LightOff);
   var messagepayloadjson_Command = new Object();
   messagepayloadjson_Command.cmd = "LightOff";
@@ -95,6 +269,8 @@ function onConnect() {
   message_Command.destinationName = "LED88ESP32/Command";
   message_Command.qos = 0;
   client.send(message_Command);
+	
+	
 }
 
 function onFailure (message){
@@ -122,6 +298,61 @@ function onMessageArrived (message){
 		//update value to Battery Status
 	}
 }
+
+/*------------------------------------------------
+ * Status Display
+ ************************************************/			  
+//function StatusDisplay(evt){
+//	
+//	console.log("Called this StatusDisplay thread");
+//	//BatteryStatus
+//	BatteryStatusA = parseInt(localStorage.getItem("BatteryStatusA"));
+//	BatteryStatusB = parseInt(localStorage.getItem("BatteryStatusB"));
+//	BatteryStatusC = parseInt(localStorage.getItem("BatteryStatusC"));
+//	BatteryStatusD = parseInt(localStorage.getItem("BatteryStatusD"));
+//	
+//	//BatteryStatusA
+//	if(BatteryStatusA <= 25){
+//		document.getElementById("BatterySetA").src = "images/Battery-Empty.png";
+//	}else if(BatteryStatusA > 25 && BatteryStatusA <= 50 ){
+//		document.getElementById("BatterySetA").src = "images/Battery-Less.png";
+//	}else if(BatteryStatusA >50 && BatteryStatusA <= 75){
+//		document.getElementById("BatterySetA").src = "images/Battery-Middle.png";
+//	}else{
+//		document.getElementById("BatterySetA").src = "images/Battery-Full.png";
+//	}
+//	//BatteryStatusB
+//	if(BatteryStatusB <= 25){
+//		document.getElementById("BatterySetB").src = "images/Battery-Empty.png";
+//	}else if(BatteryStatusB > 25 && BatteryStatusB <= 50 ){
+//		document.getElementById("BatterySetB").src = "images/Battery-Less.png";
+//	}else if(BatteryStatusB >50 && BatteryStatusB <= 75){
+//		document.getElementById("BatterySetB").src = "images/Battery-Middle.png";
+//	}else{
+//		document.getElementById("BatterySetB").src = "images/Battery-Full.png";
+//	}
+//	//BatteryStatusC
+//	if(BatteryStatusC <= 25){
+//		document.getElementById("BatterySetC").src = "images/Battery-Empty.png";
+//	}else if(BatteryStatusC > 25 && BatteryStatusC <= 50 ){
+//		document.getElementById("BatterySetC").src = "images/Battery-Less.png";
+//	}else if(BatteryStatusC >50 && BatteryStatusC <= 75){
+//		document.getElementById("BatterySetC").src = "images/Battery-Middle.png";
+//	}else{
+//		document.getElementById("BatterySetC").src = "images/Battery-Full.png";
+//	}
+//	//BatteryStatusD
+//	if(BatteryStatusD <= 25){
+//		document.getElementById("BatterySetD").src = "images/Battery-Empty.png";
+//	}else if(BatteryStatusD > 25 && BatteryStatusD <= 50 ){
+//		document.getElementById("BatterySetD").src = "images/Battery-Less.png";
+//	}else if(BatteryStatusD >50 && BatteryStatusD <= 75){
+//		document.getElementById("BatterySetD").src = "images/Battery-Middle.png";
+//	}else{
+//		document.getElementById("BatterySetD").src = "images/Battery-Full.png";
+//	}
+//}
+
 /*------------------------------------------------
  * Tap the button to home
  ************************************************/
@@ -253,17 +484,6 @@ var LED_Pixel = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]
 ];
-//rgbLED[0][0] = A1
-//var LED_RGB = [
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)'],
-//	['(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)','(0,0,0)']
-//];
 
 var Row_TtL;
 var Col_TtL;
@@ -382,6 +602,10 @@ function TapToLightBtn(cell) {
   client.send(message_Brightness);
   
 }
+
+/*------------------------------------------------
+ * In the Tap-to-Launchpad
+ ************************************************/
 
 function TapToLaunchpadBtn(id) {
   //disable all buttons dor 5 seconds
