@@ -61,7 +61,7 @@ function Setting_Close() {
 
 
 // Create a client instance: Broker, Port, Websocket Path, Client ID
-client = new Paho.MQTT.Client("mqtt.eclipse.org", Number(80), "/mqtt", "clientId");
+client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "/mqtt", "clientId");
 
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
