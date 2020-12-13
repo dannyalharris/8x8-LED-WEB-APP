@@ -241,8 +241,9 @@ function AllSet_Toggle(){
 	client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
 	client.onConnectionLost = onConnectionLost;
 	client.onMessageArrived = onMessageArrived;
-	client.connect({onSuccess: onConnect, onFailure: onFailure});
+	client.connect({timeout:3600, onSuccess: onConnect, onFailure: onFailure});
  }
+ 
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("mqtt status: connected");
