@@ -246,7 +246,7 @@ function onConnect() {
   client.subscribe("LED88ESP32/BatteryStatus");
   client.subscribe("LED88ESP32/LDRStatus");
   
-  console.log("lightoff state: "LightOff);
+  console.log("lightoff state: "+ LightOff);
   var messagepayloadjson_Command = new Object();
   messagepayloadjson_Command.cmd = "LightOff";
   messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
