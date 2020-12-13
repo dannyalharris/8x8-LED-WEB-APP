@@ -232,32 +232,21 @@ function AllSet_Toggle(){
 //}
 
 
-// Create a client instance: Broker, Port, Websocket Path, Client ID
-client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "/mqtt", "clientId");
-
+/*------------------------------------------------
+ * MQTT PAHO JAVASCRIPT CLIENT
+ ************************************************/
+client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-//client.statusdisplay = function(evt) {StatusDisplay(evt);};
+client.connect({onSuccess:onConnect});
 
-// set callback handlers
-//client.onConnectionLost = function (responseObject) {
-//  console.log("Connection Lost: " + responseObject.errorMessage);
-//}
-
-//client.onMessageArrived = function (message) {
-//  console.log("Message Arrived: " + message.payloadString);
-//}
-	
-
-// Called when the connection is made
 function onConnect() {
-  console.log("Connected!");
-  ConnectionStatus = "Connected";
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("mqtt connection: connected");
   client.subscribe("LED88ESP32/BatteryStatus");
   client.subscribe("LED88ESP32/LDRStatus");
-	
-	
-  console.log(LightOff);
+  
+  console.log("lightoff state: "LightOff);
   var messagepayloadjson_Command = new Object();
   messagepayloadjson_Command.cmd = "LightOff";
   messagepayloadjson_Command.adr = MACAddress;//"FF22DDAA0011"
@@ -268,25 +257,17 @@ function onConnect() {
   console.log(message_Command);
   message_Command.destinationName = "LED88ESP32/Command";
   message_Command.qos = 0;
-  client.send(message_Command);
+  client.send(message_Command);	
+};
+
+function onConnectionLost(responseObject) {
+	console.log("onConnectionLost:"+responseObject.errorMessage);
+	client.reconnect();
 	
-	
-}
-
-function onFailure (message){
-	console.log("Connection to host failed");
-	client.connect({onSuccess: onConnect});
-}
-
-// Connect the client, providing an onConnect callback
-client.connect({onSuccess: onConnect});
-
-// Connect the client, providing an onFailure callback
-client.connect({onFailure:onFailure});
-
-
-function onMessageArrived (message){
-	if (message.destinationName = "LED88ESP32/BatteryStatus")
+};
+function onMessageArrived(message) {
+  console.log("onMessageArrived: "+ message.payloadString + " " + message.destinationName);
+  if (message.destinationName = "LED88ESP32/BatteryStatus")
 		{
 			console.log("Message Arrived: " + message.payloadString);
 			var batterystatus= message.payloadstring;
@@ -297,61 +278,9 @@ function onMessageArrived (message){
 		var ldrstatus= message.payloadstring;
 		//update value to Battery Status
 	}
-}
+ 
+};
 
-/*------------------------------------------------
- * Status Display
- ************************************************/			  
-//function StatusDisplay(evt){
-//	
-//	console.log("Called this StatusDisplay thread");
-//	//BatteryStatus
-//	BatteryStatusA = parseInt(localStorage.getItem("BatteryStatusA"));
-//	BatteryStatusB = parseInt(localStorage.getItem("BatteryStatusB"));
-//	BatteryStatusC = parseInt(localStorage.getItem("BatteryStatusC"));
-//	BatteryStatusD = parseInt(localStorage.getItem("BatteryStatusD"));
-//	
-//	//BatteryStatusA
-//	if(BatteryStatusA <= 25){
-//		document.getElementById("BatterySetA").src = "images/Battery-Empty.png";
-//	}else if(BatteryStatusA > 25 && BatteryStatusA <= 50 ){
-//		document.getElementById("BatterySetA").src = "images/Battery-Less.png";
-//	}else if(BatteryStatusA >50 && BatteryStatusA <= 75){
-//		document.getElementById("BatterySetA").src = "images/Battery-Middle.png";
-//	}else{
-//		document.getElementById("BatterySetA").src = "images/Battery-Full.png";
-//	}
-//	//BatteryStatusB
-//	if(BatteryStatusB <= 25){
-//		document.getElementById("BatterySetB").src = "images/Battery-Empty.png";
-//	}else if(BatteryStatusB > 25 && BatteryStatusB <= 50 ){
-//		document.getElementById("BatterySetB").src = "images/Battery-Less.png";
-//	}else if(BatteryStatusB >50 && BatteryStatusB <= 75){
-//		document.getElementById("BatterySetB").src = "images/Battery-Middle.png";
-//	}else{
-//		document.getElementById("BatterySetB").src = "images/Battery-Full.png";
-//	}
-//	//BatteryStatusC
-//	if(BatteryStatusC <= 25){
-//		document.getElementById("BatterySetC").src = "images/Battery-Empty.png";
-//	}else if(BatteryStatusC > 25 && BatteryStatusC <= 50 ){
-//		document.getElementById("BatterySetC").src = "images/Battery-Less.png";
-//	}else if(BatteryStatusC >50 && BatteryStatusC <= 75){
-//		document.getElementById("BatterySetC").src = "images/Battery-Middle.png";
-//	}else{
-//		document.getElementById("BatterySetC").src = "images/Battery-Full.png";
-//	}
-//	//BatteryStatusD
-//	if(BatteryStatusD <= 25){
-//		document.getElementById("BatterySetD").src = "images/Battery-Empty.png";
-//	}else if(BatteryStatusD > 25 && BatteryStatusD <= 50 ){
-//		document.getElementById("BatterySetD").src = "images/Battery-Less.png";
-//	}else if(BatteryStatusD >50 && BatteryStatusD <= 75){
-//		document.getElementById("BatterySetD").src = "images/Battery-Middle.png";
-//	}else{
-//		document.getElementById("BatterySetD").src = "images/Battery-Full.png";
-//	}
-//}
 
 /*------------------------------------------------
  * Tap the button to home
@@ -641,8 +570,6 @@ function TapToLaunchpadBtn(id) {
   setTimeout(function(){document.getElementById("14").disabled = false;},5000);
   document.getElementById("15").disabled = true;
   setTimeout(function(){document.getElementById("15").disabled = false;},5000);
-	
-	
 	
   console.log(LightOff);
   var messagepayloadjson_Command = new Object();
