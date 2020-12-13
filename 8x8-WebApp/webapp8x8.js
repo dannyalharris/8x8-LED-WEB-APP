@@ -235,14 +235,17 @@ function AllSet_Toggle(){
 /*------------------------------------------------
  * MQTT PAHO JAVASCRIPT CLIENT
  ************************************************/
-client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
-client.onConnectionLost = onConnectionLost;
-client.onMessageArrived = onMessageArrived;
-client.connect({onSuccess:onConnect});
-
+ MQTTConnect();
+ 
+ function MQTTConnect(){
+	client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
+	client.onConnectionLost = onConnectionLost;
+	client.onMessageArrived = onMessageArrived;
+	client.connect({onSuccess: onConnect, onFailure: onFailure});
+ }
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
-  console.log("mqtt connection: connected");
+  console.log("mqtt status: connected");
   client.subscribe("LED88ESP32/BatteryStatus");
   client.subscribe("LED88ESP32/LDRStatus");
   
@@ -260,11 +263,18 @@ function onConnect() {
   client.send(message_Command);	
 };
 
+function onFailure(){
+	console.log("onFailure:"+responseObject.errorMessage);
+	console.log("mqtt status: reconnect");
+	MQTTConnect();
+}
+
 function onConnectionLost(responseObject) {
 	console.log("onConnectionLost:"+responseObject.errorMessage);
-	client.reconnect();
-	
+	console.log("mqtt status: reconnect");
+	//MQTTConnect();
 };
+
 function onMessageArrived(message) {
   console.log("onMessageArrived: "+ message.payloadString + " " + message.destinationName);
   if (message.destinationName = "LED88ESP32/BatteryStatus")
