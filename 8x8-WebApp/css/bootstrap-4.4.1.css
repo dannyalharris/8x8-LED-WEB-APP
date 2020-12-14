@@ -10709,6 +10709,91 @@ input:checked + .slider .off
   .sidenav a {font-size: 18px;}
 }
 
+/****Display Mode Toggle*****/
+
+.switchMode {
+  position: relative;
+  display: inline-block;
+  width: 230px;
+  height: 35px;
+  vertical-align: middle;
+}
+
+.switchMode input {display:none;}
+
+.sliderMode {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #630066;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.sliderMode:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 30px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .sliderMode {
+  background-color: #DF00C4;
+}
+
+input:focus + .sliderMode {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .sliderMode:before {
+  -webkit-transform: translateX(190px);
+  -ms-transform: translateX(190px);
+  transform: translateX(190px);
+}
+
+/*------ ADDED CSS ---------*/
+.Seq-on
+{
+  display: none;
+}
+
+.Seq-on, .Seq-off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  font-size: 15px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked+ .sliderMode .Seq-on
+{display: block;}
+
+input:checked + .sliderMode .Seq-off
+{display: none;}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.sliderMode.round {
+  border-radius: 5px;
+}
+
+.sliderMode.round:before {
+  border-radius: 5%;}
+
+/*******Display Mode CSS end*******/
+
 /* Add Animation */
 @-webkit-keyframes slideIn {
   from {bottom: -300px; opacity: 0} 

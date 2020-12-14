@@ -391,25 +391,13 @@
             <td><button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
           </tr>
 			<tr style="margin: 5px">
-            <td><span class="w3-left-align" style="font-size: 1.2rem">Simultaneously Display Mode</span></td>
+            <td><span class="w3-left-align" style="font-size: 1.2rem">Display Mode</span></td>
             <td> : </td>
-            <td><label class="switch"><input type="checkbox" id="SimMode_Toggle" onClick="SimMode_Toggle()" checked="true">
-			<div class="slider round">
+            <td><label class="switchMode"><input type="checkbox" id="DisplayMode_Toggle" onClick="DisplayMode_Toggle()">
+			<div class="sliderMode round">
 				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label></td>
-          </tr>
-			<tr style="margin: 5px">
-            <td><span class="w3-left-align" style="font-size: 1.2rem">Sequentially Display Mode</span></td>
-            <td> : </td>
-            <td><label class="switch"><input type="checkbox" id="SeqMode_Toggle" onClick="SeqMode_Toggle()">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
+				<span class="Seq-on">SEQUENTIALLY</span>
+				<span class="Seq-off">SIMULTANEOUSLY</span>
 				<!--END-->
 			</div>
 		</label></td>
@@ -495,4 +483,5 @@
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.4.1.js"></script> 
 <script src="WebApp8x8.js"></script>
+	</body>
 </html>
