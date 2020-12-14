@@ -124,12 +124,11 @@ function AllSet_Toggle() {
  * MQTT PAHO JAVASCRIPT CLIENT
  ************************************************/
 
-client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
 MQTTConnect();
 
 function MQTTConnect() {
-  //client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
-  client.onConnectionLost = onConnectionLost;
+  client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
+  //client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({
     timeout: 3600,
@@ -166,9 +165,15 @@ function onFailure() {
 }
 
 function onConnectionLost(responseObject) {
-  console.log("onConnectionLost:" + responseObject.errorMessage);
-  console.log("mqtt status: reconnect");
-  MQTTConnect();
+  if (responseObject.errorCode !== 0){
+	console.log("onConnectionLost: " + responseObject.errorMessage);
+    console.log("mqtt status: reconnect");
+    client.connect({
+    timeout: 3600,
+    onSuccess: onConnect,
+    onFailure: onFailure
+  });
+  }
 };
 
 function onMessageArrived(message) {
