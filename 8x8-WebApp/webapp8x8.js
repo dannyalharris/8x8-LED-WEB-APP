@@ -684,7 +684,11 @@ function DisplayMode_Toggle() {
   }
 }
 
-function startConnect() {
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function startConnect() {
 
   DisplayMode = localStorage.getItem("DisplayMode");
   console.log("DisplayMode" + DisplayMode);
@@ -726,12 +730,14 @@ function startConnect() {
       message_Command_Seq.qos = 0;
 
       // Publish a Message
+	
       client.send(message_Command_Seq);
       client.send(message);
       client.send(message_Brightness);
       console.log("Published");
-
+	  await sleep(4000)
     }
+	  
   } else if (DisplayMode == "Simultaneously") {
     messagepayloadjson_Command.cmd = "TextGenerator";
     messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
