@@ -127,8 +127,7 @@ function EnergyOpti_Toggle() {
 		document.getElementById("range_Brightness_TtL").disabled = true;
 		
     }
-  } 
-	else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
+   else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
 		document.getElementById("range_Brightness").disabled = false;
 		document.getElementById("range_Brightness_TtL").disabled = false;
   }	
