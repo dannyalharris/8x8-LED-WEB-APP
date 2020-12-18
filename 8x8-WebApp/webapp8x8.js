@@ -120,6 +120,21 @@ function AllSet_Toggle() {
 
 }
 
+function EnergyOpti_Toggle() {
+	
+	if (document.getElementById("EnergyOpti_Toggle").checked == true) {
+		document.getElementById("range_Brightness").disabled = true;
+		document.getElementById("range_Brightness_TtL").disabled = true;
+		
+    }
+  } 
+	else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
+		document.getElementById("range_Brightness").disabled = false;
+		document.getElementById("range_Brightness_TtL").disabled = false;
+  }	
+}
+
+
 /*------------------------------------------------
  * MQTT PAHO JAVASCRIPT CLIENT
  ************************************************/
@@ -718,10 +733,25 @@ async function startConnect() {
 
 
   if (DisplayMode == "Sequentially") {
-    for (var i = 16; i > 0; i--) {
-      console.log("i" + i);
+	
+	document.getElementById("range_Speed").disabled = true;  
+	var speedvalue = document.getElementById('range_Speed').value;
+	//var speedtime =  ;
+	//var sleeptime = ;
+	var ESPSetOn =[];
+	  
+	for (var i = 1; i <= 16; i++) {
+      if (document.getElementById("T" + i).checked == true){
+		  ESPSetOn.push(i);
+	  }
+    }
+	  
+	var ESPSetOnLen = ESPSetOn.length;
+	  
+    for (var i = 0; i < ESPSetOnLen; i++) {
+      console.log("i" + ESPSetOn[i]);
       messagepayloadjson_Command.cmd = "TextGenerator";
-      messagepayloadjson_Command.adr = "Set" + i; //"FF22DDAA0011"
+      messagepayloadjson_Command.adr = "Set" + ESPSetOn[i]; //"FF22DDAA0011"
 
       messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
       console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
@@ -739,6 +769,7 @@ async function startConnect() {
     }
 	  
   } else if (DisplayMode == "Simultaneously") {
+	document.getElementById("range_Speed").disabled = false; 
     messagepayloadjson_Command.cmd = "TextGenerator";
     messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
 
@@ -830,7 +861,7 @@ function TapToLightBtn(cell) {
     for (j = 0; j < 8; j++) {
       if ((i.toString() + j.toString()) == cell.toString()) {
         console.log("String linked: " + i.toString() + j.toString());
-        if (LED_Pixel[i][j] == 0) {
+        if (LED_Pixel[i][j] == 0) { 
           LED_Pixel[i][j] = 1;
           Row_TtL = i;
           Col_TtL = j;
