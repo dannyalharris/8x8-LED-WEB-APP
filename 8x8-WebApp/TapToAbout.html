@@ -35,8 +35,7 @@
 <!-- <link href="css/styles.css" rel="stylesheet" />--> 
 <!--Colour Picker--> 
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
-<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<script src="https://github.com/jaames/iro.js"></script> 
 </head>
 
 <body>
@@ -57,7 +56,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
 			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
 			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLightShow.html">LightShow</a> </div>
+			  <a class="dropdown-item" href="TapToLaunchpad.html">Light Show</a> </div>
         </li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
@@ -65,268 +64,525 @@
   </div>
 </nav>
 	
-	<!-- Sidebar -->
+<!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right: 0; width: auto" id="mySetting">
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-  	<pre></pre>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Energy Auto-Optimization: </span>
-		<label class="switch"><input type="checkbox" id="EnergyOpti_Toggle" onClick="EnergyOpti_Toggle()">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>		
-	</div>
-	<div class="w3-bar-divider"></div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align"><strong>8x8 LED ESP32 </strong></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">All Sets: </span>
-		<label class="switch"><input type="checkbox" id="AllSet_Toggle" onClick="AllSet_Toggle()">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 01: </span>
-		<label class="switch"><input type="checkbox" id="T1" onClick="Toggle('1')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>		
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet1"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet1"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet1"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 02: </span>
-		<label class="switch"><input type="checkbox" id="T2" onClick="Toggle('2')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet2"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet2"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet2"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 03: </span>
-		<label class="switch"><input type="checkbox" id="T3" onClick="Toggle('3')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet3"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet3"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet3"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 04: </span>
-		<label class="switch"><input type="checkbox" id="T4" onClick="Toggle('4')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet4"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet4"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet4"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 05: </span>
-		<label class="switch"><input type="checkbox" id="T5" onClick="Toggle('5')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet5"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet5"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet5"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 06: </span>
-		<label class="switch"><input type="checkbox" id="T6" onClick="Toggle('6')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet6"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet6"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet6"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 07: </span>
-		<label class="switch"><input type="checkbox" id="T7" onClick="Toggle('7')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet7"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet7"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet7"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 08: </span>
-		<label class="switch"><input type="checkbox" id="T8" onClick="Toggle('8')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet8"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet8"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet8"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 09: </span>
-		<label class="switch"><input type="checkbox" id="T9" onClick="Toggle('9')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet9"> </span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet9"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet9"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 10: </span>
-		<label class="switch"><input type="checkbox" id="T10" onClick="Toggle('10')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet10"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet10"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet10"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 11: </span>
-		<label class="switch"><input type="checkbox" id="T11" onClick="Toggle('11')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet11"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet11"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet11"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 12: </span>
-		<label class="switch"><input type="checkbox" id="T12" onClick="Toggle('12')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet12"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet12"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet12"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 13: </span>
-		<label class="switch"><input type="checkbox" id="T13" onClick="Toggle('13')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet13"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet13"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet13"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 14: </span>
-		<label class="switch"><input type="checkbox" id="T14" onClick="Toggle('14')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet14"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet14"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet14"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 15: </span>
-		<label class="switch"><input type="checkbox" id="T15" onClick="Toggle('15')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet15"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet15"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet15"></span>
-	</div>
-	<div class="w3-bar-item">
-		<span class="w3-left-align">Set 16: </span>
-		<label class="switch"><input type="checkbox" id="T16" onClick="Toggle('16')">
-			<div class="slider round">
-				<!--ADDED HTML -->
-				<span class="on">ON</span>
-				<span class="off">OFF</span>
-				<!--END-->
-			</div>
-		</label>
-		<span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet16"></span>
-		<span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="LDRSet16"></span>
-		<span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet16"></span>
-	</div>
-	</div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="w3-bar-item"> <span class="w3-left-align">Energy Auto-Optimization: </span>
+    <label class="switch">
+    <input type="checkbox" id="EnergyOpti_Toggle" onClick="EnergyOpti_Toggle()">
+    <div class="slider round"> 
+      <!--ADDED HTML --> 
+      	<span class="on">ON</span> 
+		<span class="off">OFF</span> 
+      <!--END--> 
+    </div>
+    </label>
+  </div>
+  <div class="w3-bar-divider"></div>
+  <div class="w3-bar-item"> <span class="w3-left-align"><strong>8x8 LED ESP32</strong></span> </div>
+  <div class="w3-bar-item"> <span class="w3-left-align">All Sets: </span>
+    <label class="switch">
+    <input type="checkbox" id="AllSet_Toggle" onClick="AllSet_Toggle()">
+    <div class="slider round"> 
+      <!--ADDED HTML --> 
+      	<span class="on">ON</span> 
+		<span class="off">OFF</span> 
+      <!--END--> 
+    </div>
+    </label>
+  </div>
+  <div class="w3-bar-item">
+    <table>
+      <tr>
+        <td><span class="w3-left-align">Set 01: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T1" onClick="Toggle('1')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet1"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet1"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet1"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText1"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText1"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText1"></span>%</td>
+		</tr>
+    </table>
+    </div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 02: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T2" onClick="Toggle('2')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet2"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet2"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet2"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText2"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText2"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText2"></span>%</td>
+		</tr>
+    </table> </div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 03: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T3" onClick="Toggle('3')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet3"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet3"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet3"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText3"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText3"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText3"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 04: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T4" onClick="Toggle('4')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet4"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet4"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet4"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText4"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText4"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText4"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 05: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T5" onClick="Toggle('5')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet5"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet5"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet5"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText5"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText5"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText5"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 06: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T6" onClick="Toggle('6')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet6"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet6"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet6"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText6"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText6"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText6"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 07: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T7" onClick="Toggle('7')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet7"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet7"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet7"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText7"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText7"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText7"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 08: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T8" onClick="Toggle('8')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet8"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet8"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet8"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText8"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText8"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText8"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 09: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T9" onClick="Toggle('9')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet9"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet9"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet9"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText9"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText9"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText9"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 10: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T10" onClick="Toggle('10')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet10"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet10"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet10"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText10"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText10"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText10"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"><table>
+      <tr>
+        <td><span class="w3-left-align">Set 11: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T11" onClick="Toggle('11')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet11"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet11"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet11"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText11"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText11"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText11"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 12: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T12" onClick="Toggle('12')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet12"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet12"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet12"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText12"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText12"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText12"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 13: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T13" onClick="Toggle('13')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet13"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet13"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet13"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText13"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText13"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText13"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 14: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T14" onClick="Toggle('14')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet14"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet14"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet14"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText14"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText14"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText14"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 15: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T15" onClick="Toggle('15')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet15"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet15"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet15"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText15"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText15"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText15"></span>%</td>
+		</tr>
+    </table></div>
+  <div class="w3-bar-item"> <table>
+      <tr>
+        <td><span class="w3-left-align">Set 16: </span></td>
+        <td><label class="switch">
+          <input type="checkbox" id="T16" onClick="Toggle('16')">
+          <div class="slider round"> 
+            <!--ADDED HTML --> 
+            	<span class="on">ON</span> 
+			  <span class="off">OFF</span> 
+            <!--END--> 
+          </div>
+          </label></td>
+		  <td>
+			  <span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet16"> </span>
+		  </td>
+		  <td>
+			  <span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet16"></span> 
+		  </td>
+		  <td>
+			   <span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet16"></span> 
+		  </td>
+      </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText16"></span></td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText16"></span>%</td>
+			<td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText16"></span>%</td>
+		</tr>
+    </table></div>
+</div>
+	
 	
 <section class="page-section" id="functions">
 <pre></pre>

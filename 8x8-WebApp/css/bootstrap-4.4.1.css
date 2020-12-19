@@ -6670,7 +6670,7 @@ a.close.disabled {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 15;
+  z-index: 10;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -6714,6 +6714,7 @@ a.close.disabled {
   right: 15%;
   bottom: 500px;
   left: 15%;
+   top: 40%;
   z-index: 10;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -10361,7 +10362,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 header.masthead {
-  padding-top: 10rem;
+  padding-top:10rem;
   padding-bottom: 2rem;
   text-align: center;
   color: #003D63;
@@ -10868,6 +10869,40 @@ input:checked + .sliderShow .show-b
   border-radius: 5%;}
 
 /*******Display Mode CSS end*******/
+
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 50%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+
+#ESP32 {background-color:transparent;}
+#MQTT {background-color:transparent;}
+
 
 /* Add Animation */
 @-webkit-keyframes slideIn {

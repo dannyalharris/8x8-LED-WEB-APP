@@ -14,12 +14,16 @@
  ************************************************/
 localStorage.setItem("LightOff", "LightOff");
 var LightOff = localStorage.getItem("LightOff");
+
 var DisplayMode = localStorage.setItem("DisplayMode", "Simultaneously");
+
 var MACAddress = localStorage.getItem("MACAddress");
 if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
   MACAddress = localStorage.getItem("MACAddress");
 }
+
+var EnergyOpt = localStorage.getItem("EnergyOpt");
 
 //= localStorage.setItem("BatteryStatusC", "50");
 //console.log("BatteryStatusC : " + localStorage.getItem("BatteryStatusC"));
@@ -50,6 +54,30 @@ function ToTapToAbout() {
   console.log(localStorage.getItem("MACAddress"));
 }
 
+/*------------------------------------------------
+ * Open Tab
+ ************************************************/
+function openTab(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+	console.log("Enter this page");
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+/*------------------------------------------------
+ * Setting SideBar open
+ ************************************************/
 function Setting_Open() {
 
   console.log(localStorage.getItem("MACAddress"));
@@ -69,12 +97,21 @@ function Setting_Open() {
       localStorage.setItem("LDRStatusSet" + i, "0");
     }
   }
+	
+if (EnergyOpt == null) {
+  localStorage.setItem("EnergyOpt", "0");
+  EnergyOpt = localStorage.getItem("EnergyOpt");
+}
 
   ToggleSet();
+  EnergyOptToggle();
   BatteryStatusDisplay();
   LDRStatusDisplay();
 }
 
+/*------------------------------------------------
+ * When setting SideBar open, check toggled SET
+ ************************************************/
 function ToggleSet() {
   if (localStorage.getItem("MACAddress") == "ALL") {
     document.getElementById("AllSet_Toggle").checked = true;
@@ -94,6 +131,20 @@ function ToggleSet() {
   }
 }
 
+/*------------------------------------------------
+ * When setting SideBar open, check toggled EnergyOpt
+ ************************************************/
+function EnergyOptToggle(){
+	if (localStorage.getItem("EnergyOpt") == "ON") {
+		document.getElementById("EnergyOpti_Toggle").checked = true;
+	}else if(localStorage.getItem("EnergyOpt") == "OFF"){
+		document.getElementById("EnergyOpti_Toggle").checked = false;
+	}
+}
+
+/*------------------------------------------------
+ * When any set being toggled
+ ************************************************/
 function Toggle(Set) {
 
   if (document.getElementById("T" + Set).checked == true) {
@@ -104,7 +155,9 @@ function Toggle(Set) {
 
 }
 
-
+/*------------------------------------------------
+ * When ALL Set being toggled
+ ************************************************/
 function AllSet_Toggle() {
   //If All Set Toggle Button has been toggled, then all Toggle button for Set 1 to 16 will be toggled
   if (document.getElementById("AllSet_Toggle").checked == true) {
@@ -138,7 +191,6 @@ function EnergyOpti_Toggle() {
 		document.getElementById("range_Brightness_TtL").disabled = false;
   }	
 }
-
 
 /*------------------------------------------------
  * MQTT PAHO JAVASCRIPT CLIENT
@@ -185,14 +237,14 @@ function onFailure() {
 }
 
 function onConnectionLost(responseObject) {
-  if (responseObject.errorCode !== 0){
-	console.log("onConnectionLost: " + responseObject.errorMessage);
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost: " + responseObject.errorMessage);
     console.log("mqtt status: reconnect");
     client.connect({
-    timeout: 3600,
-    onSuccess: onConnect,
-    onFailure: onFailure
-  });
+      timeout: 3600,
+      onSuccess: onConnect,
+      onFailure: onFailure
+    });
   }
 };
 
@@ -228,6 +280,9 @@ function onMessageArrived(message) {
 BatteryStatusDisplay();
 LDRStatusDisplay();
 
+/*------------------------------------------------
+ * Display Battery Status in Setting
+ ************************************************/
 function BatteryStatusDisplay() {
   console.log("BatteryStatusDisplay_Thread");
   //BatteryStatus
@@ -248,7 +303,25 @@ function BatteryStatusDisplay() {
   var BatteryStatus15 = parseInt(localStorage.getItem("BatteryStatusSet15"));
   var BatteryStatus16 = parseInt(localStorage.getItem("BatteryStatusSet16"));
 
+  document.getElementById("BatteryText1").innerHTML = BatteryStatus1;
+  document.getElementById("BatteryText2").innerHTML = BatteryStatus2;
+  document.getElementById("BatteryText3").innerHTML = BatteryStatus3;
+  document.getElementById("BatteryText4").innerHTML = BatteryStatus4;
+  document.getElementById("BatteryText5").innerHTML = BatteryStatus5;
+  document.getElementById("BatteryText6").innerHTML = BatteryStatus6;
+  document.getElementById("BatteryText7").innerHTML = BatteryStatus7;
+  document.getElementById("BatteryText8").innerHTML = BatteryStatus8;
+  document.getElementById("BatteryText9").innerHTML = BatteryStatus9;
+  document.getElementById("BatteryText10").innerHTML = BatteryStatus10;
+  document.getElementById("BatteryText11").innerHTML = BatteryStatus11;
+  document.getElementById("BatteryText12").innerHTML = BatteryStatus12;
+  document.getElementById("BatteryText13").innerHTML = BatteryStatus13;
+  document.getElementById("BatteryText14").innerHTML = BatteryStatus14;
+  document.getElementById("BatteryText15").innerHTML = BatteryStatus15;
+  document.getElementById("BatteryText16").innerHTML = BatteryStatus16;
+
   //BatteryStatus1
+
   if (BatteryStatus1 <= 25) {
     document.getElementById("BatterySet1").src = "images/Battery-Empty.png";
   } else if (BatteryStatus1 > 25 && BatteryStatus1 <= 50) {
@@ -410,6 +483,9 @@ function BatteryStatusDisplay() {
   }
 }
 
+/*------------------------------------------------
+ * Display Brightness Status in Setting
+ ************************************************/
 function LDRStatusDisplay() {
   //LDRStatus
   var LDRStatus1 = parseInt(localStorage.getItem("LDRStatusSet1"));
@@ -428,6 +504,23 @@ function LDRStatusDisplay() {
   var LDRStatus14 = parseInt(localStorage.getItem("LDRStatusSet14"));
   var LDRStatus15 = parseInt(localStorage.getItem("LDRStatusSet15"));
   var LDRStatus16 = parseInt(localStorage.getItem("LDRStatusSet16"));
+
+  document.getElementById("BrightnessText1").innerHTML = LDRStatus1;
+  document.getElementById("BrightnessText2").innerHTML = LDRStatus2;
+  document.getElementById("BrightnessText3").innerHTML = LDRStatus3;
+  document.getElementById("BrightnessText4").innerHTML = LDRStatus4;
+  document.getElementById("BrightnessText5").innerHTML = LDRStatus5;
+  document.getElementById("BrightnessText6").innerHTML = LDRStatus6;
+  document.getElementById("BrightnessText7").innerHTML = LDRStatus7;
+  document.getElementById("BrightnessText8").innerHTML = LDRStatus8;
+  document.getElementById("BrightnessText9").innerHTML = LDRStatus9;
+  document.getElementById("BrightnessText10").innerHTML = LDRStatus10;
+  document.getElementById("BrightnessText11").innerHTML = LDRStatus11;
+  document.getElementById("BrightnessText12").innerHTML = LDRStatus12;
+  document.getElementById("BrightnessText13").innerHTML = LDRStatus13;
+  document.getElementById("BrightnessText14").innerHTML = LDRStatus14;
+  document.getElementById("BrightnessText15").innerHTML = LDRStatus15;
+  document.getElementById("BrightnessText16").innerHTML = LDRStatus16;
 
   //LDRStatus1
   if (LDRStatus1 <= 20) {
@@ -625,6 +718,42 @@ function LDRStatusDisplay() {
 }
 
 /*------------------------------------------------
+ * Control Energy Auto-Optimization 
+ ************************************************/
+function EnergyOpti_Toggle() {
+
+  if (document.getElementById("EnergyOpti_Toggle").checked == true) {
+    //document.getElementById("range_Brightness").disabled = true;
+    //document.getElementById("range_Brightness_TtL").disabled = true;
+	
+	localStorage.setItem("EnergyOpt", "1");
+	EnergyOpt = localStorage.getItem("EnergyOpt");
+	  
+    
+	  
+  } else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
+    //document.getElementById("range_Brightness").disabled = false;
+    //document.getElementById("range_Brightness_TtL").disabled = false;
+	  
+	 localStorage.setItem("EnergyOpt", "0");
+	  EnergyOpt = localStorage.getItem("EnergyOpt");
+  }
+	
+	var messagepayloadjson_EnergyOpt = new Object();
+    messagepayloadjson_EnergyOpt.Saver = parseInt(EnergyOpt); //"1"
+    //messagepayloadjson_EnergyOpt.adr = EnergyOpt; //"ON"
+
+    var messagepayloadstring_EnergyOpt= JSON.stringify(messagepayloadjson_EnergyOpt);
+    console.log(messagepayloadstring_EnergyOpt);
+    var message_EnergyOpt = new Paho.MQTT.Message(messagepayloadstring_EnergyOpt);
+    console.log(message_EnergyOpt);
+    message_EnergyOpt.destinationName = "LED88ESP32/EnergyOpt";
+    message_EnergyOpt.qos = 0;
+    client.send(message_EnergyOpt);
+}
+
+
+/*------------------------------------------------
  * Tap the button to home
  ************************************************/
 function ToTapToHome() {
@@ -634,7 +763,6 @@ function ToTapToHome() {
 /*------------------------------------------------
  * In the Text Generator
  ************************************************/
-
 function openColorPicker() {
   document.getElementById("colorPicker_Modal").style.display = "block";
   console.log("ColorPickerOpened");
@@ -689,6 +817,7 @@ function setColorPicker() {
   //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
 }
 
+
 function DisplayMode_Toggle() {
   if (document.getElementById("DisplayMode_Toggle").checked == true) {
     DisplayMode = localStorage.setItem("DisplayMode", "Sequentially");
@@ -705,10 +834,11 @@ function DisplayMode_Toggle() {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  //return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function startConnect() {
+//async 
+function startConnect() {
 
   DisplayMode = localStorage.getItem("DisplayMode");
   console.log("DisplayMode" + DisplayMode);
@@ -738,21 +868,21 @@ async function startConnect() {
 
 
   if (DisplayMode == "Sequentially") {
-	
-	document.getElementById("range_Speed").disabled = true;  
-	var speedvalue = document.getElementById('range_Speed').value;
-	//var speedtime =  ;
-	//var sleeptime = ;
-	var ESPSetOn =[];
-	  
-	for (var i = 1; i <= 16; i++) {
-      if (document.getElementById("T" + i).checked == true){
-		  ESPSetOn.push(i);
-	  }
+
+    document.getElementById("range_Speed").disabled = true;
+    var speedvalue = document.getElementById('range_Speed').value;
+    //var speedtime =  ;
+    //var sleeptime = ;
+    var ESPSetOn = [];
+
+    for (var i = 1; i <= 16; i++) {
+      if (document.getElementById("T" + i).checked == true) {
+        ESPSetOn.push(i);
+      }
     }
-	  
-	var ESPSetOnLen = ESPSetOn.length;
-	  
+
+    var ESPSetOnLen = ESPSetOn.length;
+
     for (var i = 0; i < ESPSetOnLen; i++) {
       console.log("i" + ESPSetOn[i]);
       messagepayloadjson_Command.cmd = "TextGenerator";
@@ -765,16 +895,16 @@ async function startConnect() {
       message_Command_Seq.qos = 0;
 
       // Publish a Message
-	
+
       client.send(message_Command_Seq);
       client.send(message);
       client.send(message_Brightness);
       console.log("Published");
-	  await sleep(4000)
+      //await sleep(4000);
     }
-	  
+
   } else if (DisplayMode == "Simultaneously") {
-	document.getElementById("range_Speed").disabled = false; 
+    document.getElementById("range_Speed").disabled = false;
     messagepayloadjson_Command.cmd = "TextGenerator";
     messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
 
@@ -794,18 +924,18 @@ async function startConnect() {
 }
 
 function range_Brightness_txtChange() {
-  document.getElementById('range_Brightness_txt').value = document.getElementById('range_Brightness').value;
+  document.getElementById('range_Brightness_txt').innerHTML = document.getElementById('range_Brightness').value;
 }
 
 function range_Speed_txtChange() {
-  document.getElementById('range_Speed_txt').value = document.getElementById('range_Speed').value;
+  document.getElementById('range_Speed_txt').innerHTML = document.getElementById('range_Speed').value;
 }
 
 /*------------------------------------------------
  * In the Tap-to-Light
  ************************************************/
 function range_Brightness_TtLChange() {
-  document.getElementById('range_Brightness_TtLTxt').value = document.getElementById('range_Brightness_TtL').value;
+  document.getElementById('range_Brightness_TtLTxt').innerHTML = document.getElementById('range_Brightness_TtL').value;
 }
 
 var LED_Pixel = [
@@ -866,7 +996,7 @@ function TapToLightBtn(cell) {
     for (j = 0; j < 8; j++) {
       if ((i.toString() + j.toString()) == cell.toString()) {
         console.log("String linked: " + i.toString() + j.toString());
-        if (LED_Pixel[i][j] == 0) { 
+        if (LED_Pixel[i][j] == 0) {
           LED_Pixel[i][j] = 1;
           Row_TtL = i;
           Col_TtL = j;
@@ -1027,3 +1157,6 @@ function TapToLightShowBtn(id) {
   message_lightshow.qos = 0;
   client.send(message_lightshow);
 }
+
+
+
