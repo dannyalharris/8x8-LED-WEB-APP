@@ -36,8 +36,8 @@ function ToTapToTextGenerator() {
   window.location.replace("TapToTextGenerator.html");
 }
 
-function ToTapToLaunchpad() {
-  window.location.replace("TapToLaunchpad.html");
+function ToTapToLightShow() {
+  window.location.replace("TapToLightShow.html");
 }
 
 function ToTapToSettings() {
@@ -104,6 +104,7 @@ function Toggle(Set) {
 
 }
 
+
 function AllSet_Toggle() {
   //If All Set Toggle Button has been toggled, then all Toggle button for Set 1 to 16 will be toggled
   if (document.getElementById("AllSet_Toggle").checked == true) {
@@ -125,7 +126,12 @@ function EnergyOpti_Toggle() {
 	if (document.getElementById("EnergyOpti_Toggle").checked == true) {
 		document.getElementById("range_Brightness").disabled = true;
 		document.getElementById("range_Brightness_TtL").disabled = true;
-		
+		var message_Command = new Paho.MQTT.Message("energyopt");
+    	message_Command.destinationName = "LED88ESP32/Brightness";
+    	message_Command.qos = 0;
+
+		// Publish a Message
+		client.send(message_Command);
     }
    else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
 		document.getElementById("range_Brightness").disabled = false;
@@ -932,10 +938,10 @@ function TapToLightBtn(cell) {
 }
 
 /*------------------------------------------------
- * In the Tap-to-Launchpad
+ * In the Tap-to-LightShow
  ************************************************/
 
-function TapToLaunchpadBtn(id) {
+function TapToLightShowBtn(id) {
   //disable all buttons dor 5 seconds
   document.getElementById("00").disabled = true;
   setTimeout(function () {

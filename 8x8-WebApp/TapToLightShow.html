@@ -36,6 +36,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
 <script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
 <script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<!--Toggle Button
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>-->
 </head>
 
 <body>
@@ -56,7 +59,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
 			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
 			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item active" href="TapToLaunchpad.html">Launchpad <span class="sr-only">(current)</span></a> </div>
+			  <a class="dropdown-item active" href="TapToLightShow.html">LightShow <span class="sr-only">(current)</span></a> </div>
         </li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
@@ -334,55 +337,86 @@
   <pre></pre>
   <div class="container">
     <div class="text-center">
-      <h2 class="section-heading text-uppercase">LAUNCHPAD</h2>
+      <h2 class="section-heading text-uppercase">LIGHTSHOW</h2>
       <h3 class="section-subheading text-muted">
         <marquee behavior="scroll" direction="left" width="200" align="center">
-        Tap any button to see cool led sequence!
+        Light entertainment yet with full satisfaction
         </marquee>
       </h3>
     </div>
 	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="00" onClick="TapToLaunchpadBtn('00')">1</button>
-	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLaunchpadBtn('01')">2</button>
-	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLaunchpadBtn('02')">3</button>
-	 <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLaunchpadBtn('03')">4</button>
+		<label class="switchShow"><input type="checkbox" id="ToggleLightShow" onClick="Toggle-LightShow()">
+			<div class="sliderShow round">
+				<!--ADDED HTML -->
+				<span class="show-a">SHOW A</span>
+				<span class="show-b">SHOW B</span>
+				<!--END-->
+			</div>
+		</label>
+  	</div>
+		
+ 	</div>
+
+	<pre></pre>
+
+	  <div align="center">
+	  <button button type="button" class="btn btn-pixel" id="00" onClick="TapToLightShowBtn('00')">1</button>
+	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">2</button>
+	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">3</button>
+	 <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">4</button>
 	  </div>
 	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLaunchpadBtn('04')">5</button>
-	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLaunchpadBtn('05')">6</button>
-	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLaunchpadBtn('06')">7</button>
-	 <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLaunchpadBtn('07')">8</button>
+	  <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">5</button>
+	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">6</button>
+	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">7</button>
+	 <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">8</button>
 	  </div>
-    </div>
 	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLaunchpadBtn('08')">9</button>
-	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLaunchpadBtn('09')">10</button>
-	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLaunchpadBtn('10')">11</button>
-	 <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLaunchpadBtn('11')">12</button>
-  </div>
+	  <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">9</button>
+	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">10</button>
+	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">11</button>
+	 <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">12</button>
+   </div>
 	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLaunchpadBtn('12')">13</button>
-	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLaunchpadBtn('13')">14</button>
-	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLaunchpadBtn('14')">15</button>
-	 <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLaunchpadBtn('15')">16</button>
+	  <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">13</button>
+	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">14</button>
+	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">15</button>
+	 <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">16</button>
 	  </div>
   <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <div class="container">
-    <div class="text-center">
-      <h2 class="section-heading text-uppercase">lightshow</h2>
-      <h3 class="section-subheading text-muted">
-        <marquee behavior="scroll" direction="left" width="200" align="center">
-       Just only a button away to light up your day!
-        </marquee>
-      </h3>
-    </div>
-	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" style="width: 200px" id="16" onClick="TapToLaunchpadBtn('16')">Tap Me</button>
-	  </div>
+	<div align="center">
+	<button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
+					  <div class="modal" id="colorPicker_Modal">
+		  	<div class="modal-content">
+			  <div id="picker"></div>
+			  <br/> &nbsp;
+			  <div>
+			  <button type="button" class="btn btn-success" onClick="setColorPicker()">Set</button>
+			  <button type="button" class="btn btn-secondary" onClick="closeColorPicker()">Cancel</button>
+			  </div>
+			  </div>
+		  	</div>
 	</div>
+	<pre></pre>
+<div class="container" align="center" >           
+  <div class="dropdown" >
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width=300px">
+      Choose Sequence
+    </button>
+    <div class="dropdown-menu" align="center">
+      <a class="dropdown-item" href="#">Sequence 1</a>
+      <a class="dropdown-item" href="#">Sequence 2</a>
+      <a class="dropdown-item" href="#">Sequence 3</a>
+    </div>
+  </div>
+</div>
+	  <pre></pre>
+  <pre></pre>
+	<div class="container" align="center" >
+		<button class="btn button-send" onClick="#" style="margin: 15px">Play</button>
+		</div>
+
+ 
 	<pre></pre>
 	<pre></pre>
 	<pre></pre>

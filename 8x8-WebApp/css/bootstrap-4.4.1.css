@@ -6712,7 +6712,7 @@ a.close.disabled {
 .carousel-caption {
   position: absolute;
   right: 15%;
-  bottom: 20px;
+  bottom: 500px;
   left: 15%;
   z-index: 10;
   padding-top: 20px;
@@ -10736,7 +10736,7 @@ input:checked + .slider .off
 .sliderMode:before {
   position: absolute;
   content: "";
-  height: 26px;
+  height: 27px;
   width: 30px;
   left: 4px;
   bottom: 4px;
@@ -10780,6 +10780,81 @@ input:checked+ .sliderMode .Seq-on
 {display: block;}
 
 input:checked + .sliderMode .Seq-off
+{display: none;}
+
+/*--------- END --------*/
+
+/****Lightshow Mode Toggle*****/
+
+.switchShow {
+  position: relative;
+  display: inline-block;
+  width: 230px;
+  height: 35px;
+  vertical-align: middle;
+}
+
+.switchShow input {display:none;}
+
+.sliderShow {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ee161f;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.sliderShow:before {
+  position: absolute;
+  content: "";
+  height: 27px;
+  width: 30px;
+  left: 4px;
+  bottom:4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .sliderShow {
+  background-color: #6900A8;
+}
+
+input:focus + .sliderShow {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .sliderShow:before {
+  -webkit-transform: translateX(190px);
+  -ms-transform: translateX(190px);
+  transform: translateX(190px);
+}
+
+/*------ ADDED CSS ---------*/
+.show-a
+{
+  display: none;
+}
+
+.show-a, .show-b
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  font-size: 15px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked + .sliderShow .show-a
+{display: block;}
+
+input:checked + .sliderShow .show-b
 {display: none;}
 
 /*--------- END --------*/

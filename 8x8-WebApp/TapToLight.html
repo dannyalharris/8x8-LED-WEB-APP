@@ -54,7 +54,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
 			  <a class="dropdown-item active" href="TapToLight.html">Tap-To-Light<span class="sr-only">(current)</span></a> 
 			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLaunchpad.html">Launchpad</a> </div>
+			  <a class="dropdown-item" href="TapToLightShow.html">LightShow</a> </div>
         </li>
 		  <!--<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Status </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -446,12 +446,12 @@
           </div>
 	<pre></pre>
 	<pre></pre>
-          <div align="center">
-            <table width="80%">
+          <div align="center" style="width: auto">  
+            <table align="center">
               <tr style="margin: 5px">
                 <td width="auto"><span class="w3-left-align" style="font-size: 1.2rem">Brightness</span></td>
                 <td width="auto"> : </td>
-                <td width="auto"><input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()">
+                <td width="auto"><input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()" style="width: 100%">
                   <span id="range_Brightness_TtLTxt"></span></td>
               </tr>
 				<tr>
@@ -459,7 +459,7 @@
               <tr style="margin: 5px">
                 <td><span class="w3-left-align" style="font-size: 1.2rem">Color</span></td>
                 <td> : </td>
-                <td><button id="btnColorPicker_TtL" class="btn-color btn-fluid" onClick="openColorPicker_TtL()">&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;</button></td>
+                <td><button id="btnColorPicker_TtL" class="btn-color btn-fluid" onClick="openColorPicker_TtL()" style="width: 100%; height:30px "></button></td>
               </tr>
             </table>
 			  <div class="modal" id="colorPicker_Modal_TtL">
@@ -472,6 +472,7 @@
 			  </div>
 			  </div>
 		  	</div>
+
           </div>
 </section>
 <footer class="text-center bg-footer">
