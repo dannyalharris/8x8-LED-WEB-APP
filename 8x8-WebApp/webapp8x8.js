@@ -16,17 +16,24 @@
  var LightOff = localStorage.getItem("LightOff");
 
  var DisplayMode = localStorage.setItem("DisplayMode", "Simultaneously");
-
+ var ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
  var MACAddress = localStorage.getItem("MACAddress");
- if (MACAddress == null) {
-   localStorage.setItem("MACAddress", "ALL");
-   MACAddress = localStorage.getItem("MACAddress");
- }
+
 
  var EnergyOpt = localStorage.getItem("EnergyOpt");
 
+
  var ToggledSetArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+ //var ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
  var ToggledSetBinary;
+
+ if (MACAddress == null) {
+   localStorage.setItem("MACAddress", "ALL");
+   MACAddress = localStorage.getItem("MACAddress");
+   localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
+   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
+   ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+ }
 
  var MQTTMode = localStorage.getItem("MQTTMode");
  var MQTTBroker = localStorage.getItem("MQTTBroker");
@@ -226,10 +233,13 @@
  function SendSetsToggle() {
    ToggledSetBinary = ToggledSetArray.join('');
    console.log(ToggledSetBinary);
+   localStorage.setItem("ToggledSetLocalStorage", ToggledSetBinary);
+   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
+   //LightOff = localStorage.getItem("LightOff");
 
    var messagepayloadjson_ESPSet = new Object();
+   //messagepayloadjson_ESPSet.cmd = LightOff;
    messagepayloadjson_ESPSet.ESPSet = ToggledSetBinary; //"1"
-   //messagepayloadjson_EnergyOpt.adr = EnergyOpt; //"ON"
 
    var messagepayloadstring_ESPSet = JSON.stringify(messagepayloadjson_ESPSet);
    console.log(messagepayloadstring_ESPSet);
@@ -277,7 +287,7 @@
  /*------------------------------------------------
   * Set MQTT
   ************************************************/
- function MQTT(mode) {
+ function MQTTMode(mode) {
    if (mode == "Private") {
      localStorage.setItem("MQTTMode", "Private");
      MQTTMode = localStorage.getItem("MQTTMode");
@@ -319,6 +329,7 @@
      document.getElementById("txtbox_Port").style.display = "block";
      document.getElementById("txt_Broker").style.display = "none";
      document.getElementById("txt_Port").style.display = "none";
+	   document.getElementById("MQTT_Connect").disabled = true;
 
    } else if (mode == "Done") {
 
@@ -371,6 +382,7 @@
    console.log("lightoff state: " + LightOff);
    var messagepayloadjson_Command = new Object();
    messagepayloadjson_Command.cmd = "LightOff";
+   //messagepayloadjson_Command.adr = ToggledSetBinary;
    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
 
    var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
@@ -1003,7 +1015,7 @@
      for (var i = 0; i < ESPSetOnLen; i++) {
        console.log("i" + ESPSetOn[i]);
        messagepayloadjson_Command.cmd = "TextGenerator";
-       messagepayloadjson_Command.adr = "Set" + ESPSetOn[i]; //"FF22DDAA0011"
+       //messagepayloadjson_Command.adr = "Set" + ESPSetOn[i]; //"FF22DDAA0011"
 
        messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
        console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
