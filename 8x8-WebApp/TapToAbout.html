@@ -68,22 +68,20 @@
 </nav>
 	
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right: 0; width: auto" id="mySetting">
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute" id="mySetting">
   <pre></pre>
   <pre></pre>
   <pre></pre>
   <pre></pre>
   <pre></pre>
   <pre></pre>
-  <div class="w3-bar-item">
-    <button class="tablink" onclick="openTab('ESP32', this, 'navy')" id="defaultOpen">ESP32</button>
-    <button class="tablink" onclick="openTab('MQTT', this, 'maroon')">MQTT</button>
+  <div class="w3-bar-item btn-group">
+    <button class="tablink" onclick="openTab('ESP32', this, '#7516FF')" id="defaultOpen">ESP32</button>
+    <button class="tablink" onclick="openTab('MQTT', this, '#7516FF')">MQTT</button>
   </div>
   <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <div class="w3-bar-item tab-content" id="ESP32">
+  <br>
+  <div class="w3-bar-item tab-content" style="box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 10, 0.4);" id="ESP32">
     <div class="w3-bar-item"> <span class="w3-left-align">Energy Auto-Optimization: </span>
       <label class="switch">
       <input type="checkbox" id="EnergyOpti_Toggle" onClick="EnergyOpti_Toggle()">
@@ -508,12 +506,27 @@
       </table>
     </div>
   </div>
-  <pre></pre>
-  <div class="w3-bar-item tab-content" id="MQTT"> <span class="w3-left-align">MQTT Broker: </span> <br>
-    <input type="text" id="txtbox_Broker" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 20rem">
-    <pre></pre>
-    <span class="w3-left-align">MQTT Port: </span> <br>
-    <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 20rem">
+  <div class="w3-bar-item tab-content" style="box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 10, 0.4); height: 100%; width: 23.5rem" id="MQTT">
+    <div class="w3-bar-item w3-center">
+      <button button type="button" class="btn btn-primary" id="Private" onClick="MQTT('Private')" style="width: 9rem">Private Broker</button>
+      <button button type="button" class="btn btn-primary" id="Public" onClick="MQTT('Public')" style="width: 9rem">Public Broker</button>
+    </div>
+    <div class="w3-bar-divider"></div>
+    <div class="w3-bar-item">
+      <a class="nav-link js-scroll-trigger w3-right-align" href="#" onClick="EditMQTT('Edit')" id="EditMQTT"><i class="fa fa-fw fa-edit"></i></a>
+		<a class="nav-link js-scroll-trigger w3-right-align" href="#" onClick="EditMQTT('Done')" style="display: none" id="DoneEditMQTT"><i class="fa fa-fw fa-check"></i></a>
+    </div>
+    <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Broker:</strong> </span> <br>
+      <span class="w3-left-align" id="txt_Broker" style="width: 19rem;"></span>
+      <input type="text" id="txtbox_Broker" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
+    </div>
+    <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Port:</strong> </span> <br>
+      <span class="w3-left-align" id="txt_Port" style="width: 19rem;"></span>
+      <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
+    </div>
+    <div class="w3-bar-item" style="align-content: center">
+      <button button type="button" style="align-content: center" class="btn btn-primary" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
+    </div>
   </div>
 </div>
 	
