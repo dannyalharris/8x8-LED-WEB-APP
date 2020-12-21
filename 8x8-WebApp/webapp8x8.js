@@ -1,4 +1,4 @@
- // JavaScript Document
+// JavaScript Document
 
  /*------------------------------------------------
   * Created by:
@@ -17,6 +17,9 @@
 
  var DisplayMode = localStorage.setItem("DisplayMode", "Simultaneously");
  var ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
+ console.log("HTML" + document.getElementById("HTML").innerHTML);
+localStorage.setItem("HTML", document.getElementById("HTML").innerHTML);
+var HTMLPage = localStorage.getItem("HTML");
  var MACAddress = localStorage.getItem("MACAddress");
 
 
@@ -173,15 +176,25 @@
    }
    console.log(ToggledSetArray);
  }
-
+EnergyOptToggle();
  /*------------------------------------------------
   * When setting SideBar open, check toggled EnergyOpt
   ************************************************/
  function EnergyOptToggle() {
-   if (localStorage.getItem("EnergyOpt") == "ON") {
+   if (localStorage.getItem("EnergyOpt") == "1") {
      document.getElementById("EnergyOpti_Toggle").checked = true;
-   } else if (localStorage.getItem("EnergyOpt") == "OFF") {
+	   if(HTMLPage== "Text Generator"){
+		   document.getElementById("range_Brightness").disabled = true;
+	   }else if (HTMLPage == "Tap-To-Light"){
+		   document.getElementById("range_Brightness_TtL").disabled = true;
+	   }
+   } else if (localStorage.getItem("EnergyOpt") == "0") {
      document.getElementById("EnergyOpti_Toggle").checked = false;
+	   if(HTMLPage== "Text Generator"){
+		   document.getElementById("range_Brightness").disabled = false;
+	   }else if (HTMLPage == "Tap-To-Light"){
+		   document.getElementById("range_Brightness_TtL").disabled = false;
+	   }
    }
  }
 
@@ -256,19 +269,28 @@
  function EnergyOpti_Toggle() {
 
    if (document.getElementById("EnergyOpti_Toggle").checked == true) {
-     //document.getElementById("range_Brightness").disabled = true;
-     //document.getElementById("range_Brightness_TtL").disabled = true;
+	   if(HTMLPage== "Text Generator"){
+		   document.getElementById("range_Brightness").disabled = true;
+	   }else if (HTMLPage == "Tap-To-Light"){
+		   document.getElementById("range_Brightness_TtL").disabled = true;
+	   }
 
      localStorage.setItem("EnergyOpt", "1");
      EnergyOpt = localStorage.getItem("EnergyOpt");
+	   console.log("EnergyOptFn" + EnergyOpt);
 
 
    } else if (document.getElementById("EnergyOpti_Toggle").checked == false) {
-     //document.getElementById("range_Brightness").disabled = false;
-     //document.getElementById("range_Brightness_TtL").disabled = false;
 
+	   if(HTMLPage == "Text Generator"){
+		   document.getElementById("range_Brightness").disabled = false;
+	   }else if (HTMLPage == "Tap-To-Light"){
+		   document.getElementById("range_Brightness_TtL").disabled = false;
+	   }
+	   
      localStorage.setItem("EnergyOpt", "0");
      EnergyOpt = localStorage.getItem("EnergyOpt");
+	   console.log("EnergyOptFn" + EnergyOpt);
    }
 
    var messagepayloadjson_EnergyOpt = new Object();
@@ -283,6 +305,7 @@
    message_EnergyOpt.qos = 0;
    client.send(message_EnergyOpt);
  }
+
 
  /*------------------------------------------------
   * Set MQTT
@@ -953,21 +976,22 @@
      document.getElementById("AllSet_Toggle").checked = true;
      AllSet_Toggle();
      document.getElementById("AllSet_Toggle").disabled = true;
+	   document.getElementById("range_Speed").disabled = true;
 
    } else if (document.getElementById("DisplayMode_Toggle").checked == false) {
      DisplayMode = localStorage.setItem("DisplayMode", "Simultaneously");
      document.getElementById("AllSet_Toggle").checked = false;
      AllSet_Toggle();
      document.getElementById("AllSet_Toggle").disabled = false;
+	   document.getElementById("range_Speed").disabled = false;
    }
  }
 
  function sleep(ms) {
-   //return new Promise(resolve => setTimeout(resolve, ms));
+   return new Promise(resolve => setTimeout(resolve, ms));
  }
 
- //async 
- function startConnect() {
+ async function startConnect() {
 
    DisplayMode = localStorage.getItem("DisplayMode");
    console.log("DisplayMode" + DisplayMode);
@@ -997,8 +1021,6 @@
 
 
    if (DisplayMode == "Sequentially") {
-
-     document.getElementById("range_Speed").disabled = true;
      var speedvalue = document.getElementById('range_Speed').value;
      //var speedtime =  ;
      //var sleeptime = ;
@@ -1029,7 +1051,7 @@
        client.send(message);
        client.send(message_Brightness);
        console.log("Published");
-       //await sleep(4000);
+       await sleep(4000);
      }
 
    } else if (DisplayMode == "Simultaneously") {
