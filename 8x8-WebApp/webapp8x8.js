@@ -26,17 +26,20 @@ var MACAddress = localStorage.getItem("MACAddress");
 var EnergyOpt = localStorage.getItem("EnergyOpt");
 
 
-var ToggledSetArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-//var ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+//var ToggledSetArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+//var ToggledSetArray = ["false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false"];
+var ToggledSetArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 var ToggledSetBinary;
 
 
 if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
   MACAddress = localStorage.getItem("MACAddress");
-  localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
+  //localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
+	localStorage.setItem("ToggledSetLocalStorage", "");
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
-  ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  //ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+	ToggledSetArray = ["true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true"];
 }
 
 var MQTTMode_Str = localStorage.getItem("MQTTMode");
@@ -158,7 +161,7 @@ function ToggleSet() {
     document.getElementById("AllSet_Toggle").checked = true;
     for (var i = 1; i <= 16; i++) {
       document.getElementById("T" + i).checked = true;
-      ToggledSetArray[i - 1] = 1;
+      ToggledSetArray[i - 1] = true;
     }
   } else if (localStorage.getItem("MACAddress") == "Partial") {
 
@@ -167,10 +170,10 @@ function ToggleSet() {
     for (var j = 1; j <= 16; j++) {
       if (localStorage.getItem("MACAddress" + j) == "ON") {
         document.getElementById("T" + j).checked = true;
-        ToggledSetArray[j - 1] = 1;
+        ToggledSetArray[j - 1] = true;
       } else if (localStorage.getItem("MACAddress" + j) == "OFF") {
         document.getElementById("T" + j).checked = false;
-        ToggledSetArray[j - 1] = 0;
+        ToggledSetArray[j - 1] = false;
       }
     }
   }
@@ -203,10 +206,10 @@ function Toggle(Set) {
 
   if (document.getElementById("T" + Set).checked == true) {
     localStorage.setItem(("MACAddress" + Set), "ON");
-    ToggledSetArray[Set - 1] = 1;
+    ToggledSetArray[Set - 1] = true;
   } else if (document.getElementById("T" + Set).checked == false) {
     localStorage.setItem(("MACAddress" + Set), "OFF");
-    ToggledSetArray[Set - 1] = 0;
+    ToggledSetArray[Set - 1] = false;
   }
 
   console.log(ToggledSetArray);
@@ -220,13 +223,13 @@ function AllSet_Toggle() {
   if (document.getElementById("AllSet_Toggle").checked == true) {
     for (var i = 1; i <= 16; i++) {
       document.getElementById("T" + i).checked = true;
-      ToggledSetArray[i - 1] = 1;
+      ToggledSetArray[i - 1] = true;
     }
     localStorage.setItem("MACAddress", "ALL");
   } else if (document.getElementById("AllSet_Toggle").checked == false) {
     for (var j = 1; j <= 16; j++) {
       document.getElementById("T" + j).checked = false;
-      ToggledSetArray[j - 1] = 0;
+      ToggledSetArray[j - 1] = false;
     }
     localStorage.setItem("MACAddress", "Partial");
   }
@@ -238,7 +241,8 @@ function AllSet_Toggle() {
 
 //Send sets data
 function SendSetsToggle() {
-  ToggledSetBinary = ToggledSetArray.join('');
+  //ToggledSetBinary = ToggledSetArray.join('');
+	ToggledSetBinary = ToggledSetArray;
   console.log(ToggledSetBinary);
   localStorage.setItem("ToggledSetLocalStorage", ToggledSetBinary);
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
@@ -401,7 +405,7 @@ MQTTConnect();
 
 function MQTTConnect() {
   //client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
-  console.log(MQTTBroker + "Number:" + MQTTPort);
+  console.log(MQTTBroker + " Number:" + MQTTPort);
   client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "clientId");
   //client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
@@ -484,7 +488,6 @@ function onMessageArrived(message) {
   }
 
 };
-
 
 BatteryStatusDisplay();
 LDRStatusDisplay();
@@ -920,10 +923,6 @@ function LDRStatusDisplay() {
     document.getElementById("LDRSet16").src = "images/Brightness-VeryBright.png";
   }
 
-}
-
-function ConnectionStatusDisplay(message) {
-  console.log("onMessageArrived_ConnectionStatus Thread: " + message.payloadString + " " + message.destinationName);
 }
 
 // Tap the button to home
