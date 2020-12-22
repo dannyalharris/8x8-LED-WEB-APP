@@ -932,6 +932,7 @@ EnergyOptToggle();
 
  var color_Hex = "#f0f0f0";
  var color_Hex_TtL = "ff0000";
+ var color_Hex_LightShow = "ff0000";
 
  var colorPicker = new iro.ColorPicker("#picker", {
    // Set the size of the color picker
@@ -946,6 +947,7 @@ EnergyOptToggle();
    console.log(color.hexString);
    color_Hex = color.hexString;
    color_Hex_TtL = color.hexString;
+   color_Hex_LightShow = color.hexString;
  });
 
 
@@ -1326,8 +1328,8 @@ async function startConnect() {
 	}
 	 
 	else if (document.getElementById("ToggleLightShow").checked == false){
-    document.getElementById(id).style.background = "#" + color_Hex_TtL;	
-	var messagepayloadjson_Command = new Object();
+   document.getElementById(id).style.background = "#" + color_Hex_LightShow;	
+   var messagepayloadjson_Command = new Object();
    messagepayloadjson_Command.cmd = "LightOff";
    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
 
@@ -1416,60 +1418,39 @@ function SEQ3(){
 
 
 // LIGHTSHOW COLOR PICKER
-
-function openColorPicker() {
-   document.getElementById("colorPicker_Modal").style.display = "block";
-   console.log("ColorPickerOpened");
+ function LightShowOpenColorPicker() {
+   document.getElementById("LightShowColorPicker_Modal").style.display = "block";
+   console.log("LightShowColorPickerOpened");
  }
 
- function closeColorPicker() {
-   document.getElementById("colorPicker_Modal").style.display = "none";
+ function LightShowCloseColorPicker() {
+   document.getElementById("LightShowColorPicker_Modal").style.display = "none";
  }
 
  window.onclick = function (event) {
-   if (event.target == document.getElementById("colorPicker_Modal")) {
-     document.getElementById("colorPicker_Modal").style.display = "none";
+   if (event.target == document.getElementById("LightShowColorPicker_Modal")) {
+     document.getElementById("LightShowColorPicker_Modal").style.display = "none";
    }
  }
+ 
+var result_LightShow;
+var Red_LightShow = 255;
+var Green_LightShow  = 0;
+var Blue_LightShow = 0;
 
- var color_Hex = "#f0f0f0";
- var color_Hex_TtL = "ff0000";
-
- var colorPicker = new iro.ColorPicker("#picker", {
-   // Set the size of the color picker
-   width: 200,
-   // Set the initial color to pure red
-   color: "#ff0000"
- });
- // listen to a color picker's color:change event
- // color:change callbacks receive the current color
- colorPicker.on('color:change', function (color) {
-   // log the current color as a HEX string
-   console.log(color.hexString);
-   color_Hex = color.hexString;
-   color_Hex_TtL = color.hexString;
- });
-
-
- var result;
- var Red = 255;
- var Green = 0;
- var Blue = 0;
-
- function setColorPicker() {
-   document.getElementById("colorPicker_Modal").style.display = "none";
-   document.getElementById("btnColorPicker").style.backgroundColor = color_Hex;
+  function LightShowSetColorPicker() {
+   document.getElementById("LightShowColorPicker_Modal").style.display = "none";
+   document.getElementById("LightShowBtnColorPicker").style.backgroundColor = color_Hex_LightShow;
    //var Red, Green, Blue;
-   color_Hex = color_Hex.replace('#', '');
-   Red = parseInt(color_Hex.substring(0, 2), 16);
-   Green = parseInt(color_Hex.substring(2, 4), 16);
-   Blue = parseInt(color_Hex.substring(4, 6), 16);
+   color_Hex_LightShow = color_Hex_LightShow.replace('#', '');
+   Red_LightShow = parseInt(color_Hex_LightShow.substring(0, 2), 16);
+   Green_LightShow = parseInt(color_Hex_LightShow.substring(2, 4), 16);
+   Blue_LightShow = parseInt(color_Hex_LightShow.substring(4, 6), 16);
 
-   result = 'rgba(' + Red + ',' + Green + ',' + Blue + ')';
+   result_LightShow = 'rgba(' + Red_LightShow + ',' + Green_LightShow + ',' + Blue_LightShow + ')';
 
-   console.log(result);
+   console.log(result_LightShow);
    //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
  }
-
 
 //////
