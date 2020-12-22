@@ -978,7 +978,7 @@ EnergyOptToggle();
    return new Promise(resolve => setTimeout(resolve, ms));
  }
 
- async function startConnect() {
+async function startConnect() {
 
    DisplayMode = localStorage.getItem("DisplayMode");
    console.log("DisplayMode" + DisplayMode);
@@ -1210,7 +1210,9 @@ EnergyOptToggle();
   ************************************************/
 
  function TapToLightShowBtn(id) {
-   //disable all buttons dor 5 seconds
+	 if (document.getElementById("ToggleLightShow").checked == true){ 
+		 /*
+	//disable all buttons dor 5 seconds
    document.getElementById("00").disabled = true;
    setTimeout(function () {
      document.getElementById("00").disabled = false;
@@ -1275,9 +1277,44 @@ EnergyOptToggle();
    setTimeout(function () {
      document.getElementById("15").disabled = false;
    }, 5000);
-
-   console.log(LightOff);
+   */
+		 
+   //console.log(LightOff);
    var messagepayloadjson_Command = new Object();
+   messagepayloadjson_Command.cmd = "LightOff";
+   //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+
+   var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+   console.log(messagepayloadstring_Command);
+   var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+   console.log(message_Command);
+   message_Command.destinationName = "LED88ESP32/Command";
+   message_Command.qos = 0;
+   client.send(message_Command);
+   
+   //console.log(LightShow);
+   var messagepayloadjson_Command = new Object();
+   messagepayloadjson_Command.cmd = "LightShow";
+   //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+
+   var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+   console.log(messagepayloadstring_Command);
+   var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+   console.log(message_Command);
+   message_Command.destinationName = "LED88ESP32/Command";
+   message_Command.qos = 0;
+   client.send(message_Command);
+		 
+   var message_lightshow = new Paho.MQTT.Message("{\"ptr\":"+id+"}");
+   message_lightshow.destinationName = "LED88ESP32/LightShow";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+		 
+	}
+	 
+	else if (document.getElementById("ToggleLightShow").checked == false){
+    document.getElementById(id).style.background = "#" + color_Hex_TtL;	
+	var messagepayloadjson_Command = new Object();
    messagepayloadjson_Command.cmd = "LightOff";
    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
 
@@ -1294,4 +1331,132 @@ EnergyOptToggle();
    message_lightshow.destinationName = "LED88ESP32/LightShow";
    message_lightshow.qos = 0;
    client.send(message_lightshow);
+	}
+	 
  }
+
+function Toggle_LightShow(){
+
+	if (document.getElementById("ToggleLightShow").checked == true || document.getElementById("ToggleLightShow").checked == null ) {
+	document.getElementById("btnColorPicker").style.backgroundColor = "rgb(122,122,122)";
+	document.getElementById("btnColorPicker").disabled = true;
+	document.getElementById("SEQ1").disabled = true;	
+	document.getElementById("SEQ2").disabled = true;	
+	document.getElementById("SEQ3").disabled = true;	
+	}
+	else if (document.getElementById("ToggleLightShow").checked == false){
+	document.getElementById("btnColorPicker").style.backgroundColor = "rgb(238,22,31)";
+    document.getElementById("btnColorPicker").disabled = false;
+	document.getElementById("SEQ1").disabled = false;	
+	document.getElementById("SEQ2").disabled = false;	
+	document.getElementById("SEQ3").disabled = false;
+		
+	}
+}
+
+function PLAYALL(){
+	if (document.getElementById("ToggleLightShow").checked == true) 
+	{
+   var message_lightshow = new Paho.MQTT.Message("{\"ptr\":17}");
+   message_lightshow.destinationName = "LED88ESP32/LightShow";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+	}
+	
+	else if (document.getElementById("ToggleLightShow").checked == false){
+   var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
+   message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+	}
+}
+
+function SEQ1(){
+	if (document.getElementById("ToggleLightShow").checked == false) 
+	{
+   var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
+   message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+	}
+}
+
+function SEQ2(){
+	if (document.getElementById("ToggleLightShow").checked == false) 
+	{
+   var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
+   message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+	}
+}
+
+function SEQ3(){
+	if (document.getElementById("ToggleLightShow").checked == false) 
+	{
+   var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
+   message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+   message_lightshow.qos = 0;
+   client.send(message_lightshow);
+	}
+}
+
+
+// LIGHTSHOW COLOR PICKER
+
+function openColorPicker() {
+   document.getElementById("colorPicker_Modal").style.display = "block";
+   console.log("ColorPickerOpened");
+ }
+
+ function closeColorPicker() {
+   document.getElementById("colorPicker_Modal").style.display = "none";
+ }
+
+ window.onclick = function (event) {
+   if (event.target == document.getElementById("colorPicker_Modal")) {
+     document.getElementById("colorPicker_Modal").style.display = "none";
+   }
+ }
+
+ var color_Hex = "#f0f0f0";
+ var color_Hex_TtL = "ff0000";
+
+ var colorPicker = new iro.ColorPicker("#picker", {
+   // Set the size of the color picker
+   width: 200,
+   // Set the initial color to pure red
+   color: "#ff0000"
+ });
+ // listen to a color picker's color:change event
+ // color:change callbacks receive the current color
+ colorPicker.on('color:change', function (color) {
+   // log the current color as a HEX string
+   console.log(color.hexString);
+   color_Hex = color.hexString;
+   color_Hex_TtL = color.hexString;
+ });
+
+
+ var result;
+ var Red = 255;
+ var Green = 0;
+ var Blue = 0;
+
+ function setColorPicker() {
+   document.getElementById("colorPicker_Modal").style.display = "none";
+   document.getElementById("btnColorPicker").style.backgroundColor = color_Hex;
+   //var Red, Green, Blue;
+   color_Hex = color_Hex.replace('#', '');
+   Red = parseInt(color_Hex.substring(0, 2), 16);
+   Green = parseInt(color_Hex.substring(2, 4), 16);
+   Blue = parseInt(color_Hex.substring(4, 6), 16);
+
+   result = 'rgba(' + Red + ',' + Green + ',' + Blue + ')';
+
+   console.log(result);
+   //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
+ }
+
+
+//////

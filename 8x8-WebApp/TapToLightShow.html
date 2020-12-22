@@ -72,7 +72,7 @@
 </nav>
 	
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute" id="mySetting">
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute; z-index: 1000" id="mySetting">
   <pre></pre>
   <pre></pre>
   <pre></pre>
@@ -529,7 +529,7 @@
       <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
     </div>
     <div class="w3-bar-item" style="align-content: center">
-      <button button type="button" style="align-content: center" class="btn btn-primary" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
+      <button button type="button" style="align-content: center" class="btn button-send" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
     </div>
   </div>
 </div>
@@ -549,11 +549,11 @@
       </h3>
     </div>
 	  <div align="center">
-		<label class="switchShow"><input type="checkbox" id="ToggleLightShow" onClick="Toggle-LightShow()">
+		<label class="switchShow"><input type="checkbox" id="ToggleLightShow" onClick="Toggle_LightShow()">
 			<div class="sliderShow round">
 				<!--ADDED HTML -->
-				<span class="show-a">SHOW A</span>
-				<span class="show-b">SHOW B</span>
+				<span class="show-a">SHOW B</span>
+				<span class="show-b">SHOW A</span>
 				<!--END-->
 			</div>
 		</label>
@@ -564,45 +564,54 @@
 	<pre></pre>
 
 	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="00" onClick="TapToLightShowBtn('00')">1</button>
-	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">2</button>
-	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">3</button>
-	 <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">4</button>
+	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">1</button>
+	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">2</button>
+	  <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">3</button>
+	 <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">4</button>
 	  </div>
 	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">5</button>
-	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">6</button>
-	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">7</button>
-	 <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">8</button>
+	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">5</button>
+	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">6</button>
+	  <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">7</button>
+	 <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">8</button>
 	  </div>
 	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">9</button>
-	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">10</button>
-	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">11</button>
-	 <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">12</button>
+	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">9</button>
+	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">10</button>
+	  <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">11</button>
+	 <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">12</button>
    </div>
 	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">13</button>
-	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">14</button>
-	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">15</button>
-	 <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">16</button>
+	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">13</button>
+	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">14</button>
+	  <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">15</button>
+	 <button button type="button" class="btn btn-pixel" id="16" onClick="TapToLightShowBtn('16')">16</button>
 	  </div>
   <pre></pre>
 	<div align="center">
-	<button id="btnColorPicker" class="btn-color btn-fluid" onClick="openColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
-					  <div class="modal" id="colorPicker_Modal">
+	<button id="LightShowBtnColorPicker" class="btn-color btn-fluid" onClick="LightShowOpenColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
+					  <div class="modal" id="LightShowColorPicker_Modal">
 		  	<div class="modal-content">
 			  <div id="picker"></div>
 			  <br/> &nbsp;
 			  <div>
-			  <button type="button" class="btn btn-success" onClick="setColorPicker()">Set</button>
-			  <button type="button" class="btn btn-secondary" onClick="closeColorPicker()">Cancel</button>
+			  <button type="button" class="btn btn-success" onClick="LightShowSetColorPicker()">Set</button>
+			  <button type="button" class="btn btn-secondary" onClick="LightShowCloseColorPicker()">Cancel</button>
 			  </div>
 			  </div>
 		  	</div>
 	</div>
 	<pre></pre>
-<div class="container" align="center" >           
+	<pre></pre>
+<div class="container" align="center" >
+    <div class="btn-group">
+    <button type="button" id="SEQ1" class="btn button-send" onClick="SEQ1()" >Sequence 1</button>
+    <button type="button" id="SEQ2" class="btn button-send" onClick="SEQ2()">Sequence 2</button>
+    <button type="button" id="SEQ3" class="btn button-send" onClick="SEQ3()" >Sequence 3</button>
+	<button type="button" id="PLAYALL" class="btn button-send" onClick="PLAYALL()">Play All</button>
+  </div>
+	
+	<!--
   <div class="dropdown" >
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width=300px">
       Choose Sequence
@@ -618,6 +627,7 @@
   <pre></pre>
 	<div class="container" align="center" >
 		<button class="btn button-send" onClick="#" style="margin: 15px">Play</button>
+		-->
 		</div>
 
  

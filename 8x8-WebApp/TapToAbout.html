@@ -59,7 +59,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
 			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
 			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item" href="TapToLaunchpad.html">Light Show</a> </div>
+			  <a class="dropdown-item" href="TapToLightShow.html">Light Show</a> </div>
         </li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
@@ -68,7 +68,7 @@
 </nav>
 	
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute" id="mySetting">
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute; z-index: 1000" id="mySetting">
   <pre></pre>
   <pre></pre>
   <pre></pre>
@@ -525,7 +525,7 @@
       <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
     </div>
     <div class="w3-bar-item" style="align-content: center">
-      <button button type="button" style="align-content: center" class="btn btn-primary" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
+      <button button type="button" style="align-content: center" class="btn button-send" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
     </div>
   </div>
 </div>
