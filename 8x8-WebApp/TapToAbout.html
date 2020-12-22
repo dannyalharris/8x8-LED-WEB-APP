@@ -512,20 +512,29 @@
       <button button type="button" class="btn btn-primary" id="Public" onClick="MQTTMode('Public')" style="width: 9rem">Public Broker</button>
     </div>
     <div class="w3-bar-divider"></div>
-    <div class="w3-bar-item">
-      <a class="nav-link js-scroll-trigger w3-right-align" href="#" onClick="EditMQTT('Edit')" id="EditMQTT"><i class="fa fa-fw fa-edit"></i></a>
-		<a class="nav-link js-scroll-trigger w3-right-align" href="#" onClick="EditMQTT('Done')" style="display: none" id="DoneEditMQTT"><i class="fa fa-fw fa-check"></i></a>
-    </div>
+    <div class="w3-bar-item w3-right-align"> 
+		 <table align="right" id="OpenEditMQTTTable">
+			 <tr><td width="2rem"><a class="nav-link js-scroll-trigger " href="#" onClick="EditMQTT('Edit')"  id="EditMQTT" style="width: 2rem"><i class="fa fa-fw fa-edit"></i></a> 
+				 </td></tr>		
+		</table>
+	  <table align="right" id="EditMQTTTable">
+        <tr>
+          <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Done')" style="display: none; width: 2rem"  id="DoneEditMQTT"><i class="fa fa-fw fa-check w3-right-align"></i></a></td>
+          <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Cancel')" style="display: none; width: 2rem;" id="CancelEditMQTT"><i class="fa fa-fw fa-ban w3-right-align"></i></a></td>
+        </tr>
+      </table></div>
     <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Broker:</strong> </span> <br>
-      <span class="w3-left-align" id="txt_Broker" style="width: 19rem;"></span>
+      <span class="w3-left-align" id="txt_Broker" style="width: 19rem; height: 2.0rem"></span>
       <input type="text" id="txtbox_Broker" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
     </div>
     <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Port:</strong> </span> <br>
-      <span class="w3-left-align" id="txt_Port" style="width: 19rem;"></span>
+      <span class="w3-left-align" id="txt_Port" style="width: 19rem; height: 2.0rem"></span>
       <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
     </div>
-    <div class="w3-bar-item" style="align-content: center">
-      <button button type="button" style="align-content: center" class="btn button-send" id="MQTT_Connect" onClick="MQTT_Connect()">Connect</button>
+    <br>
+    <div class="w3-bar-item w3-center">
+      <button button type="button" style="align-content: center" class="btn button-send" id="MQTT_Connect" onClick="MQTT_Connect('Connect')">Connect</button>
+      <button button type="button" style="align-content: center" class="btn btn-danger" id="MQTT_Disconnect" onClick="MQTT_Connect('Disconnect')">Disconnect</button>
     </div>
   </div>
 </div>

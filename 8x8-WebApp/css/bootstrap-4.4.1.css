@@ -2792,6 +2792,13 @@ border-color: #0062cc;
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+  display: inline-block;
+  padding:6px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
 }
 
 .btn-danger:hover {
@@ -2811,6 +2818,12 @@ border-color: #0062cc;
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+}
+
+.btn-danger:active {
+  background-color: #dc3545;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active,
