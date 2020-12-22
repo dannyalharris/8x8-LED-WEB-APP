@@ -21,7 +21,7 @@
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <!-- Bootstrap -->
 <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-<!-- MQTT -->
+<!-- MQTT --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> 
 <!-- Font Awesome icons (free version)--> 
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> 
@@ -29,18 +29,18 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 <!-- Core theme CSS (includes Bootstrap)--> 
 <!-- <link href="css/styles.css" rel="stylesheet" />--> 
 <!--Colour Picker--> 
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
 <script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
-<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script> 
 <!--Toggle Button
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>--> 
 <script src="https://github.com/jaames/iro.js"></script> 
-	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 </head>
@@ -50,27 +50,20 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
   <div class="container">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
-    
-	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
-    
-	  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
-        
-		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger" href="#" >About</a> </li>
-        
-		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
-			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
-			  <a class="dropdown-item active" href="TapToLightShow.html">Light Show <span class="sr-only">(current)</span></a> </div>
+        <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger" href="#" >About</a> </li>
+        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> <a class="dropdown-item active" href="TapToLightShow.html">Light Show <span class="sr-only">(current)</span></a> </div>
         </li>
         <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
       </ul>
     </div>
   </div>
 </nav>
-	
+
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute; z-index: 1000" id="mySetting">
   <pre></pre>
@@ -516,17 +509,19 @@
       <button button type="button" class="btn btn-primary" id="Public" onClick="MQTTMode('Public')" style="width: 9rem">Public Broker</button>
     </div>
     <div class="w3-bar-divider"></div>
-    <div class="w3-bar-item w3-right-align"> 
-		 <table align="right" id="OpenEditMQTTTable">
-			 <tr><td width="2rem"><a class="nav-link js-scroll-trigger " href="#" onClick="EditMQTT('Edit')"  id="EditMQTT" style="width: 2rem"><i class="fa fa-fw fa-edit"></i></a> 
-				 </td></tr>		
-		</table>
-	  <table align="right" id="EditMQTTTable">
+    <div class="w3-bar-item w3-right-align">
+      <table align="right" id="OpenEditMQTTTable">
+        <tr>
+          <td width="2rem"><a class="nav-link js-scroll-trigger " href="#" onClick="EditMQTT('Edit')"  id="EditMQTT" style="width: 2rem"><i class="fa fa-fw fa-edit"></i></a></td>
+        </tr>
+      </table>
+      <table align="right" id="EditMQTTTable">
         <tr>
           <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Done')" style="display: none; width: 2rem"  id="DoneEditMQTT"><i class="fa fa-fw fa-check w3-right-align"></i></a></td>
           <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Cancel')" style="display: none; width: 2rem;" id="CancelEditMQTT"><i class="fa fa-fw fa-ban w3-right-align"></i></a></td>
         </tr>
-      </table></div>
+      </table>
+    </div>
     <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Broker:</strong> </span> <br>
       <span class="w3-left-align" id="txt_Broker" style="width: 19rem; height: 2.0rem"></span>
       <input type="text" id="txtbox_Broker" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
@@ -542,7 +537,6 @@
     </div>
   </div>
 </div>
-	
 <section class="page-section" id="functions">
   <pre></pre>
   <pre></pre>
@@ -557,70 +551,108 @@
         </marquee>
       </h3>
     </div>
-	  <div align="center">
-		<label class="switchShow"><input type="checkbox" id="ToggleLightShow" onClick="Toggle_LightShow()">
-			<div class="sliderShow round">
-				<!--ADDED HTML -->
-				<span class="show-a">SHOW B</span>
-				<span class="show-b">SHOW A</span>
-				<!--END-->
-			</div>
-		</label>
-  	</div>
-		
- 	</div>
-
-	<pre></pre>
-
-	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">1</button>
-	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">2</button>
-	  <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">3</button>
-	 <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">4</button>
-	  </div>
-	  <div align="center">
-	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">5</button>
-	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">6</button>
-	  <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">7</button>
-	 <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">8</button>
-	  </div>
-	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">9</button>
-	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">10</button>
-	  <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">11</button>
-	 <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">12</button>
-   </div>
-	<div align="center">
-	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">13</button>
-	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">14</button>
-	  <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">15</button>
-	 <button button type="button" class="btn btn-pixel" id="16" onClick="TapToLightShowBtn('16')">16</button>
-	  </div>
-  <pre></pre>
-	<div align="center">
-	<button id="LightShowBtnColorPicker" class="btn-color btn-fluid" onClick="LightShowOpenColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
-					  <div class="modal" id="LightShowColorPicker_Modal">
-		  	<div class="modal-content">
-			  <div id="picker"></div>
-			  <br/> &nbsp;
-			  <div>
-			  <button type="button" class="btn btn-success" onClick="LightShowSetColorPicker()">Set</button>
-			  <button type="button" class="btn btn-secondary" onClick="LightShowCloseColorPicker()">Cancel</button>
-			  </div>
-			  </div>
-		  	</div>
-	</div>
-	<pre></pre>
-	<pre></pre>
-<div class="container" align="center" >
-    <div class="btn-group">
-    <button type="button" id="SEQ1" class="btn button-send" onClick="SEQ1()" >Sequence 1</button>
-    <button type="button" id="SEQ2" class="btn button-send" onClick="SEQ2()">Sequence 2</button>
-    <button type="button" id="SEQ3" class="btn button-send" onClick="SEQ3()" >Sequence 3</button>
-	<button type="button" id="PLAYALL" class="btn button-send" onClick="PLAYALL()">Play All</button>
+    
   </div>
-	
-	<!--
+  <pre></pre>
+  <div class="row text-center w3-center" align="center" style="margin-left: auto;">
+    <div class="col" style="margin: auto"> <span class="w3-left-align"><strong>Patterns:</strong><br>
+      </span>
+      <div align="center" class="btn-group-vertical" data-toggle="buttons">
+        <button button type="button" class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #6b5fb9" id="P0" onClick="PatternBtn('0')">P1</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #5b4eb1" id="P1" onClick="PatternBtn('1')">P2</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #5246a0" id="P2" onClick="PatternBtn('2')">P3</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #483d8b" id="P3" onClick="PatternBtn('3')">P4</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #40367c" id="P4" onClick="PatternBtn('4')">P5</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #372f6a" id="P5" onClick="PatternBtn('5')">P6</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #2e2759" id="P6" onClick="PatternBtn('6')">P7</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #241f47" id="P7" onClick="PatternBtn('7')">P8</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #1b1735" id="P8" onClick="PatternBtn('8')">P9</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #121023" id="P09" onClick="PatternBtn('9')">P10</button>
+        <!--<button button type="radio" class="btn btn-pixel" id="S0" onClick="TapToLightBtn('00')">S1 <i class='fab fa-buromobelexperte'></i></button>--> 
+      </div>
+    </div>
+    <div class="row-cols-1 align-middle" style="vertical-align: middle; margin: auto">
+      <div align="center">
+        <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">1</button>
+        <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">2</button>
+        <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">3</button>
+        <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">4</button>
+      </div>
+      <div align="center">
+        <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">5</button>
+        <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">6</button>
+        <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">7</button>
+        <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">8</button>
+      </div>
+      <div align="center">
+        <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">9</button>
+        <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">10</button>
+        <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">11</button>
+        <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">12</button>
+      </div>
+      <div align="center">
+        <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">13</button>
+        <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">14</button>
+        <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">15</button>
+        <button button type="button" class="btn btn-pixel" id="16" onClick="TapToLightShowBtn('16')">16</button>
+      </div>
+      <pre></pre>
+      <div align="center">
+        <button id="LightShowBtnColorPicker" class="btn-color btn-fluid" onClick="LightShowOpenColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
+		  <pre></pre>
+		 <table width="100%">
+			 <tr>
+				 <td><span class="w3-left-align">Brightness: </span>
+				 </td>
+				 <td></td>
+			 </tr>
+			 <tr>
+				 <td><input type="range" min= "0" max="255" id="range_Brightness" class="custom-range" onChange="range_Brightness_txtChange()"></td>
+				 <td><span id="range_Brightness_lightshow"></span></td>
+			 </tr>
+			 
+			 </table>
+			
+        <div class="modal" id="LightShowColorPicker_Modal">
+          <div class="modal-content">
+            <div id="picker"></div>
+            <br/>
+            &nbsp;
+            <div>
+              <button type="button" class="btn btn-success" onClick="LightShowSetColorPicker()">Set</button>
+              <button type="button" class="btn btn-secondary" onClick="LightShowCloseColorPicker()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="margin: auto"> <span class="w3-left-align"><strong>Patterns:</strong><br>
+      </span>
+      <div align="center" class="btn-group-vertical" data-toggle="buttons">
+        <button button type="button" class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #8c53c6" id="P10" onClick="PatternBtn('10')">P11</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #8040bf" id="P11" onClick="PatternBtn('11')">P12</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#7339ac" id="P12" onClick="PatternBtn('12')">P13</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#663399" id="P13" onClick="PatternBtn('13')">P14</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#592d86" id="P14" onClick="PatternBtn('14')">P15</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#4d2673" id="P15" onClick="PatternBtn('15')">P16</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#402060" id="P16" onClick="PatternBtn('16')">P17</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#33194d" id="P17" onClick="PatternBtn('17')">P18</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#261339" id="P18" onClick="PatternBtn('18')">P19</button>
+        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#1a0d26" id="P19" onClick="PatternBtn('19')">P20</button>
+      </div>
+    </div>
+  </div>
+  <pre></pre>
+  <pre></pre>
+  <div class="container" align="center" >
+    <div class="btn-group">
+      <button type="button" id="SEQ1" class="btn button-send" onClick="SEQ1()" >Sequence 1</button>
+      <button type="button" id="SEQ2" class="btn button-send" onClick="SEQ2()">Sequence 2</button>
+      <button type="button" id="SEQ3" class="btn button-send" onClick="SEQ3()" >Sequence 3</button>
+      <button type="button" id="PLAYALL" class="btn button-send" onClick="PLAYALL()">Play All</button>
+    </div>
+    
+    <!--
   <div class="dropdown" >
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width=300px">
       Choose Sequence
@@ -636,16 +668,13 @@
   <pre></pre>
 	<div class="container" align="center" >
 		<button class="btn button-send" onClick="#" style="margin: 15px">Play</button>
-		-->
-		</div>
-
- 
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
-	<pre></pre>
+		--> 
+  </div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
 </section>
-
 <footer class="text-center bg-footer">
   <div class="container" align="center">
     <div class="row">

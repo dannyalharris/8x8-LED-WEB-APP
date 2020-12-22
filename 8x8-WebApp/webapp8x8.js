@@ -39,7 +39,7 @@ if (MACAddress == null) {
 	localStorage.setItem("ToggledSetLocalStorage", "");
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
   //ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-	ToggledSetArray = ["true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true", "true"];
+	ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
 }
 
 var MQTTMode_Str = localStorage.getItem("MQTTMode");
@@ -201,7 +201,7 @@ function EnergyOptToggle() {
   }
 }
 
-// When any set being toggled
+// When any ESP set being toggled
 function Toggle(Set) {
 
   if (document.getElementById("T" + Set).checked == true) {
@@ -250,7 +250,7 @@ function SendSetsToggle() {
 
   var messagepayloadjson_ESPSet = new Object();
   //messagepayloadjson_ESPSet.cmd = LightOff;
-  messagepayloadjson_ESPSet.ESPSet = ToggledSetBinary; //"1"
+  messagepayloadjson_ESPSet.sel = ToggledSetBinary; //"1"
 
   var messagepayloadstring_ESPSet = JSON.stringify(messagepayloadjson_ESPSet);
   console.log(messagepayloadstring_ESPSet);
@@ -930,9 +930,7 @@ function ToTapToHome() {
   window.location.replace("TapToHomepage.html");
 }
 
-/*------------------------------------------------
- * In the Text Generator
- ************************************************/
+// In the Text Generator
 function openColorPicker() {
   document.getElementById("colorPicker_Modal").style.display = "block";
   console.log("ColorPickerOpened");
@@ -1102,9 +1100,7 @@ function range_Speed_txtChange() {
   document.getElementById('range_Speed_txt').innerHTML = document.getElementById('range_Speed').value;
 }
 
-/*------------------------------------------------
- * In the Tap-to-Light
- ************************************************/
+// In the Tap-to-Light
 function range_Brightness_TtLChange() {
   document.getElementById('range_Brightness_TtLTxt').innerHTML = document.getElementById('range_Brightness_TtL').value;
 }
@@ -1238,11 +1234,30 @@ function TapToLightBtn(cell) {
 
 }
 
-/*------------------------------------------------
- * In the Tap-to-LightShow
- ************************************************/
+// In the Tap-to-LightShow
+
+var ESP_Pixel = [0,0,0,0,
+				 0,0,0,0,
+				 0,0,0,0,
+				 0,0,0,0]
 
 function TapToLightShowBtn(id) {
+	console.log("Triggered ESPset: " + id);
+	var i;
+	
+	for (i = 0; i<16; i++){
+		if (i == id){
+			console.log("Got triggered ESPset: " + i);
+			if(ESP_Pixel[i] == 0){
+				ESP_Pixel = 1;
+				document.getElementById(id).style.background = "#" + color_Hex_LightShow;
+			}else if (ESP_Pixel[i] == 1){
+				ESP_Pixel = 0;
+				document.getElementById(id).style.background = "#f8f8ff";
+			}
+		}
+	}
+	
   if (document.getElementById("ToggleLightShow").checked == true) {
     /*
 	//disable all buttons dor 5 seconds

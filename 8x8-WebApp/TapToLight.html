@@ -640,15 +640,18 @@
               <tr style="margin: 5px">
                 <td width="auto"><span class="w3-left-align" style="font-size: 1.2rem">Brightness</span></td>
                 <td width="auto"> : </td>
-                <td width="auto"><input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()" style="width: 100%">
-                  <span id="range_Brightness_TtLTxt"></span></td>
+                <td width="auto">
+					<input type="range" min= "0" max="255" id="range_Brightness_TtL" class="custom-range" onChange="range_Brightness_TtLChange()" style="width: 100%">
+                 </td>
+				  <td>&nbsp;</td>
+				  <td><span id="range_Brightness_TtLTxt"></span></td>
               </tr>
-				<tr>
-				<td></td></tr>
               <tr style="margin: 5px">
                 <td><span class="w3-left-align" style="font-size: 1.2rem">Color</span></td>
                 <td> : </td>
                 <td><button id="btnColorPicker_TtL" class="btn-color btn-fluid" onClick="openColorPicker_TtL()" style="width: 100%; height:30px "></button></td>
+				  <td>&nbsp;</td>
+				  <td>&nbsp;</td>
               </tr>
             </table>
 			  <div class="modal" id="colorPicker_Modal_TtL">
