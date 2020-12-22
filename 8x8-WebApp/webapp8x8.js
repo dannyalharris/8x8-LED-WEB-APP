@@ -31,7 +31,7 @@ var ToggledSetArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var ToggledSetBinary;
 
 
-if (MACAddress == "") {
+if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
   MACAddress = localStorage.getItem("MACAddress");
   localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
@@ -39,28 +39,28 @@ if (MACAddress == "") {
   ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 }
 
-var MQTTMode = localStorage.getItem("MQTTMode");
+var MQTTMode_Str = localStorage.getItem("MQTTMode");
 var MQTTBroker = localStorage.getItem("MQTTBroker");
 var MQTTPort = localStorage.getItem("MQTTPort");
 
-if (MQTTMode == "") {
+if (MQTTMode_Str == null) {
   localStorage.setItem("MQTTMode", "Public");
-  MQTTMode = localStorage.getItem("MQTTMode");
+  MQTTMode_Str = localStorage.getItem("MQTTMode");
   localStorage.setItem("MQTTBroker", "broker.hivemq.com");
   MQTTBroker = localStorage.getItem("MQTTBroker");
-  localStorage.setItem("MQTTPort", "8000");
+  localStorage.setItem("MQTTPort", 8000);
   MQTTPort = localStorage.getItem("MQTTPort");
 
   document.getElementById("txt_Broker").innerHTML = MQTTBroker;
   document.getElementById("txt_Port").innerHTML = MQTTPort;
-  console.log("MQTTMode" + MQTTMode);
+  console.log("MQTTMode" + MQTTMode_Str);
   console.log("MQTTBroker" + MQTTBroker);
   console.log("MQTTPort" + MQTTPort);
 }
 
-console.log("MQTT: " + MQTTBroker + MQTTPort);
+console.log("MQTT: " + MQTTBroker + " , " + MQTTPort);
 
-if (MQTTBroker == "") {
+if (MQTTBroker == null) {
   localStorage.setItem("MQTTBroker", "broker.hivemq.com");
   MQTTBroker = localStorage.getItem("MQTTBroker");
   console.log("MQTTBroker null!");
@@ -69,8 +69,8 @@ if (MQTTBroker == "") {
   console.log("MQTTBroker not null!");
 }
 
-if (MQTTPort == "") {
-   localStorage.setItem("MQTTPort", "8000");
+if (MQTTPort == null) {
+   localStorage.setItem("MQTTPort", 8000);
   MQTTPort = localStorage.getItem("MQTTPort");
   console.log("MQTTPort null!");
 } else {
@@ -78,14 +78,7 @@ if (MQTTPort == "") {
   console.log("MQTTPort not null!");
 }
 
-
-//= localStorage.setItem("BatteryStatusC", "50");
-//console.log("BatteryStatusC : " + localStorage.getItem("BatteryStatusC"));
-//console.log(localStorage.getItem("MACAddress"));
-
-/*------------------------------------------------
- * Tap the button to Specific Tab
- ************************************************/
+//Tap the button to Specific Tab
 function ToTapToLight() {
   window.location.replace("TapToLight.html");
 }
@@ -108,9 +101,7 @@ function ToTapToAbout() {
   console.log(localStorage.getItem("MACAddress"));
 }
 
-/*------------------------------------------------
- * Open Tab
- ************************************************/
+//Open Tab
 function openTab(pageName, elmnt, color) {
   var i, tabcontent, tablinks;
   console.log("Enter this page");
@@ -129,9 +120,7 @@ function openTab(pageName, elmnt, color) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
-/*------------------------------------------------
- * Setting SideBar open
- ************************************************/
+//Setting SideBar open
 function Setting_Open() {
 
   console.log(localStorage.getItem("MACAddress"));
@@ -163,9 +152,7 @@ function Setting_Open() {
   LDRStatusDisplay();
 }
 
-/*------------------------------------------------
- * When setting SideBar open, check toggled SET
- ************************************************/
+// When setting SideBar open, check toggled SET
 function ToggleSet() {
   if (localStorage.getItem("MACAddress") == "ALL") {
     document.getElementById("AllSet_Toggle").checked = true;
@@ -189,10 +176,10 @@ function ToggleSet() {
   }
   console.log(ToggledSetArray);
 }
+
 EnergyOptToggle();
-/*------------------------------------------------
- * When setting SideBar open, check toggled EnergyOpt
- ************************************************/
+
+// When setting SideBar open, check toggled EnergyOpt
 function EnergyOptToggle() {
   if (localStorage.getItem("EnergyOpt") == "1") {
     document.getElementById("EnergyOpti_Toggle").checked = true;
@@ -211,9 +198,7 @@ function EnergyOptToggle() {
   }
 }
 
-/*------------------------------------------------
- * When any set being toggled
- ************************************************/
+// When any set being toggled
 function Toggle(Set) {
 
   if (document.getElementById("T" + Set).checked == true) {
@@ -229,9 +214,7 @@ function Toggle(Set) {
 
 }
 
-/*------------------------------------------------
- * When ALL Set being toggled
- ************************************************/
+//When ALL Set being toggled
 function AllSet_Toggle() {
   //If All Set Toggle Button has been toggled, then all Toggle button for Set 1 to 16 will be toggled
   if (document.getElementById("AllSet_Toggle").checked == true) {
@@ -253,9 +236,7 @@ function AllSet_Toggle() {
 
 }
 
-/*------------------------------------------------
- * Send sets data
- ************************************************/
+//Send sets data
 function SendSetsToggle() {
   ToggledSetBinary = ToggledSetArray.join('');
   console.log(ToggledSetBinary);
@@ -276,9 +257,7 @@ function SendSetsToggle() {
   client.send(message_ESPSet);
 }
 
-/*------------------------------------------------
- * Control Energy Auto-Optimization 
- ************************************************/
+//Control Energy Auto-Optimization 
 function EnergyOpti_Toggle() {
 
   if (document.getElementById("EnergyOpti_Toggle").checked == true) {
@@ -319,43 +298,38 @@ function EnergyOpti_Toggle() {
   client.send(message_EnergyOpt);
 }
 
-
-/*------------------------------------------------
- * Set MQTT
- ************************************************/
+//Set MQTT
 function MQTTMode(mode) {
   if (mode == "Private") {
     localStorage.setItem("MQTTMode", "Private");
-    MQTTMode = localStorage.getItem("MQTTMode");
+    MQTTMode_Str = localStorage.getItem("MQTTMode");
     localStorage.setItem("MQTTBroker", "broker.hivemq.com");
     MQTTBroker = localStorage.getItem("MQTTBroker");
-    localStorage.setItem("MQTTPort", "8000");
+    localStorage.setItem("MQTTPort", 8000);
     MQTTPort = localStorage.getItem("MQTTPort");
 
     document.getElementById("txt_Broker").innerHTML = MQTTBroker;
     document.getElementById("txt_Port").innerHTML = MQTTPort;
-    console.log("MQTTMode" + MQTTMode);
+    console.log("MQTTMode" + MQTTMode_Str);
     console.log("MQTTBroker" + MQTTBroker);
     console.log("MQTTPort" + MQTTPort);
   } else if (mode == "Public") {
     localStorage.setItem("MQTTMode", "Public");
-    MQTTMode = localStorage.getItem("MQTTMode");
+    MQTTMode_Str = localStorage.getItem("MQTTMode");
     localStorage.setItem("MQTTBroker", "broker.hivemq.com");
     MQTTBroker = localStorage.getItem("MQTTBroker");
-    localStorage.setItem("MQTTPort", "8000");
+    localStorage.setItem("MQTTPort", 8000);
     MQTTPort = localStorage.getItem("MQTTPort");
 
     document.getElementById("txt_Broker").innerHTML = MQTTBroker;
     document.getElementById("txt_Port").innerHTML = MQTTPort;
-    console.log("MQTTMode" + MQTTMode);
+    console.log("MQTTMode" + MQTTMode_Str);
     console.log("MQTTBroker" + MQTTBroker);
     console.log("MQTTPort" + MQTTPort);
   }
 }
 
-/*------------------------------------------------
- * Edit MQTT Info
- ************************************************/
+//Edit MQTT Info
 function EditMQTT(mode) {
 
   if (mode == "Edit") {
@@ -409,21 +383,20 @@ function EditMQTT(mode) {
 function MQTT_Connect(Connection) {
   if (Connection == "Connect") {
     console.log("Connecting...");
-    localStorage.setItem("MQTTBroker", document.getElementById("txtbox_Broker").value);
+    localStorage.setItem("MQTTBroker", document.getElementById("txt_Broker").innerHTML);
     MQTTBroker = localStorage.getItem("MQTTBroker");
-    localStorage.setItem("MQTTPort", document.getElementById("txtbox_Port").value);
+    localStorage.setItem("MQTTPort", document.getElementById("txt_Port").innerHTML);
     MQTTPort = localStorage.getItem("MQTTPort");
+	console.log(MQTTBroker + " Number:" + MQTTPort);
     MQTTConnect();
-  } else if (Connection == "Disconnect") {
+  } 
+	else if (Connection == "Disconnect") {
     console.log("Disconnecting...");
     MQTTDisconnect();
   }
 }
 
-/*------------------------------------------------
- * MQTT PAHO JAVASCRIPT CLIENT
- ************************************************/
-
+//MQTT PAHO JAVASCRIPT CLIENT
 MQTTConnect();
 
 function MQTTConnect() {
@@ -510,17 +483,13 @@ function onMessageArrived(message) {
     LDRStatusDisplay();
   }
 
-  ConnectionStatusDisplay(message);
-
 };
 
 
 BatteryStatusDisplay();
 LDRStatusDisplay();
 
-/*------------------------------------------------
- * Display Battery Status in Setting
- ************************************************/
+// Display Battery Status in Setting
 function BatteryStatusDisplay() {
   console.log("BatteryStatusDisplay_Thread");
   //BatteryStatus
@@ -721,9 +690,7 @@ function BatteryStatusDisplay() {
   }
 }
 
-/*------------------------------------------------
- * Display Brightness Status in Setting
- ************************************************/
+// Display Brightness Status in Setting
 function LDRStatusDisplay() {
   //LDRStatus
   var LDRStatus1 = parseInt(localStorage.getItem("LDRStatusSet1"));
@@ -959,10 +926,7 @@ function ConnectionStatusDisplay(message) {
   console.log("onMessageArrived_ConnectionStatus Thread: " + message.payloadString + " " + message.destinationName);
 }
 
-
-/*------------------------------------------------
- * Tap the button to home
- ************************************************/
+// Tap the button to home
 function ToTapToHome() {
   window.location.replace("TapToHomepage.html");
 }
