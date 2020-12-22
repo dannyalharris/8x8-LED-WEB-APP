@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<!------------------------------------------------
+ * Created by:
+ * Kai Li, Ong
+ * Danial Hawari
+ *
+ * Winter Semester 2020
+ *
+ * 8x8 WepApp Project
+ *
+ * More informations: http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App
+ *
+ ------------------------------------------------>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="Description" content=""/>
+<title>8x8-WebApp</title>
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+<!-- MQTT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> 
+<!-- Font Awesome icons (free version)--> 
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> 
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+<!-- Core theme CSS (includes Bootstrap)--> 
+<!-- <link href="css/styles.css" rel="stylesheet" />--> 
+<!--Colour Picker--> 
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script> 
+<script src="http://propeller.in/components/range-slider/js/wNumb.js"></script> 
+<script src="http://propeller.in/components/range-slider/js/nouislider.js"></script>
+<!--Toggle Button
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>-->
+<script src="https://github.com/jaames/iro.js"></script> 
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+<!--navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-header" id="mainNav">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu &nbsp;<span class="navbar-toggler-icon"></span></button>
+    
+	  <a class="navbar-brand js-scroll-trigger"><img src="images/HsKA Logo.png" height="auto" width="250" alt="Hochschule Karlsruhe"></a>
+    
+	  <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="TapToHomepage.html"><i class="fa fa-fw fa-home"></i></a></li>
+        
+		  <li class="nav-item" onClick="ToTapToAbout()"> <a class="nav-link js-scroll-trigger" href="#" >About</a> </li>
+        
+		  <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Let's Play </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+			  <a class="dropdown-item" href="TapToLight.html">Tap-To-Light</a> 
+			  <a class="dropdown-item" href="TapToTextGenerator.html">Text-Generator</a> 
+			  <a class="dropdown-item active" href="TapToLightShow.html">Light Show <span class="sr-only">(current)</span></a> </div>
+        </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#" onClick="Setting_Open()"><i class="fa fa-fw fa-wrench"></i></a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+	
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display: none; right: 0; width: auto; position: absolute; z-index: 1000" id="mySetting">
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="w3-bar-item btn-group">
+    <button class="tablink" onclick="openTab('ESP32', this, '#7516FF')" id="defaultOpen">ESP32</button>
+    <button class="tablink" onclick="openTab('MQTT', this, '#7516FF')">MQTT</button>
+  </div>
+  <pre></pre>
+  <br>
+  <div class="w3-bar-item tab-content" style="box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 10, 0.4);" id="ESP32">
+    <div class="w3-bar-item"> <span class="w3-left-align">Energy Auto-Optimization: </span>
+      <label class="switch">
+      <input type="checkbox" id="EnergyOpti_Toggle" onClick="EnergyOpti_Toggle()">
+      <div class="slider round"> 
+        <!--ADDED HTML --> 
+        <span class="on">ON</span> <span class="off">OFF</span> 
+        <!--END--> 
+      </div>
+      </label>
+    </div>
+    <div class="w3-bar-divider"></div>
+    <div class="w3-bar-item"> <span class="w3-left-align"><strong>8x8 LED ESP32</strong></span> </div>
+    <div class="w3-bar-item"> <span class="w3-left-align">All Sets: </span>
+      <label class="switch">
+      <input type="checkbox" id="AllSet_Toggle" onClick="AllSet_Toggle()">
+      <div class="slider round"> 
+        <!--ADDED HTML --> 
+        <span class="on">ON</span> <span class="off">OFF</span> 
+        <!--END--> 
+      </div>
+      </label>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 01: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T1" onClick="Toggle('1')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet1"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet1"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet1"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText1"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText1"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText1"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 02: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T2" onClick="Toggle('2')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet2"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet2"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet2"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText2"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText2"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText2"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 03: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T3" onClick="Toggle('3')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet3"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet3"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet3"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText3"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText3"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText3"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 04: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T4" onClick="Toggle('4')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet4"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet4"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet4"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText4"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText4"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText4"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 05: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T5" onClick="Toggle('5')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet5"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet5"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet5"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText5"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText5"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText5"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 06: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T6" onClick="Toggle('6')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet6"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet6"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet6"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText6"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText6"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText6"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 07: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T7" onClick="Toggle('7')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet7"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet7"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet7"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText7"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText7"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText7"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 08: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T8" onClick="Toggle('8')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet8"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet8"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet8"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText8"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText8"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText8"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 09: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T9" onClick="Toggle('9')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet9"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet9"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet9"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText9"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText9"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText9"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 10: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T10" onClick="Toggle('10')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet10"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet10"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet10"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText10"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText10"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText10"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 11: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T11" onClick="Toggle('11')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet11"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet11"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet11"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText11"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText11"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText11"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 12: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T12" onClick="Toggle('12')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet12"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet12"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet12"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText12"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText12"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText12"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 13: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T13" onClick="Toggle('13')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet13"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet13"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet13"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText13"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText13"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText13"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 14: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T14" onClick="Toggle('14')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet14"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet14"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet14"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText14"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText14"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText14"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 15: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T15" onClick="Toggle('15')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet15"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet15"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet15"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText15"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText15"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText15"></span>%</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-bar-item">
+      <table>
+        <tr>
+          <td><span class="w3-left-align">Set 16: </span></td>
+          <td><label class="switch">
+            <input type="checkbox" id="T16" onClick="Toggle('16')">
+            <div class="slider round"> 
+              <!--ADDED HTML --> 
+              <span class="on">ON</span> <span class="off">OFF</span> 
+              <!--END--> 
+            </div>
+            </label></td>
+          <td><span>&nbsp;<img src="images/Disconnected.png" class="img-fluid" alt="" style="width: 25px; height: 25px; align-content: center; vertical-align: middle" id="ConnectionSet16"> </span></td>
+          <td><span>&nbsp;<img src="images/Brightness-Dark.png" class="img-fluid" alt="" style="width: 35px; height:35px; align-content: center; vertical-align: middle" id="LDRSet16"></span></td>
+          <td><span>&nbsp;<img src="images/Battery-Empty.png" class="img-fluid" alt="" style="width: 35px; height: 35px; align-content: center; vertical-align: middle" id="BatterySet16"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="ConnectionText16"></span></td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BrightnessText16"></span>%</td>
+          <td align="center" style="font-size: 10px"><span class="w3-center" style="align-content: center;" id="BatteryText16"></span>%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="w3-bar-item tab-content" style="box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 10, 0.4); height: 100%; width: 23.5rem" id="MQTT">
+    <div class="w3-bar-item w3-center">
+      <button button type="button" class="btn btn-primary" id="Private" onClick="MQTTMode('Private')" style="width: 9rem">Private Broker</button>
+      <button button type="button" class="btn btn-primary" id="Public" onClick="MQTTMode('Public')" style="width: 9rem">Public Broker</button>
+    </div>
+    <div class="w3-bar-divider"></div>
+    <div class="w3-bar-item w3-right-align"> 
+		 <table align="right" id="OpenEditMQTTTable">
+			 <tr><td width="2rem"><a class="nav-link js-scroll-trigger " href="#" onClick="EditMQTT('Edit')"  id="EditMQTT" style="width: 2rem"><i class="fa fa-fw fa-edit"></i></a> 
+				 </td></tr>		
+		</table>
+	  <table align="right" id="EditMQTTTable">
+        <tr>
+          <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Done')" style="display: none; width: 2rem"  id="DoneEditMQTT"><i class="fa fa-fw fa-check w3-right-align"></i></a></td>
+          <td width="2rem"><a class="nav-link js-scroll-trigger" href="#" onClick="EditMQTT('Cancel')" style="display: none; width: 2rem;" id="CancelEditMQTT"><i class="fa fa-fw fa-ban w3-right-align"></i></a></td>
+        </tr>
+      </table></div>
+    <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Broker:</strong> </span> <br>
+      <span class="w3-left-align" id="txt_Broker" style="width: 19rem; height: 2.0rem"></span>
+      <input type="text" id="txtbox_Broker" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
+    </div>
+    <div class="w3-bar-item"> <span class="w3-left-align"><strong>MQTT Port:</strong> </span> <br>
+      <span class="w3-left-align" id="txt_Port" style="width: 19rem; height: 2.0rem"></span>
+      <input type="text" id="txtbox_Port" class="custom-range"  style="font-size: 1.2rem; height: 2.0rem; width: 19rem; display: none">
+    </div>
+    <br>
+    <div class="w3-bar-item w3-center">
+      <button button type="button" style="align-content: center" class="btn button-send" id="MQTT_Connect" onClick="MQTT_Connect('Connect')">Connect</button>
+      <button button type="button" style="align-content: center" class="btn btn-danger" id="MQTT_Disconnect" onClick="MQTT_Connect('Disconnect')">Disconnect</button>
+    </div>
+  </div>
+</div>
+	
+<section class="page-section" id="functions">
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase" id="HTML">LightShow</h2>
+      <h3 class="section-subheading text-muted">
+        <marquee behavior="scroll" direction="left" width="200" align="center">
+        Light entertainment and yet give full satisfaction
+        </marquee>
+      </h3>
+    </div>
+	  <div align="center">
+		<label class="switchShow"><input type="checkbox" id="ToggleLightShow" onClick="Toggle_LightShow()">
+			<div class="sliderShow round">
+				<!--ADDED HTML -->
+				<span class="show-a">SHOW B</span>
+				<span class="show-b">SHOW A</span>
+				<!--END-->
+			</div>
+		</label>
+  	</div>
+		
+ 	</div>
+
+	<pre></pre>
+
+	  <div align="center">
+	  <button button type="button" class="btn btn-pixel" id="01" onClick="TapToLightShowBtn('01')">1</button>
+	  <button button type="button" class="btn btn-pixel" id="02" onClick="TapToLightShowBtn('02')">2</button>
+	  <button button type="button" class="btn btn-pixel" id="03" onClick="TapToLightShowBtn('03')">3</button>
+	 <button button type="button" class="btn btn-pixel" id="04" onClick="TapToLightShowBtn('04')">4</button>
+	  </div>
+	  <div align="center">
+	  <button button type="button" class="btn btn-pixel" id="05" onClick="TapToLightShowBtn('05')">5</button>
+	  <button button type="button" class="btn btn-pixel" id="06" onClick="TapToLightShowBtn('06')">6</button>
+	  <button button type="button" class="btn btn-pixel" id="07" onClick="TapToLightShowBtn('07')">7</button>
+	 <button button type="button" class="btn btn-pixel" id="08" onClick="TapToLightShowBtn('08')">8</button>
+	  </div>
+	<div align="center">
+	  <button button type="button" class="btn btn-pixel" id="09" onClick="TapToLightShowBtn('09')">9</button>
+	  <button button type="button" class="btn btn-pixel" id="10" onClick="TapToLightShowBtn('10')">10</button>
+	  <button button type="button" class="btn btn-pixel" id="11" onClick="TapToLightShowBtn('11')">11</button>
+	 <button button type="button" class="btn btn-pixel" id="12" onClick="TapToLightShowBtn('12')">12</button>
+   </div>
+	<div align="center">
+	  <button button type="button" class="btn btn-pixel" id="13" onClick="TapToLightShowBtn('13')">13</button>
+	  <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">14</button>
+	  <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">15</button>
+	 <button button type="button" class="btn btn-pixel" id="16" onClick="TapToLightShowBtn('16')">16</button>
+	  </div>
+  <pre></pre>
+	<div align="center">
+	<button id="LightShowBtnColorPicker" class="btn-color btn-fluid" onClick="LightShowOpenColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
+					  <div class="modal" id="LightShowColorPicker_Modal">
+		  	<div class="modal-content">
+			  <div id="picker"></div>
+			  <br/> &nbsp;
+			  <div>
+			  <button type="button" class="btn btn-success" onClick="LightShowSetColorPicker()">Set</button>
+			  <button type="button" class="btn btn-secondary" onClick="LightShowCloseColorPicker()">Cancel</button>
+			  </div>
+			  </div>
+		  	</div>
+	</div>
+	<pre></pre>
+	<pre></pre>
+<div class="container" align="center" >
+    <div class="btn-group">
+    <button type="button" id="SEQ1" class="btn button-send" onClick="SEQ1()" >Sequence 1</button>
+    <button type="button" id="SEQ2" class="btn button-send" onClick="SEQ2()">Sequence 2</button>
+    <button type="button" id="SEQ3" class="btn button-send" onClick="SEQ3()" >Sequence 3</button>
+	<button type="button" id="PLAYALL" class="btn button-send" onClick="PLAYALL()">Play All</button>
+  </div>
+	
+	<!--
+  <div class="dropdown" >
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width=300px">
+      Choose Sequence
+    </button>
+    <div class="dropdown-menu" align="center">
+      <a class="dropdown-item" href="#">Sequence 1</a>
+      <a class="dropdown-item" href="#">Sequence 2</a>
+      <a class="dropdown-item" href="#">Sequence 3</a>
+    </div>
+  </div>
+</div>
+	  <pre></pre>
+  <pre></pre>
+	<div class="container" align="center" >
+		<button class="btn button-send" onClick="#" style="margin: 15px">Play</button>
+		-->
+		</div>
+
+ 
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+	<pre></pre>
+</section>
+
+<footer class="text-center bg-footer">
+  <div class="container" align="center">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Find us on</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.youtube.com/c/MechatronikWelt/featured" target="_blank">Youtube</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://github.com/dannyalharris/8x8-LED-WEB-APP" target="_blank">GitHub</a></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>For more information</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="http://www.hit-karlsruhe.de/hit-info/info-ws20/8x8-App/" target="_blank">Project documentation</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a  href="http://www.hit-karlsruhe.de/" target="_blank">HIT Karsruhe</a></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Contact</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/hochschule/personen-a-z/details/user/juergen-walter/" target="_blank">Prof. Dipl. -Ing. Jürgen  Walter</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://www.hs-karlsruhe.de/" target="_blank">Hochschule Karlsruhe</a></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12">
+        <div class="portfolio-caption">
+          <div class="portfolio-caption-heading"  align="left"><strong>Website created by</strong></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://de.linkedin.com/in/dannyalharris" target="_blank">Danial Hawari</a></div>
+          <div class="portfolio-caption-subheading text-muted" align="left"><a href="https://my.linkedin.com/in/ong-kai-li-3040b8105" target="_blank">Kai Li Ong</a></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <pre></pre>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>Copyright © 2020 HIT-Karlsruhe. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-3.4.1.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.4.1.js"></script> 
+<script src="WebApp8x8.js"></script>
+</body>
+</html>
