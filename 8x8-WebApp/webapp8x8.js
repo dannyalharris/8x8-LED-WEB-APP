@@ -36,10 +36,10 @@ if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
   MACAddress = localStorage.getItem("MACAddress");
   //localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
-	localStorage.setItem("ToggledSetLocalStorage", "");
+  localStorage.setItem("ToggledSetLocalStorage", "");
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
   //ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-	ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
 }
 
 var MQTTMode_Str = localStorage.getItem("MQTTMode");
@@ -68,16 +68,16 @@ if (MQTTBroker == null) {
   MQTTBroker = localStorage.getItem("MQTTBroker");
   console.log("MQTTBroker null!");
 } else {
-   document.getElementById("txt_Broker").innerHTML = MQTTBroker;
+  document.getElementById("txt_Broker").innerHTML = MQTTBroker;
   console.log("MQTTBroker not null!");
 }
 
 if (MQTTPort == null) {
-   localStorage.setItem("MQTTPort", 8000);
+  localStorage.setItem("MQTTPort", 8000);
   MQTTPort = localStorage.getItem("MQTTPort");
   console.log("MQTTPort null!");
 } else {
-   document.getElementById("txt_Port").innerHTML = MQTTPort;
+  document.getElementById("txt_Port").innerHTML = MQTTPort;
   console.log("MQTTPort not null!");
 }
 
@@ -242,7 +242,7 @@ function AllSet_Toggle() {
 //Send sets data
 function SendSetsToggle() {
   //ToggledSetBinary = ToggledSetArray.join('');
-	ToggledSetBinary = ToggledSetArray;
+  ToggledSetBinary = ToggledSetArray;
   console.log(ToggledSetBinary);
   localStorage.setItem("ToggledSetLocalStorage", ToggledSetBinary);
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
@@ -391,10 +391,9 @@ function MQTT_Connect(Connection) {
     MQTTBroker = localStorage.getItem("MQTTBroker");
     localStorage.setItem("MQTTPort", document.getElementById("txt_Port").innerHTML);
     MQTTPort = localStorage.getItem("MQTTPort");
-	console.log(MQTTBroker + " Number:" + MQTTPort);
+    console.log(MQTTBroker + " Number:" + MQTTPort);
     MQTTConnect();
-  } 
-	else if (Connection == "Disconnect") {
+  } else if (Connection == "Disconnect") {
     console.log("Disconnecting...");
     MQTTDisconnect();
   }
@@ -1236,148 +1235,123 @@ function TapToLightBtn(cell) {
 
 // In the Tap-to-LightShow
 
-var ESP_Pixel = [0,0,0,0,
-				 0,0,0,0,
-				 0,0,0,0,
-				 0,0,0,0]
+// LIGHTSHOW COLOR PICKER
+function LightShowOpenColorPicker() {
+  document.getElementById("LightShowColorPicker_Modal").style.display = "block";
+  console.log("LightShowColorPickerOpened");
+}
 
-function TapToLightShowBtn(id) {
-	console.log("Triggered ESPset: " + id);
-	var i;
-	
-	for (i = 0; i<16; i++){
-		if (i == id){
-			console.log("Got triggered ESPset: " + i);
-			if(ESP_Pixel[i] == 0){
-				ESP_Pixel = 1;
-				document.getElementById(id).style.background = "#" + color_Hex_LightShow;
-			}else if (ESP_Pixel[i] == 1){
-				ESP_Pixel = 0;
-				document.getElementById(id).style.background = "#f8f8ff";
-			}
-		}
-	}
-	
-  if (document.getElementById("ToggleLightShow").checked == true) {
-    /*
-	//disable all buttons dor 5 seconds
-   document.getElementById("00").disabled = true;
-   setTimeout(function () {
-     document.getElementById("00").disabled = false;
-   }, 5000);
-   document.getElementById("01").disabled = true;
-   setTimeout(function () {
-     document.getElementById("01").disabled = false;
-   }, 5000);
-   document.getElementById("02").disabled = true;
-   setTimeout(function () {
-     document.getElementById("02").disabled = false;
-   }, 5000);
-   document.getElementById("03").disabled = true;
-   setTimeout(function () {
-     document.getElementById("03").disabled = false;
-   }, 5000);
-   document.getElementById("04").disabled = true;
-   setTimeout(function () {
-     document.getElementById("04").disabled = false;
-   }, 5000);
-   document.getElementById("05").disabled = true;
-   setTimeout(function () {
-     document.getElementById("05").disabled = false;
-   }, 5000);
-   document.getElementById("06").disabled = true;
-   setTimeout(function () {
-     document.getElementById("06").disabled = false;
-   }, 5000);
-   document.getElementById("07").disabled = true;
-   setTimeout(function () {
-     document.getElementById("07").disabled = false;
-   }, 5000);
-   document.getElementById("08").disabled = true;
-   setTimeout(function () {
-     document.getElementById("08").disabled = false;
-   }, 5000);
-   document.getElementById("09").disabled = true;
-   setTimeout(function () {
-     document.getElementById("09").disabled = false;
-   }, 5000);
-   document.getElementById("10").disabled = true;
-   setTimeout(function () {
-     document.getElementById("10").disabled = false;
-   }, 5000);
-   document.getElementById("11").disabled = true;
-   setTimeout(function () {
-     document.getElementById("11").disabled = false;
-   }, 5000);
-   document.getElementById("12").disabled = true;
-   setTimeout(function () {
-     document.getElementById("12").disabled = false;
-   }, 5000);
-   document.getElementById("13").disabled = true;
-   setTimeout(function () {
-     document.getElementById("13").disabled = false;
-   }, 5000);
-   document.getElementById("14").disabled = true;
-   setTimeout(function () {
-     document.getElementById("14").disabled = false;
-   }, 5000);
-   document.getElementById("15").disabled = true;
-   setTimeout(function () {
-     document.getElementById("15").disabled = false;
-   }, 5000);
-   */
+function LightShowCloseColorPicker() {
+  document.getElementById("LightShowColorPicker_Modal").style.display = "none";
+}
 
-    //console.log(LightOff);
-    var messagepayloadjson_Command = new Object();
-    messagepayloadjson_Command.cmd = "LightOff";
-    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-
-    var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-    console.log(messagepayloadstring_Command);
-    var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-    console.log(message_Command);
-    message_Command.destinationName = "LED88ESP32/Command";
-    message_Command.qos = 0;
-    client.send(message_Command);
-
-    //console.log(LightShow);
-    var messagepayloadjson_Command = new Object();
-    messagepayloadjson_Command.cmd = "LightShow";
-    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-
-    var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-    console.log(messagepayloadstring_Command);
-    var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-    console.log(message_Command);
-    message_Command.destinationName = "LED88ESP32/Command";
-    message_Command.qos = 0;
-    client.send(message_Command);
-
-    var message_lightshow = new Paho.MQTT.Message("{\"ptr\":" + id + "}");
-    message_lightshow.destinationName = "LED88ESP32/LightShow";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-
-  } else if (document.getElementById("ToggleLightShow").checked == false) {
-    document.getElementById(id).style.background = "#" + color_Hex_LightShow;
-    var messagepayloadjson_Command = new Object();
-    messagepayloadjson_Command.cmd = "LightOff";
-    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-
-    var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-    console.log(messagepayloadstring_Command);
-    var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-    console.log(message_Command);
-    message_Command.destinationName = "LED88ESP32/Command";
-    message_Command.qos = 0;
-    client.send(message_Command);
-
-    var number = document.getElementById(id)
-    var message_lightshow = new Paho.MQTT.Message(id);
-    message_lightshow.destinationName = "LED88ESP32/LightShow";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
+window.onclick = function (event) {
+  if (event.target == document.getElementById("LightShowColorPicker_Modal")) {
+    document.getElementById("LightShowColorPicker_Modal").style.display = "none";
   }
+}
+
+var result_LightShow;
+var Red_LightShow = 255;
+var Green_LightShow = 0;
+var Blue_LightShow = 0;
+var Red_LightShow_Inner = 255;
+var Green_LightShow_Inner = 0;
+var Blue_LightShow_Inner = 0;
+
+function LightShowSetColorPicker() {
+  document.getElementById("LightShowColorPicker_Modal").style.display = "none";
+  document.getElementById("LightShowBtnColorPicker").style.backgroundColor = color_Hex_LightShow;
+  //var Red, Green, Blue;
+  color_Hex_LightShow = color_Hex_LightShow.replace('#', '');
+  Red_LightShow_Inner = parseInt(color_Hex_LightShow.substring(0, 2), 16);
+  Green_LightShow_Inner = parseInt(color_Hex_LightShow.substring(2, 4), 16);
+  Blue_LightShow_Inner = parseInt(color_Hex_LightShow.substring(4, 6), 16);
+
+  result_LightShow = 'rgba(' + Red_LightShow_Inner + ',' + Green_LightShow_Inner + ',' + Blue_LightShow_Inner + ')';
+
+  console.log(result_LightShow);
+  //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
+}
+
+
+var ESP_Pixel = [
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 0
+];
+
+var PatternNumber = 0;
+
+function PatternBtn(Pattern) {
+  console.log("Pattern Number: " + Pattern);
+  document.getElementById("PatternNum").innerHTML = Pattern;
+  PatternNumber = Pattern;
+}
+function TapToLightShowBtn(id) {
+  console.log("Triggered ESPset: " + id);
+  console.log("Triggered ESPset Array: " + ESP_Pixel);
+  var i;
+
+  for (i = 0; i < 16; i++) {
+    if (i == id) {
+      console.log("Got triggered ESPset On: " + i);
+      if (ESP_Pixel[i] == 0) {
+        ESP_Pixel[i] = 1;
+        Red_LightShow = Red_LightShow_Inner;
+        Green_LightShow = Green_LightShow_Inner;
+        Blue_LightShow = Blue_LightShow_Inner;
+        document.getElementById(id).style.background = "#" + color_Hex_LightShow;
+      } else if (ESP_Pixel[i] == 1) {
+        console.log("Got triggered ESPset Off: " + i);
+        ESP_Pixel[i] = 0;
+		Red_LightShow = 0;
+        Green_LightShow = 0;
+        Blue_LightShow = 0;
+		PatternNumber = 0;
+        document.getElementById(id).style.background = "#f8f8ff";
+		document.getElementById("PatternNum").innerHTML = PatternNumber;
+      }
+    }
+  }
+  //Send to turn off lights
+  var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "LightOff";
+  //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+
+  //Send for knowing in LightShow
+  var messagepayloadjson_LSCommand = new Object();
+  messagepayloadjson_LSCommand.cmd = "LightShow";
+  //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+  var messagepayloadstring_LSCommand = JSON.stringify(messagepayloadjson_LSCommand);
+  console.log(messagepayloadstring_LSCommand);
+  var message_LSCommand = new Paho.MQTT.Message(messagepayloadstring_LSCommand);
+  console.log(message_LSCommand);
+  message_LSCommand.destinationName = "LED88ESP32/Command";
+  message_LSCommand.qos = 0;
+  client.send(message_LSCommand);
+
+	
+  var messagepayloadjson_LightShow = new Object();
+  messagepayloadjson_LightShow.sel = id;
+  messagepayloadjson_LightShow.ptr = PatternNumber;
+  messagepayloadjson_LightShow.r = Red_LightShow;
+  messagepayloadjson_LightShow.g = Green_LightShow;
+  messagepayloadjson_LightShow.b = Blue_LightShow;
+  var messagepayloadstring_LightShow = JSON.stringify(messagepayloadjson_LightShow);
+  console.log(messagepayloadstring_LightShow);
+  var message_lightshow = new Paho.MQTT.Message(messagepayloadstring_LightShow);
+  message_lightshow.destinationName = "LED88ESP32/LightShow";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
 
 }
 
@@ -1440,41 +1414,5 @@ function SEQ3() {
   }
 }
 
-
-// LIGHTSHOW COLOR PICKER
-function LightShowOpenColorPicker() {
-  document.getElementById("LightShowColorPicker_Modal").style.display = "block";
-  console.log("LightShowColorPickerOpened");
-}
-
-function LightShowCloseColorPicker() {
-  document.getElementById("LightShowColorPicker_Modal").style.display = "none";
-}
-
-window.onclick = function (event) {
-  if (event.target == document.getElementById("LightShowColorPicker_Modal")) {
-    document.getElementById("LightShowColorPicker_Modal").style.display = "none";
-  }
-}
-
-var result_LightShow;
-var Red_LightShow = 255;
-var Green_LightShow = 0;
-var Blue_LightShow = 0;
-
-function LightShowSetColorPicker() {
-  document.getElementById("LightShowColorPicker_Modal").style.display = "none";
-  document.getElementById("LightShowBtnColorPicker").style.backgroundColor = color_Hex_LightShow;
-  //var Red, Green, Blue;
-  color_Hex_LightShow = color_Hex_LightShow.replace('#', '');
-  Red_LightShow = parseInt(color_Hex_LightShow.substring(0, 2), 16);
-  Green_LightShow = parseInt(color_Hex_LightShow.substring(2, 4), 16);
-  Blue_LightShow = parseInt(color_Hex_LightShow.substring(4, 6), 16);
-
-  result_LightShow = 'rgba(' + Red_LightShow + ',' + Green_LightShow + ',' + Blue_LightShow + ')';
-
-  console.log(result_LightShow);
-  //console.log("rgb("+ +r + "," + +g + "," + +b + ")");
-}
 
 //////

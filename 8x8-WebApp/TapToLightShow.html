@@ -550,24 +550,23 @@
         Light entertainment and yet give full satisfaction
         </marquee>
       </h3>
-    </div>
-    
+    </div>   
   </div>
-  <pre></pre>
-  <div class="row text-center w3-center" align="center" style="margin-left: auto;">
+
+  <div class="row text-center" style="margin-left: auto;">
     <div class="col" style="margin: auto"> <span class="w3-left-align"><strong>Patterns:</strong><br>
       </span>
       <div align="center" class="btn-group-vertical" data-toggle="buttons">
-        <button button type="button" class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #6b5fb9" id="P0" onClick="PatternBtn('0')">P1</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #5b4eb1" id="P1" onClick="PatternBtn('1')">P2</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #5246a0" id="P2" onClick="PatternBtn('2')">P3</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #483d8b" id="P3" onClick="PatternBtn('3')">P4</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #40367c" id="P4" onClick="PatternBtn('4')">P5</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #372f6a" id="P5" onClick="PatternBtn('5')">P6</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #2e2759" id="P6" onClick="PatternBtn('6')">P7</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #241f47" id="P7" onClick="PatternBtn('7')">P8</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #1b1735" id="P8" onClick="PatternBtn('8')">P9</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #121023" id="P09" onClick="PatternBtn('9')">P10</button>
+        <button button type="button" class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #6b5fb9" id="P1" onClick="PatternBtn('1')">P1</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #5b4eb1" id="P2" onClick="PatternBtn('2')">P2</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #5246a0" id="P3" onClick="PatternBtn('3')">P3</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #483d8b" id="P4" onClick="PatternBtn('4')">P4</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #40367c" id="P5" onClick="PatternBtn('5')">P5</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #372f6a" id="P6" onClick="PatternBtn('6')">P6</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #2e2759" id="P7" onClick="PatternBtn('7')">P7</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #241f47" id="P8" onClick="PatternBtn('8')">P8</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #1b1735" id="P9" onClick="PatternBtn('9')">P9</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #121023" id="P10" onClick="PatternBtn('10')">P10</button>
         <!--<button button type="radio" class="btn btn-pixel" id="S0" onClick="TapToLightBtn('00')">S1 <i class='fab fa-buromobelexperte'></i></button>--> 
       </div>
     </div>
@@ -595,11 +594,17 @@
         <button button type="button" class="btn btn-pixel" id="14" onClick="TapToLightShowBtn('14')">14</button>
         <button button type="button" class="btn btn-pixel" id="15" onClick="TapToLightShowBtn('15')">15</button>
         <button button type="button" class="btn btn-pixel" id="16" onClick="TapToLightShowBtn('16')">16</button>
-      </div>
-      <pre></pre>
+      </div> 		
+		<br>
+		<br>
+		<div align="left" style="background-color: lavenderblush; border-color: rebeccapurple; border: thick; padding: 5px 5px; box-shadow: 5px 5px 18px #888888">
+			<span class="w3-left-align"><strong>Pattern You Choosed:  </strong>&nbsp;</span>
+			<span class="w3-left-align" id="PatternNum" style="color: #4d001f"></span>
+		</div>
+		<pre></pre>
       <div align="center">
         <button id="LightShowBtnColorPicker" class="btn-color btn-fluid" onClick="LightShowOpenColorPicker()" style="width: 230px; height: 35px;">Pick  Color</button>
-		  <pre></pre>
+		<pre></pre>
 		 <table width="100%">
 			 <tr>
 				 <td><span class="w3-left-align">Brightness: </span>
@@ -629,16 +634,16 @@
     <div class="col" style="margin: auto"> <span class="w3-left-align"><strong>Patterns:</strong><br>
       </span>
       <div align="center" class="btn-group-vertical" data-toggle="buttons">
-        <button button type="button" class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #8c53c6" id="P10" onClick="PatternBtn('10')">P11</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color: #8040bf" id="P11" onClick="PatternBtn('11')">P12</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#7339ac" id="P12" onClick="PatternBtn('12')">P13</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#663399" id="P13" onClick="PatternBtn('13')">P14</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#592d86" id="P14" onClick="PatternBtn('14')">P15</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#4d2673" id="P15" onClick="PatternBtn('15')">P16</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#402060" id="P16" onClick="PatternBtn('16')">P17</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#33194d" id="P17" onClick="PatternBtn('17')">P18</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#261339" id="P18" onClick="PatternBtn('18')">P19</button>
-        <button button type="button"  class="btn btn-color" style="padding: 5px 20px; border-color: aliceblue; background-color:#1a0d26" id="P19" onClick="PatternBtn('19')">P20</button>
+        <button button type="button" class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #8c53c6" id="P11" onClick="PatternBtn('11')">P11</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color: #8040bf" id="P12" onClick="PatternBtn('12')">P12</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#7339ac" id="P13" onClick="PatternBtn('13')">P13</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#663399" id="P14" onClick="PatternBtn('14')">P14</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#592d86" id="P15" onClick="PatternBtn('15')">P15</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#4d2673" id="P16" onClick="PatternBtn('16')">P16</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#402060" id="P17" onClick="PatternBtn('17')">P17</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#33194d" id="P18" onClick="PatternBtn('18')">P18</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#261339" id="P19" onClick="PatternBtn('19')">P19</button>
+        <button button type="button"  class="btn btn-color" style="padding: 10px 20px; border-color: aliceblue; background-color:#1a0d26" id="P20" onClick="PatternBtn('20')">P20</button>
       </div>
     </div>
   </div>
