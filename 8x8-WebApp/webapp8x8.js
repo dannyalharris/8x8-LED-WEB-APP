@@ -405,13 +405,13 @@ function MQTT_Connect(Connection) {
 }
 
 //MQTT PAHO JAVASCRIPT CLIENT
-MQTTConnect();
+//MQTTConnect();
 
 function MQTTConnect() {
   //client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
   console.log(MQTTBroker + " Number:" + MQTTPort);
-  client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "clientId");
-  //client.onConnectionLost = onConnectionLost;
+  client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "3136c683-88d2-4825-b3c3-f2ba14a28eae");
+  client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({
     timeout: 3600,
@@ -451,12 +451,12 @@ function onFailure() {
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost: " + responseObject.errorMessage);
-    console.log("mqtt status: reconnect");
-    client.connect({
-      timeout: 3600,
-      onSuccess: onConnect,
-      onFailure: onFailure
-    });
+    //console.log("mqtt status: reconnect");
+   // client.connect({
+   //   timeout: 3600,
+   //   onSuccess: onConnect,
+   //   onFailure: onFailure
+ //   });
   }
 };
 
@@ -1389,7 +1389,7 @@ function TapToLightShowBtn(id) {
   console.log("Triggered ESPset Array: " + ESP_Pixel);
   var i;
 
-  for (i = 0; i < 16; i++) {
+  for (i = 1; i < 17; i++) {
     if (i == id) {
       console.log("Got triggered ESPset On: " + i);
       if (ESP_Pixel[i] == 0) {
@@ -1495,19 +1495,7 @@ function TapToLightShowBtn(id) {
 //  }
 //}
 
-function PLAYALL() {
-  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
-  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-  message_lightshow.qos = 0;
-  client.send(message_lightshow);
 
-  //else if (document.getElementById("ToggleLightShow").checked == false) {
-  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
-  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-  //    message_lightshow.qos = 0;
-  //    client.send(message_lightshow);
-  //  }
-}
 
 function SEQ1() {
   var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
@@ -1529,6 +1517,20 @@ function SEQ3() {
   //SingleColor/setSequence";
   message_lightshow.qos = 0;
   client.send(message_lightshow);
+}
+
+function PLAYALL() {
+  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
+  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
+
+  //else if (document.getElementById("ToggleLightShow").checked == false) {
+  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
+  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+  //    message_lightshow.qos = 0;
+  //    client.send(message_lightshow);
+  //  }
 }
 
 
