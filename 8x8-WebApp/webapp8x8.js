@@ -405,7 +405,7 @@ function MQTT_Connect(Connection) {
 }
 
 //MQTT PAHO JAVASCRIPT CLIENT
-//MQTTConnect();
+MQTTConnect();
 
 function MQTTConnect() {
   //client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
@@ -424,8 +424,8 @@ function MQTTConnect() {
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("mqtt status: connected");
-  client.subscribe("LED88ESP32/BatteryStatus");
-  client.subscribe("LED88ESP32/LDRStatus");
+  client.subscribe("LED88ESP32/State");
+  //client.subscribe("LED88ESP32/LDRStatus");
 
   console.log("lightoff state: " + LightOff);
   var messagepayloadjson_Command = new Object();
@@ -462,6 +462,17 @@ function onConnectionLost(responseObject) {
 
 function MQTTDisconnect() {
   console.log("client is disconnecting..");
+
+ var messagepayloadjson_Command = new Object();
+  messagepayloadjson_Command.cmd = "LightOff";
+  var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  console.log(messagepayloadstring_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
+  client.send(message_Command);
+	
   client.disconnect();
 	for (var i = 1; i <= 16; i++) {
 		localStorage.setItem("BatteryStatusSet" + i, "0");
@@ -476,34 +487,50 @@ ConnectionStatusDisplay();
 
 //var messageConnectionBattery;
 //var messageConnectionLDR;
+var mqttconnected;
 
 function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString + " " + message.destinationName);
 
-  if (message.destinationName == "LED88ESP32/BatteryStatus") {
-    console.log("Message Arrived: " + message.payloadString);
-    var batterystatus = message.payloadString.toString();
-    var BatteryStatusObj = JSON.parse(batterystatus);
-    console.log("BatteryStatusObj.adr: " + BatteryStatusObj.adr + ", BatteryStatusObj.State: " + BatteryStatusObj.state);
-    var BatteryStateSetAdr = BatteryStatusObj.adr;
-    var BatteryStateSetValue = BatteryStatusObj.state;
-    //messageConnectionBattery = BatteryStatusObj.adr;
-    //update value to Battery Status
-    localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
-    BatteryStatusDisplay();
-
-  } else if (message.destinationName == "LED88ESP32/LDRStatus") {
-    console.log("Message Arrived: " + message.payloadString);
-    var ldrstatus = message.payloadString.toString();
-    var LDRStatusObj = JSON.parse(ldrstatus);
-    console.log("LDRStatusObj.adr: " + LDRStatusObj.adr + ", LDRStatusObj.State: " + LDRStatusObj.state);
-    var LDRStateSetAdr = LDRStatusObj.adr;
-    var LDRStateSetValue = LDRStatusObj.state;
-    //messageConnectionLDR = LDRStatusObj.adr;
-    //update value to Battery Status
-    localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
-    LDRStatusDisplay();
-  }
+	var status = message.payloadString.toString();
+    var StatusObj = JSON.parse(status);
+    console.log("StatusObj.ADR: " + StatusObj.ADR + ", StatusObj.BAT: " + StatusObj.BAT + ", StatusObj.LDR: " + StatusObj.LDR);
+  	var BatteryStateSetAdr = StatusObj.ADR;
+    var BatteryStateSetValue =  StatusObj.BAT;
+	var LDRStateSetAdr = StatusObj.ADR;
+    var LDRStateSetValue = StatusObj.LDR;
+	mqttconnected = StatusObj.ADR;
+	
+	localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
+	localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
+	
+	
+	//if (message.destinationName == "LED88ESP32/BatteryStatus") {
+//    console.log("Message Arrived: " + message.payloadString);
+//    var batterystatus = message.payloadString.toString();
+//    var BatteryStatusObj = JSON.parse(batterystatus);
+//    console.log("BatteryStatusObj.adr: " + BatteryStatusObj.adr + ", BatteryStatusObj.State: " + BatteryStatusObj.state);
+//    var BatteryStateSetAdr = BatteryStatusObj.adr;
+//    var BatteryStateSetValue = BatteryStatusObj.state;
+//    //messageConnectionBattery = BatteryStatusObj.adr;
+//    //update value to Battery Status
+//    localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
+//    BatteryStatusDisplay();
+//
+//  } else if (message.destinationName == "LED88ESP32/LDRStatus") {
+//    console.log("Message Arrived: " + message.payloadString);
+//    var ldrstatus = message.payloadString.toString();
+//    var LDRStatusObj = JSON.parse(ldrstatus);
+//    console.log("LDRStatusObj.adr: " + LDRStatusObj.adr + ", LDRStatusObj.State: " + LDRStatusObj.state);
+//    var LDRStateSetAdr = LDRStatusObj.adr;
+//    var LDRStateSetValue = LDRStatusObj.state;
+//    //messageConnectionLDR = LDRStatusObj.adr;
+//    //update value to Battery Status
+//    localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
+//    LDRStatusDisplay();
+//  }
+  BatteryStatusDisplay();
+  LDRStatusDisplay();  
   ConnectionStatusDisplay();
 
 };
@@ -1009,11 +1036,11 @@ function ConnectionStatusDisplay() {
 
   for (var i = 1; i <= 16; i++) {
     console.log("Set: " + i + " - " + BatteryStat[i - 1]);
-    if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0) {
+    if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0 || i == mqttconnected) {
       document.getElementById("ConnectionSet" + i).src = "images/Connected.png";
       document.getElementById("ConnectionText" + i).innerHTML = "ON";
     } 
-	  else if (BatteryStat[i - 1] == 0 && LDRStat[i - 1] == 0) {
+	  else if (BatteryStat[i - 1] == 0 && LDRStat[i - 1] == 0 && i == mqttconnected) {
       document.getElementById("ConnectionSet" + i).src = "images/Disconnected.png";
       document.getElementById("ConnectionText" + i).innerHTML = "OFF";
     }
@@ -1429,7 +1456,23 @@ function TapToLightShowBtn(id) {
         Blue_LightShow = Blue_LightShow_Inner;
         document.getElementById(id).style.background = "#" + color_Hex_LightShow;
 
-        //Send to turn off lights
+        
+      } 
+		else if (ESP_Pixel[i] == 1) {
+        console.log("Got triggered ESPset Off: " + i);
+        ESP_Pixel[i] = 0;
+		console.log("Triggered ESPset Array: " + ESP_Pixel);
+        Red_LightShow = 0;
+        Green_LightShow = 0;
+        Blue_LightShow = 0;
+        //PatternNumber = 0;
+        document.getElementById(id).style.background = "#f8f8ff";
+        //document.getElementById("PatternNum").innerHTML = PatternNumber;
+		document.getElementById("PatternNum").innerHTML = "Off";	  
+		
+      }
+		
+		//Send to turn off lights
         var messagepayloadjson_Command = new Object();
         messagepayloadjson_Command.cmd = "LightOff";
         //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
@@ -1476,32 +1519,6 @@ function TapToLightShowBtn(id) {
         message_Brightness.destinationName = "LED88ESP32/Brightness";
         message_Brightness.qos = 0;
         client.send(message_Brightness);
-      } 
-		else if (ESP_Pixel[i] == 1) {
-        console.log("Got triggered ESPset Off: " + i);
-        ESP_Pixel[i] = 0;
-		console.log("Triggered ESPset Array: " + ESP_Pixel);
-        Red_LightShow = 0;
-        Green_LightShow = 0;
-        Blue_LightShow = 0;
-        //PatternNumber = 0;
-        document.getElementById(id).style.background = "#f8f8ff";
-        //document.getElementById("PatternNum").innerHTML = PatternNumber;
-		document.getElementById("PatternNum").innerHTML = "Off";
-		  
-		var messagepayloadjson_Command = new Object();
-        messagepayloadjson_Command.cmd = "LightOff";
-        //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-        var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-        console.log(messagepayloadstring_Command);
-        var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-        console.log(message_Command);
-        message_Command.destinationName = "LED88ESP32/Command";
-        message_Command.qos = 0;
-        client.send(message_Command);
-		  
-		
-      }
     }
   }
 
