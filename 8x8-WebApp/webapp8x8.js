@@ -195,12 +195,18 @@ function EnergyOptToggle() {
     } else if (HTMLPage == "Tap-To-Light") {
       document.getElementById("range_Brightness_TtL").disabled = true;
     }
+	  else if (HTMLPage == "LightShow") {
+		document.getElementById("range_Brightness_LightShow").disabled = true;
+    }
   } else if (localStorage.getItem("EnergyOpt") == "0") {
     document.getElementById("EnergyOpti_Toggle").checked = false;
     if (HTMLPage == "Text Generator") {
       document.getElementById("range_Brightness").disabled = false;
     } else if (HTMLPage == "Tap-To-Light") {
       document.getElementById("range_Brightness_TtL").disabled = false;
+    }
+	  else if (HTMLPage == "LightShow") {
+		  document.getElementById("range_Brightness_LightShow").disabled = false;
     }
   }
 }
