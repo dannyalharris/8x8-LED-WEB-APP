@@ -31,6 +31,10 @@ var EnergyOpt = localStorage.getItem("EnergyOpt");
 var ToggledSetArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 var ToggledSetBinary;
 
+var BatteryStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+var LDRStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
 if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
@@ -134,11 +138,11 @@ function Setting_Open() {
   }
 
   for (var i = 1; i <= 16; i++) {
-    if (localStorage.getItem(("BatteryStatusSet" + i)) == null) {
+    if (localStorage.getItem(("BatteryStatusSet" + i)) == null || localStorage.getItem(("BatteryStatusSet" + i)) == undefined) {
       localStorage.setItem("BatteryStatusSet" + i, "0");
     }
 
-    if (localStorage.getItem(("LDRStatusSet" + i)) == null) {
+    if (localStorage.getItem(("LDRStatusSet" + i)) == null || localStorage.getItem(("LDRStatusSet" + i)) == undefined) {
       localStorage.setItem("LDRStatusSet" + i, "0");
     }
   }
@@ -460,6 +464,9 @@ function MQTTDisconnect() {
   client.disconnect();
 }
 
+var messageConnectionBattery;
+var messageConnectionLDR;
+
 function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString + " " + message.destinationName);
 
@@ -470,6 +477,7 @@ function onMessageArrived(message) {
     console.log("BatteryStatusObj.adr: " + BatteryStatusObj.adr + ", BatteryStatusObj.State: " + BatteryStatusObj.state);
     var BatteryStateSetAdr = BatteryStatusObj.adr;
     var BatteryStateSetValue = BatteryStatusObj.state;
+    messageConnectionBattery = BatteryStatusObj.adr;
     //update value to Battery Status
     localStorage.setItem("BatteryStatus" + BatteryStateSetAdr, BatteryStateSetValue);
     BatteryStatusDisplay();
@@ -481,15 +489,18 @@ function onMessageArrived(message) {
     console.log("LDRStatusObj.adr: " + LDRStatusObj.adr + ", LDRStatusObj.State: " + LDRStatusObj.state);
     var LDRStateSetAdr = LDRStatusObj.adr;
     var LDRStateSetValue = LDRStatusObj.state;
+    messageConnectionLDR = LDRStatusObj.adr;
     //update value to Battery Status
     localStorage.setItem("LDRStatus" + LDRStateSetAdr, LDRStateSetValue);
     LDRStatusDisplay();
   }
+  ConnectionStatusDisplay();
 
 };
 
 BatteryStatusDisplay();
 LDRStatusDisplay();
+ConnectionStatusDisplay();
 
 // Display Battery Status in Setting
 function BatteryStatusDisplay() {
@@ -920,6 +931,62 @@ function LDRStatusDisplay() {
     document.getElementById("LDRSet16").src = "images/Brightness-Bright.png";
   } else {
     document.getElementById("LDRSet16").src = "images/Brightness-VeryBright.png";
+  }
+
+}
+
+
+
+console.log("Try: " + localStorage.getItem("BatteryStatusSet1"));
+// Display Connection Status in Setting
+function ConnectionStatusDisplay() {
+  //var ConnectionStatusBattery = messageConnectionBattery.substring(3);
+
+
+  BatteryStat[0] = parseInt(localStorage.getItem("BatteryStatusSet1"));
+  console.log("Set: " + " - " + BatteryStat[0]);
+  BatteryStat[1] = parseInt(localStorage.getItem("BatteryStatusSet2"));
+  BatteryStat[2] = parseInt(localStorage.getItem("BatteryStatusSet3"));
+  BatteryStat[3] = parseInt(localStorage.getItem("BatteryStatusSet4"));
+  BatteryStat[4] = parseInt(localStorage.getItem("BatteryStatusSet5"));
+  BatteryStat[5] = parseInt(localStorage.getItem("BatteryStatusSet6"));
+  BatteryStat[6] = parseInt(localStorage.getItem("BatteryStatusSet7"));
+  BatteryStat[7] = parseInt(localStorage.getItem("BatteryStatusSet8"));
+  BatteryStat[8] = parseInt(localStorage.getItem("BatteryStatusSet9"));
+  BatteryStat[9] = parseInt(localStorage.getItem("BatteryStatusSet10"));
+  BatteryStat[10] = parseInt(localStorage.getItem("BatteryStatusSet11"));
+  BatteryStat[11] = parseInt(localStorage.getItem("BatteryStatusSet12"));
+  BatteryStat[12] = parseInt(localStorage.getItem("BatteryStatusSet13"));
+  BatteryStat[13] = parseInt(localStorage.getItem("BatteryStatusSet14"));
+  BatteryStat[14] = parseInt(localStorage.getItem("BatteryStatusSet15"));
+  BatteryStat[15] = parseInt(localStorage.getItem("BatteryStatusSet16"));
+
+  LDRStat[0] = parseInt(localStorage.getItem("LDRStatusSet1"));
+  LDRStat[1] = parseInt(localStorage.getItem("LDRStatusSet2"));
+  LDRStat[2] = parseInt(localStorage.getItem("LDRStatusSet3"));
+  LDRStat[3] = parseInt(localStorage.getItem("LDRStatusSet4"));
+  LDRStat[4] = parseInt(localStorage.getItem("LDRStatusSet5"));
+  LDRStat[5] = parseInt(localStorage.getItem("LDRStatusSet6"));
+  LDRStat[6] = parseInt(localStorage.getItem("LDRStatusSet7"));
+  LDRStat[7] = parseInt(localStorage.getItem("LDRStatusSet8"));
+  LDRStat[8] = parseInt(localStorage.getItem("LDRStatusSet9"));
+  LDRStat[9] = parseInt(localStorage.getItem("LDRStatusSet10"));
+  LDRStat[10] = parseInt(localStorage.getItem("LDRStatusSet11"));
+  LDRStat[11] = parseInt(localStorage.getItem("LDRStatusSet12"));
+  LDRStat[12] = parseInt(localStorage.getItem("LDRStatusSet13"));
+  LDRStat[13] = parseInt(localStorage.getItem("LDRStatusSet14"));
+  LDRStat[14] = parseInt(localStorage.getItem("LDRStatusSet15"));
+  LDRStat[15] = parseInt(localStorage.getItem("LDRStatusSet16"));
+
+  for (var i = 1; i <= 16; i++) {
+    console.log("Set: " + i + " - " + BatteryStat[i - 1]);
+    if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0) {
+      document.getElementById("ConnectionSet" + i).src = "images/Connected.png";
+      document.getElementById("ConnectionText" + i).innerHTML = "ON";
+    } else if (BatteryStat[i - 1] == 0 && LDRStat[i - 1] == 0) {
+      document.getElementById("ConnectionSet" + i).src = "images/Disconnected.png";
+      document.getElementById("ConnectionText" + i).innerHTML = "OFF";
+    }
   }
 
 }
