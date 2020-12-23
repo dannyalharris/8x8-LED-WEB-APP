@@ -1465,24 +1465,24 @@ function TapToLightShowBtn(id) {
         Red_LightShow = 0;
         Green_LightShow = 0;
         Blue_LightShow = 0;
-        //PatternNumber = 0;
+        PatternNumber = 0;
         document.getElementById(id).style.background = "#f8f8ff";
         //document.getElementById("PatternNum").innerHTML = PatternNumber;
 		document.getElementById("PatternNum").innerHTML = "Off";	  
 		
       }
 		
-		//Send to turn off lights
-        var messagepayloadjson_Command = new Object();
-        messagepayloadjson_Command.cmd = "LightOff";
-        //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-        var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-        console.log(messagepayloadstring_Command);
-        var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-        console.log(message_Command);
-        message_Command.destinationName = "LED88ESP32/Command";
-        message_Command.qos = 0;
-        client.send(message_Command);
+//		//Send to turn off lights
+//        var messagepayloadjson_Command = new Object();
+//        messagepayloadjson_Command.cmd = "LightOff";
+//        //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+//        var messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+//        console.log(messagepayloadstring_Command);
+//        var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+//        console.log(message_Command);
+//        message_Command.destinationName = "LED88ESP32/Command";
+//        message_Command.qos = 0;
+//        client.send(message_Command);
 
         //Send for knowing in LightShow
         var messagepayloadjson_LSCommand = new Object();
@@ -1498,7 +1498,7 @@ function TapToLightShowBtn(id) {
 
 
         var messagepayloadjson_LightShow = new Object();
-        messagepayloadjson_LightShow.sel = id;
+        messagepayloadjson_LightShow.sel = parseInt(id) + 1;
         messagepayloadjson_LightShow.ptr = PatternNumber;
         messagepayloadjson_LightShow.r = Red_LightShow;
         messagepayloadjson_LightShow.g = Green_LightShow;
