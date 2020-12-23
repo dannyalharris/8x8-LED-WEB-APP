@@ -32,17 +32,17 @@ var ToggledSetArray = [false, false, false, false, false, false, false, false, f
 var ToggledSetBinary;
 
 var BatteryStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
 var LDRStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
 if (MACAddress == null) {
-  localStorage.setItem("MACAddress", "ALL");
+  localStorage.setItem("MACAddress", "Partial");
   MACAddress = localStorage.getItem("MACAddress");
   localStorage.setItem("ToggledSetLocalStorage", ToggledSetArray);
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
   //ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-  ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  //ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  ToggledSetArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 }
 
 var MQTTMode_Str = localStorage.getItem("MQTTMode");
@@ -294,8 +294,8 @@ function EnergyOpti_Toggle() {
   }
 
   var messagepayloadjson_EnergyOpt = new Object();
-  messagepayloadjson_EnergyOpt.Saver = parseInt(EnergyOpt); //"1"
   messagepayloadjson_EnergyOpt.br = 100;
+  messagepayloadjson_EnergyOpt.adp = parseInt(EnergyOpt); //"1"
   //messagepayloadjson_EnergyOpt.adr = EnergyOpt; //"ON"
 
   var messagepayloadstring_EnergyOpt = JSON.stringify(messagepayloadjson_EnergyOpt);
@@ -312,9 +312,9 @@ function MQTTMode(mode) {
   if (mode == "Private") {
     localStorage.setItem("MQTTMode", "Private");
     MQTTMode_Str = localStorage.getItem("MQTTMode");
-    localStorage.setItem("MQTTBroker", "broker.hivemq.com");
+    localStorage.setItem("MQTTBroker", "198.168.188.188");
     MQTTBroker = localStorage.getItem("MQTTBroker");
-    localStorage.setItem("MQTTPort", 8000);
+    localStorage.setItem("MQTTPort", 1883);
     MQTTPort = localStorage.getItem("MQTTPort");
 
     document.getElementById("txt_Broker").innerHTML = MQTTBroker;
@@ -463,6 +463,15 @@ function onConnectionLost(responseObject) {
 function MQTTDisconnect() {
   console.log("client is disconnecting..");
   client.disconnect();
+	for (var i = 1; i <= 16; i++) {
+		localStorage.setItem("BatteryStatusSet" + i, "0");
+		localStorage.setItem("LDRStatusSet" + i, "0");
+  }
+	
+BatteryStatusDisplay();
+LDRStatusDisplay();
+ConnectionStatusDisplay();
+  
 }
 
 //var messageConnectionBattery;
@@ -480,7 +489,7 @@ function onMessageArrived(message) {
     var BatteryStateSetValue = BatteryStatusObj.state;
     //messageConnectionBattery = BatteryStatusObj.adr;
     //update value to Battery Status
-    localStorage.setItem("BatteryStatus" + BatteryStateSetAdr, BatteryStateSetValue);
+    localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
     BatteryStatusDisplay();
 
   } else if (message.destinationName == "LED88ESP32/LDRStatus") {
@@ -492,7 +501,7 @@ function onMessageArrived(message) {
     var LDRStateSetValue = LDRStatusObj.state;
     //messageConnectionLDR = LDRStatusObj.adr;
     //update value to Battery Status
-    localStorage.setItem("LDRStatus" + LDRStateSetAdr, LDRStateSetValue);
+    localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
     LDRStatusDisplay();
   }
   ConnectionStatusDisplay();
@@ -507,6 +516,12 @@ ConnectionStatusDisplay();
 function BatteryStatusDisplay() {
   console.log("BatteryStatusDisplay_Thread");
   //BatteryStatus
+	
+  for (var i = 1; i <= 16; i++) {
+    if (localStorage.getItem(("BatteryStatusSet" + i)) == null || localStorage.getItem(("BatteryStatusSet" + i)) == undefined) {
+      localStorage.setItem("BatteryStatusSet" + i, "0");
+    }
+  }
   var BatteryStatus1 = parseInt(localStorage.getItem("BatteryStatusSet1"));
   var BatteryStatus2 = parseInt(localStorage.getItem("BatteryStatusSet2"));
   var BatteryStatus3 = parseInt(localStorage.getItem("BatteryStatusSet3"));
@@ -706,6 +721,13 @@ function BatteryStatusDisplay() {
 
 // Display Brightness Status in Setting
 function LDRStatusDisplay() {
+  
+	for (var i = 1; i <= 16; i++) {
+    if (localStorage.getItem(("LDRStatusSet" + i)) == null || localStorage.getItem(("LDRStatusSet" + i)) == undefined) {
+      localStorage.setItem("LDRStatusSet" + i, "0");
+    }
+  }
+	
   //LDRStatus
   var LDRStatus1 = parseInt(localStorage.getItem("LDRStatusSet1"));
   var LDRStatus2 = parseInt(localStorage.getItem("LDRStatusSet2"));
@@ -936,12 +958,19 @@ function LDRStatusDisplay() {
 
 }
 
-
-console.log("Try: " + localStorage.getItem("BatteryStatusSet1"));
 // Display Connection Status in Setting
 function ConnectionStatusDisplay() {
   //var ConnectionStatusBattery = messageConnectionBattery.substring(3);
+  	console.log("Try: " + localStorage.getItem("BatteryStatusSet1"));
+	for (var i = 1; i <= 16; i++) {
+    if (localStorage.getItem(("BatteryStatusSet" + i)) == null || localStorage.getItem(("BatteryStatusSet" + i)) == undefined) {
+      localStorage.setItem("BatteryStatusSet" + i, "0");
+    }
 
+    if (localStorage.getItem(("LDRStatusSet" + i)) == null || localStorage.getItem(("LDRStatusSet" + i)) == undefined) {
+      localStorage.setItem("LDRStatusSet" + i, "0");
+    }
+  }
 
   BatteryStat[0] = parseInt(localStorage.getItem("BatteryStatusSet1"));
   console.log("Set: " + " - " + BatteryStat[0]);
@@ -1088,7 +1117,7 @@ function startConnect() {
   if (DisplayMode == "Sequentially") {
     Sequence = 1;
   } else if (DisplayMode == "Simultaneously") {
-    Sequence = 0
+    Sequence = 0;
   }
 
   messagepayloadjson_Command.cmd = "TextGenerator";
@@ -1114,8 +1143,8 @@ function startConnect() {
   message.qos = 0;
 
   var messagepayloadjson_Brightness = new Object();
-  messagepayloadjson_Brightness.Saver = parseInt(EnergyOpt);
   messagepayloadjson_Brightness.br = document.getElementById('range_Brightness').value;
+  messagepayloadjson_Brightness.adp = parseInt(EnergyOpt);
   var messagepayloadstring_Brightness = JSON.stringify(messagepayloadjson_Brightness);
   console.log(messagepayloadstring_Brightness);
   var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness);
@@ -1314,8 +1343,8 @@ function TapToLightBtn(cell) {
   client.send(message);
 
   var messagepayloadjson_Brightness_TtL = new Object();
-  messagepayloadjson_Brightness_TtL.Saver = parseInt(EnergyOpt);
   messagepayloadjson_Brightness_TtL.br = document.getElementById('range_Brightness_TtL').value;
+  messagepayloadjson_Brightness_TtL.adp = parseInt(EnergyOpt);
   var messagepayloadstring_Brightness_TtL = JSON.stringify(messagepayloadjson_Brightness_TtL);
   console.log(messagepayloadstring_Brightness_TtL);
   var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness_TtL);
@@ -1389,11 +1418,12 @@ function TapToLightShowBtn(id) {
   console.log("Triggered ESPset Array: " + ESP_Pixel);
   var i;
 
-  for (i = 1; i < 17; i++) {
+  for (i = 0; i < 16; i++) {
     if (i == id) {
       console.log("Got triggered ESPset On: " + i);
       if (ESP_Pixel[i] == 0) {
         ESP_Pixel[i] = 1;
+		console.log("Triggered ESPset Array: " + ESP_Pixel);
         Red_LightShow = Red_LightShow_Inner;
         Green_LightShow = Green_LightShow_Inner;
         Blue_LightShow = Blue_LightShow_Inner;
@@ -1438,8 +1468,8 @@ function TapToLightShowBtn(id) {
         client.send(message_lightshow);
 
         var messagepayloadjson_Brightness_LightShow = new Object();
-        messagepayloadjson_Brightness_LightShow.Saver = parseInt(EnergyOpt);
         messagepayloadjson_Brightness_LightShow.br = document.getElementById('range_Brightness').value;
+		messagepayloadjson_Brightness_LightShow.adp = parseInt(EnergyOpt);
         var messagepayloadstring_Brightness_LightShow = JSON.stringify(messagepayloadjson_Brightness_LightShow);
         console.log(messagepayloadstring_Brightness_LightShow);
         var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness_LightShow);
@@ -1450,6 +1480,7 @@ function TapToLightShowBtn(id) {
 		else if (ESP_Pixel[i] == 1) {
         console.log("Got triggered ESPset Off: " + i);
         ESP_Pixel[i] = 0;
+		console.log("Triggered ESPset Array: " + ESP_Pixel);
         Red_LightShow = 0;
         Green_LightShow = 0;
         Blue_LightShow = 0;
@@ -1495,43 +1526,89 @@ function TapToLightShowBtn(id) {
 //  }
 //}
 
+var Seq_Number = [
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 0
+];
 
+function SEQ(id){
+	if(id == 1){
+		Seq_Number = [ 
+			1, 1, 1, 1,
+  			1, 1, 1, 1,
+  			1, 1, 1, 1,
+  			1, 1, 1, 1];
+	}else if(id == 2){
+		Seq_Number = [ 
+			10, 9, 8, 7,
+  			11, 2, 1, 6,
+  			12, 3, 4, 5,
+  			13, 14, 15, 16];
+	}else if(id == 3){
+		Seq_Number = [ 
+			7, 8, 9, 10,
+  			6, 15, 16, 11,
+  			5, 14, 13, 12,
+  			4, 3, 2, 1];
+	}else if (id == 4){
+		Seq_Number = [ 
+			1, 2, 3, 4,
+  			2, 3, 4, 5,
+  			3, 4, 5, 6,
+  			4, 5, 6, 7];
+	}
+	
+  var messagepayloadjson_Seq = new Object();
+  messagepayloadjson_Seq.seq = Seq_Number; //"1"
 
-function SEQ1() {
-  var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
-  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-  message_lightshow.qos = 0;
-  client.send(message_lightshow);
+  var messagepayloadstring_Seq = JSON.stringify(messagepayloadjson_Seq);
+  console.log(messagepayloadstring_Seq);
+  var message_Seq = new Paho.MQTT.Message(messagepayloadstring_Seq);
+  console.log(message_Seq);
+  message_Seq.destinationName = "LED88ESP32/PlayInSequence";
+  message_Seq.qos = 0;
+  client.send(message_Seq);
+	
 }
 
-function SEQ2() {
-  var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
-  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-  message_lightshow.qos = 0;
-  client.send(message_lightshow);
-}
 
-function SEQ3() {
-  var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
-  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-  //SingleColor/setSequence";
-  message_lightshow.qos = 0;
-  client.send(message_lightshow);
-}
-
-function PLAYALL() {
-  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
-  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-  message_lightshow.qos = 0;
-  client.send(message_lightshow);
-
-  //else if (document.getElementById("ToggleLightShow").checked == false) {
-  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
-  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-  //    message_lightshow.qos = 0;
-  //    client.send(message_lightshow);
-  //  }
-}
+//function SEQ1() {
+//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
+//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+//  message_lightshow.qos = 0;
+//  client.send(message_lightshow);
+//}
+//
+//function SEQ2() {
+//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
+//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+//  message_lightshow.qos = 0;
+//  client.send(message_lightshow);
+//}
+//
+//function SEQ3() {
+//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
+//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+//  //SingleColor/setSequence";
+//  message_lightshow.qos = 0;
+//  client.send(message_lightshow);
+//}
+//
+//function PLAYALL() {
+//  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
+//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+//  message_lightshow.qos = 0;
+//  client.send(message_lightshow);
+//
+//  //else if (document.getElementById("ToggleLightShow").checked == false) {
+//  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
+//  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+//  //    message_lightshow.qos = 0;
+//  //    client.send(message_lightshow);
+//  //  }
+//}
 
 
 //////
