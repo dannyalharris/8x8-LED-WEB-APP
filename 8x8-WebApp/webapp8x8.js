@@ -312,9 +312,9 @@ function MQTTMode(mode) {
   if (mode == "Private") {
     localStorage.setItem("MQTTMode", "Private");
     MQTTMode_Str = localStorage.getItem("MQTTMode");
-    localStorage.setItem("MQTTBroker", "198.168.188.188");
+    localStorage.setItem("MQTTBroker", "192.168.188.225");
     MQTTBroker = localStorage.getItem("MQTTBroker");
-    localStorage.setItem("MQTTPort", 1883);
+    localStorage.setItem("MQTTPort", 8080);
     MQTTPort = localStorage.getItem("MQTTPort");
 
     document.getElementById("txt_Broker").innerHTML = MQTTBroker;
