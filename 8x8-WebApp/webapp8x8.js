@@ -35,8 +35,7 @@ var ToggledSetBinary;
 if (MACAddress == null) {
   localStorage.setItem("MACAddress", "ALL");
   MACAddress = localStorage.getItem("MACAddress");
-  //localStorage.setItem("ToggledSetLocalStorage", "1111111111111111");
-  localStorage.setItem("ToggledSetLocalStorage", "");
+  localStorage.setItem("ToggledSetLocalStorage", ToggledSetArray);
   ToggledSetLocalStorage = localStorage.getItem("ToggledSetLocalStorage");
   //ToggledSetArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   ToggledSetArray = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
@@ -256,7 +255,7 @@ function SendSetsToggle() {
   console.log(messagepayloadstring_ESPSet);
   var message_ESPSet = new Paho.MQTT.Message(messagepayloadstring_ESPSet);
   console.log(message_ESPSet);
-  message_ESPSet.destinationName = "LED88ESP32/ESPSet";
+  message_ESPSet.destinationName = "LED88ESP32/ESPSelect";
   message_ESPSet.qos = 0;
   client.send(message_ESPSet);
 }
@@ -994,27 +993,43 @@ function DisplayMode_Toggle() {
     document.getElementById("AllSet_Toggle").checked = true;
     AllSet_Toggle();
     document.getElementById("AllSet_Toggle").disabled = true;
-    document.getElementById("range_Speed").disabled = true;
+    //document.getElementById("range_Speed").disabled = true;
 
   } else if (document.getElementById("DisplayMode_Toggle").checked == false) {
     DisplayMode = localStorage.setItem("DisplayMode", "Simultaneously");
     document.getElementById("AllSet_Toggle").checked = false;
     AllSet_Toggle();
     document.getElementById("AllSet_Toggle").disabled = false;
-    document.getElementById("range_Speed").disabled = false;
+    //document.getElementById("range_Speed").disabled = false;
   }
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function startConnect() {
+//function sleep(ms) {
+//  return new Promise(resolve => setTimeout(resolve, ms));
+//}
+var Sequence;
+//async 
+function startConnect() {
 
   DisplayMode = localStorage.getItem("DisplayMode");
   console.log("DisplayMode" + DisplayMode);
   var messagepayloadjson_Command = new Object();
   var messagepayloadstring_Command;
+
+
+  if (DisplayMode == "Sequentially") {
+    Sequence = 1;
+  } else if (DisplayMode == "Simultaneously") {
+    Sequence = 0
+  }
+
+  messagepayloadjson_Command.cmd = "TextGenerator";
+  //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+  messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  console.log(message_Command);
+  message_Command.destinationName = "LED88ESP32/Command";
+  message_Command.qos = 0;
 
   var messagepayloadjson = new Object();
   messagepayloadjson.txt = document.getElementById('txtbox_Text').value;
@@ -1022,6 +1037,7 @@ async function startConnect() {
   messagepayloadjson.g = Green;
   messagepayloadjson.b = Blue;
   messagepayloadjson.spd = document.getElementById('range_Speed').value;
+  messagepayloadjson.seq = Sequence;
   var messagepayloadstring = JSON.stringify(messagepayloadjson);
   console.log("messagepayloadstring: " + messagepayloadstring);
 
@@ -1039,58 +1055,63 @@ async function startConnect() {
   message_Brightness.qos = 0;
 
 
-  if (DisplayMode == "Sequentially") {
-    var speedvalue = document.getElementById('range_Speed').value;
-    //var speedtime =  ;
-    //var sleeptime = ;
-    var ESPSetOn = [];
+  // Publish a Message
+  client.send(message_Command);
+  client.send(message);
+  client.send(message_Brightness);
 
-    for (var i = 1; i <= 16; i++) {
-      if (document.getElementById("T" + i).checked == true) {
-        ESPSetOn.push(i);
-      }
-    }
+  //  if (DisplayMode == "Sequentially") {
+  //    var speedvalue = document.getElementById('range_Speed').value;
+  //    //var speedtime =  ;
+  //    //var sleeptime = ;
+  //    var ESPSetOn = [];
 
-    var ESPSetOnLen = ESPSetOn.length;
-
-    for (var i = 0; i < ESPSetOnLen; i++) {
-      console.log("i" + ESPSetOn[i]);
-      messagepayloadjson_Command.cmd = "TextGenerator";
-      //messagepayloadjson_Command.adr = "Set" + ESPSetOn[i]; //"FF22DDAA0011"
-
-      messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-      console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
-      var message_Command_Seq = new Paho.MQTT.Message(messagepayloadstring_Command);
-      message_Command_Seq.destinationName = "LED88ESP32/Command";
-      message_Command_Seq.qos = 0;
-
-      // Publish a Message
-
-      client.send(message_Command_Seq);
-      client.send(message);
-      client.send(message_Brightness);
-      console.log("Published");
-      await sleep(4000);
-    }
-
-  } else if (DisplayMode == "Simultaneously") {
-    document.getElementById("range_Speed").disabled = false;
-    messagepayloadjson_Command.cmd = "TextGenerator";
-    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
-
-    messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
-    //console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
-    var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
-    console.log(message_Command);
-    message_Command.destinationName = "LED88ESP32/Command";
-    message_Command.qos = 0;
-
-    // Publish a Message
-    client.send(message_Command);
-    client.send(message);
-    client.send(message_Brightness);
-
-  }
+  //for (var i = 1; i <= 16; i++) {
+  //      if (document.getElementById("T" + i).checked == true) {
+  //        ESPSetOn.push(i);
+  //      }
+  //    }
+  //
+  //    var ESPSetOnLen = ESPSetOn.length;
+  //
+  //    for (var i = 0; i < ESPSetOnLen; i++) {
+  //      console.log("i" + ESPSetOn[i]);
+  //      messagepayloadjson_Command.cmd = "TextGenerator";
+  //      //messagepayloadjson_Command.adr = "Set" + ESPSetOn[i]; //"FF22DDAA0011"
+  //
+  //      messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  //      console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
+  //      var message_Command_Seq = new Paho.MQTT.Message(messagepayloadstring_Command);
+  //      message_Command_Seq.destinationName = "LED88ESP32/Command";
+  //      message_Command_Seq.qos = 0;
+  //
+  //      // Publish a Message
+  //
+  //      client.send(message_Command_Seq);
+  //      client.send(message);
+  //      client.send(message_Brightness);
+  //      console.log("Published");
+  //      await sleep(4000);
+  //    }
+  //
+  //  } else if (DisplayMode == "Simultaneously") {
+  //    document.getElementById("range_Speed").disabled = false;
+  //    messagepayloadjson_Command.cmd = "TextGenerator";
+  //    //messagepayloadjson_Command.adr = MACAddress; //"FF22DDAA0011"
+  //
+  //    messagepayloadstring_Command = JSON.stringify(messagepayloadjson_Command);
+  //    //console.log("messagepayloadstring_Command" + messagepayloadstring_Command);
+  //    var message_Command = new Paho.MQTT.Message(messagepayloadstring_Command);
+  //    console.log(message_Command);
+  //    message_Command.destinationName = "LED88ESP32/Command";
+  //    message_Command.qos = 0;
+  //
+  //    // Publish a Message
+  //    client.send(message_Command);
+  //    client.send(message);
+  //    client.send(message_Brightness);
+  //
+  //  }
 }
 
 function range_Brightness_txtChange() {
@@ -1292,6 +1313,7 @@ function PatternBtn(Pattern) {
   document.getElementById("PatternNum").innerHTML = Pattern;
   PatternNumber = Pattern;
 }
+
 function TapToLightShowBtn(id) {
   console.log("Triggered ESPset: " + id);
   console.log("Triggered ESPset Array: " + ESP_Pixel);
@@ -1309,12 +1331,12 @@ function TapToLightShowBtn(id) {
       } else if (ESP_Pixel[i] == 1) {
         console.log("Got triggered ESPset Off: " + i);
         ESP_Pixel[i] = 0;
-		Red_LightShow = 0;
+        Red_LightShow = 0;
         Green_LightShow = 0;
         Blue_LightShow = 0;
-		PatternNumber = 0;
+        PatternNumber = 0;
         document.getElementById(id).style.background = "#f8f8ff";
-		document.getElementById("PatternNum").innerHTML = PatternNumber;
+        document.getElementById("PatternNum").innerHTML = PatternNumber;
       }
     }
   }
@@ -1341,8 +1363,8 @@ function TapToLightShowBtn(id) {
   message_LSCommand.destinationName = "LED88ESP32/Command";
   message_LSCommand.qos = 0;
   client.send(message_LSCommand);
-	
-	
+
+
   var messagepayloadjson_LightShow = new Object();
   messagepayloadjson_LightShow.sel = id;
   messagepayloadjson_LightShow.ptr = PatternNumber;
@@ -1355,7 +1377,7 @@ function TapToLightShowBtn(id) {
   message_lightshow.destinationName = "LED88ESP32/LightShow";
   message_lightshow.qos = 0;
   client.send(message_lightshow);
- 
+
   var messagepayloadjson_Brightness_LightShow = new Object();
   messagepayloadjson_Brightness_LightShow.Saver = parseInt(EnergyOpt);
   messagepayloadjson_Brightness_LightShow.br = document.getElementById('range_Brightness').value;
@@ -1368,63 +1390,58 @@ function TapToLightShowBtn(id) {
 
 }
 
-function Toggle_LightShow() {
-
-  if (document.getElementById("ToggleLightShow").checked == true || document.getElementById("ToggleLightShow").checked == null) {
-    document.getElementById("btnColorPicker").style.backgroundColor = "rgb(122,122,122)";
-    document.getElementById("btnColorPicker").disabled = true;
-    document.getElementById("SEQ1").disabled = true;
-    document.getElementById("SEQ2").disabled = true;
-    document.getElementById("SEQ3").disabled = true;
-  } else if (document.getElementById("ToggleLightShow").checked == false) {
-    document.getElementById("btnColorPicker").style.backgroundColor = "rgb(238,22,31)";
-    document.getElementById("btnColorPicker").disabled = false;
-    document.getElementById("SEQ1").disabled = false;
-    document.getElementById("SEQ2").disabled = false;
-    document.getElementById("SEQ3").disabled = false;
-
-  }
-}
+//function Toggle_LightShow() {
+//
+//  if (document.getElementById("ToggleLightShow").checked == true || document.getElementById("ToggleLightShow").checked == null) {
+//    document.getElementById("btnColorPicker").style.backgroundColor = "rgb(122,122,122)";
+//    document.getElementById("btnColorPicker").disabled = true;
+//    document.getElementById("SEQ1").disabled = true;
+//    document.getElementById("SEQ2").disabled = true;
+//    document.getElementById("SEQ3").disabled = true;
+//  } else if (document.getElementById("ToggleLightShow").checked == false) {
+//    document.getElementById("btnColorPicker").style.backgroundColor = "rgb(238,22,31)";
+//    document.getElementById("btnColorPicker").disabled = false;
+//    document.getElementById("SEQ1").disabled = false;
+//    document.getElementById("SEQ2").disabled = false;
+//    document.getElementById("SEQ3").disabled = false;
+//
+//  }
+//}
 
 function PLAYALL() {
-  if (document.getElementById("ToggleLightShow").checked == true) {
-    var message_lightshow = new Paho.MQTT.Message("{\"ptr\":17}");
-    message_lightshow.destinationName = "LED88ESP32/LightShow";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-  } else if (document.getElementById("ToggleLightShow").checked == false) {
-    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
-    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-  }
+  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
+  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
+
+  //else if (document.getElementById("ToggleLightShow").checked == false) {
+  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
+  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
+  //    message_lightshow.qos = 0;
+  //    client.send(message_lightshow);
+  //  }
 }
 
 function SEQ1() {
-  if (document.getElementById("ToggleLightShow").checked == false) {
-    var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
-    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-  }
+  var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
+  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
 }
 
 function SEQ2() {
-  if (document.getElementById("ToggleLightShow").checked == false) {
-    var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
-    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-  }
+  var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
+  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
 }
 
 function SEQ3() {
-  if (document.getElementById("ToggleLightShow").checked == false) {
-    var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
-    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-    message_lightshow.qos = 0;
-    client.send(message_lightshow);
-  }
+  var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
+  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
+  //SingleColor/setSequence";
+  message_lightshow.qos = 0;
+  client.send(message_lightshow);
 }
 
 
