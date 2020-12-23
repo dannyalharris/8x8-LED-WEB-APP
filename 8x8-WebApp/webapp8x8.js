@@ -291,13 +291,14 @@ function EnergyOpti_Toggle() {
 
   var messagepayloadjson_EnergyOpt = new Object();
   messagepayloadjson_EnergyOpt.Saver = parseInt(EnergyOpt); //"1"
+  messagepayloadjson_EnergyOpt.br = 100;
   //messagepayloadjson_EnergyOpt.adr = EnergyOpt; //"ON"
 
   var messagepayloadstring_EnergyOpt = JSON.stringify(messagepayloadjson_EnergyOpt);
   console.log(messagepayloadstring_EnergyOpt);
   var message_EnergyOpt = new Paho.MQTT.Message(messagepayloadstring_EnergyOpt);
   console.log(message_EnergyOpt);
-  message_EnergyOpt.destinationName = "LED88ESP32/EnergyOpt";
+  message_EnergyOpt.destinationName = "LED88ESP32/Brightness";
   message_EnergyOpt.qos = 0;
   client.send(message_EnergyOpt);
 }
@@ -1029,6 +1030,7 @@ async function startConnect() {
   message.qos = 0;
 
   var messagepayloadjson_Brightness = new Object();
+  messagepayloadjson_Brightness.Saver = parseInt(EnergyOpt);
   messagepayloadjson_Brightness.br = document.getElementById('range_Brightness').value;
   var messagepayloadstring_Brightness = JSON.stringify(messagepayloadjson_Brightness);
   console.log(messagepayloadstring_Brightness);
@@ -1223,6 +1225,7 @@ function TapToLightBtn(cell) {
   client.send(message);
 
   var messagepayloadjson_Brightness_TtL = new Object();
+  messagepayloadjson_Brightness_TtL.Saver = parseInt(EnergyOpt);
   messagepayloadjson_Brightness_TtL.br = document.getElementById('range_Brightness_TtL').value;
   var messagepayloadstring_Brightness_TtL = JSON.stringify(messagepayloadjson_Brightness_TtL);
   console.log(messagepayloadstring_Brightness_TtL);
@@ -1338,7 +1341,7 @@ function TapToLightShowBtn(id) {
   message_LSCommand.destinationName = "LED88ESP32/Command";
   message_LSCommand.qos = 0;
   client.send(message_LSCommand);
-
+	
 	
   var messagepayloadjson_LightShow = new Object();
   messagepayloadjson_LightShow.sel = id;
@@ -1352,6 +1355,16 @@ function TapToLightShowBtn(id) {
   message_lightshow.destinationName = "LED88ESP32/LightShow";
   message_lightshow.qos = 0;
   client.send(message_lightshow);
+ 
+  var messagepayloadjson_Brightness_LightShow = new Object();
+  messagepayloadjson_Brightness_LightShow.Saver = parseInt(EnergyOpt);
+  messagepayloadjson_Brightness_LightShow.br = document.getElementById('range_Brightness').value;
+  var messagepayloadstring_Brightness_LightShow = JSON.stringify(messagepayloadjson_Brightness_LightShow);
+  console.log(messagepayloadstring_Brightness_LightShow);
+  var message_Brightness = new Paho.MQTT.Message(messagepayloadstring_Brightness_LightShow);
+  message_Brightness.destinationName = "LED88ESP32/Brightness";
+  message_Brightness.qos = 0;
+  client.send(message_Brightness);
 
 }
 
