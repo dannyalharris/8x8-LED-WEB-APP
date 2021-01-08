@@ -310,6 +310,24 @@ function EnergyOpti_Toggle() {
   client.send(message_EnergyOpt);
 }
 
+//Send to let All ESP sets sleep
+function ESP_Sleep(){
+  
+  EnergyOpt = localStorage.getItem("EnergyOpt");
+  var messagepayloadjson_ESPSleep = new Object();
+  //messagepayloadjson_ESPSleep.br = 100;
+  //messagepayloadjson_ESPSleep.adp = parseInt(EnergyOpt); //"1"
+  messagepayloadjson_ESPSleep.cmd = "sleep";
+
+  var messagepayloadstring_ESPSleep = JSON.stringify(messagepayloadjson_ESPSleep);
+  console.log(messagepayloadstring_ESPSleep);
+  var message_ESPSleep = new Paho.MQTT.Message(messagepayloadstring_ESPSleep);
+  console.log(message_ESPSleep);
+  message_ESPSleep.destinationName = "LED88ESP32/Command";
+  message_ESPSleep.qos = 0;
+  client.send(message_ESPSleep);
+}
+
 //Set MQTT
 function MQTTMode(mode) {
   if (mode == "Private") {
