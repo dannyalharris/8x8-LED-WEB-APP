@@ -35,6 +35,7 @@ var BatteryStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var LDRStat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
+
 if (MACAddress == null) {
   localStorage.setItem("MACAddress", "Partial");
   MACAddress = localStorage.getItem("MACAddress");
@@ -556,12 +557,49 @@ function onMessageArrived(message) {
   BatteryStatusDisplay();
   LDRStatusDisplay();  
   ConnectionStatusDisplay();
+  StatusDisplayTimeout(StatusObj.ADR);
 
 };
 
 BatteryStatusDisplay();
 LDRStatusDisplay();
 ConnectionStatusDisplay();
+
+var valueTimeout1 = [0,0,0,0,
+				     0,0,0,0,
+				     0,0,0,0,
+				     0,0,0,0];
+
+// Timeout for Status
+function StatusDisplayTimeout(adr){
+	
+	for(var i=1;i<=16;i++){
+		if(i == adr){
+			valueTimeout1[i-1] = valueTimeout1[i-1] + 1;
+			console.log("valueOn: " + valueTimeout1);
+			
+		}else if (i != adr){
+			if(valueTimeout1[i-1] >= -17){
+				localStorage.setItem("BatteryStatusSet" + i, 0);
+				localStorage.setItem("LDRStatusSet" + i, 0);
+			}else {
+				setTimeout_count(i);
+			}			
+		}
+	}
+	console.log("valueOverall: ");
+	console.log(valueTimeout1);
+}
+
+function setTimeout_count(adr){
+	console.log("Set should be set to 0: " + adr);
+	//setTimeout(valueTimeout1[adr-1] = 0, 10000);
+	valueTimeout1[adr-1] = valueTimeout1[adr-1]-1;
+	console.log("We are in setTimeout count Thread: ");
+	console.log(valueTimeout1);
+	
+	
+}
 
 // Display Battery Status in Setting
 function BatteryStatusDisplay() {
