@@ -524,8 +524,8 @@ function MQTTDisconnect() {
 //var messageConnectionBattery;
 //var messageConnectionLDR;
 var mqttconnected;
-var espmqttconnect;
-var espmqttconnected;
+//var espmqttconnect;
+//var espmqttconnected;
 
 function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString + " " + message.destinationName);
@@ -538,7 +538,7 @@ function onMessageArrived(message) {
   var LDRStateSetAdr = StatusObj.ADR;
   var LDRStateSetValue = StatusObj.LDR;
   mqttconnected = StatusObj.ADR;
-  espmqttconnected = espmqttconnect.StatusObj.ADR = "ON";
+  //espmqttconnected = espmqttconnect.StatusObj.ADR = "ON";
 
   localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
   localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
@@ -593,9 +593,10 @@ function StatusDisplayTimeout(adr){
 			console.log("valueOn: " + valueTimeout1);
 			
 		}else if (i != adr){
-			if(valueTimeout1[i-1] >= -17){
+			if(valueTimeout1[i-1] == -17){
 				localStorage.setItem("BatteryStatusSet" + i, 0);
 				localStorage.setItem("LDRStatusSet" + i, 0);
+				valueTimeout1[i-1] = 0;
 			}else {
 				setTimeout_count(i);
 			}			
@@ -1112,10 +1113,10 @@ function ConnectionStatusDisplay() {
 
   for (var i = 1; i <= 16; i++) {
     console.log("Set: " + i + " - " + BatteryStat[i - 1]);
-    if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0 || i == mqttconnected) {
+    if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0 /*|| i == mqttconnected*/) {
       document.getElementById("ConnectionSet" + i).src = "images/Connected.png";
       document.getElementById("ConnectionText" + i).innerHTML = "ON";
-    } else if (BatteryStat[i - 1] == 0 && LDRStat[i - 1] == 0 && i == mqttconnected) {
+    } else if (BatteryStat[i - 1] == 0 && LDRStat[i - 1] == 0 /*&& i == mqttconnected*/) {
       document.getElementById("ConnectionSet" + i).src = "images/Disconnected.png";
       document.getElementById("ConnectionText" + i).innerHTML = "OFF";
     }
