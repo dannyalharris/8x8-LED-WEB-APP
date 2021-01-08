@@ -311,8 +311,8 @@ function EnergyOpti_Toggle() {
 }
 
 //Send to let All ESP sets sleep
-function ESP_Sleep(){
-  
+function ESP_Sleep() {
+
   EnergyOpt = localStorage.getItem("EnergyOpt");
   var messagepayloadjson_ESPSleep = new Object();
   //messagepayloadjson_ESPSleep.br = 100;
@@ -454,11 +454,11 @@ function MQTTConnect() {
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   localStorage.setItem("mqttestablished", true);
-	//|| "
-  if (HTMLPage != "ABOUT" && HTMLPage != "Let's play!"){
-	  console.log (HTMLPage);
-  alert("8x8-WebApp MQTT connection is connected to " + MQTTBroker + " at port " + MQTTPort);
-}
+  //|| "
+  if (HTMLPage != "ABOUT" && HTMLPage != "Let's play!") {
+    console.log(HTMLPage);
+    alert("8x8-WebApp MQTT connection is connected to " + MQTTBroker + " at port " + MQTTPort);
+  }
   console.log("mqtt status: connected");
   client.subscribe("LED88ESP32/State");
   //client.subscribe("LED88ESP32/LDRStatus");
@@ -490,11 +490,7 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     localStorage.setItem("mqttestablished", false);
     console.log("onConnectionLost: " + responseObject.errorMessage);
-    if (responseObject.errorCode !== 8) {
-      alert("Error " + responseObject.errorCode + " ( " + responseObject.errorMessage + " ) " + ": Please disconnect before attempting connection to the MQTT broker next time!");
-    } else {
-      alert("Error " + responseObject.errorCode + " ( " + responseObject.errorMessage + " ) " + ": Please reconnect to the MQTT broker!");
-    }
+    alert("Error " + responseObject.errorCode + " ( " + responseObject.errorMessage + " ) " + ": Please disconnect before attempting connection to the MQTT broker next time!");
   }
 };
 
@@ -527,6 +523,8 @@ function MQTTDisconnect() {
 //var messageConnectionBattery;
 //var messageConnectionLDR;
 var mqttconnected;
+var espmqttconnect;
+var espmqttconnected;
 
 function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString + " " + message.destinationName);
@@ -539,6 +537,7 @@ function onMessageArrived(message) {
   var LDRStateSetAdr = StatusObj.ADR;
   var LDRStateSetValue = StatusObj.LDR;
   mqttconnected = StatusObj.ADR;
+  espmqttconnected = espmqttconnect.StatusObj.ADR = "ON";
 
   localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
   localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
@@ -1683,5 +1682,43 @@ function SEQ(id) {
 //  //  }
 //}
 
+/* TEST ASYNCHRONOUS COUNTER
+function sleep(ms) {
+  return new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+}
+
+var myArray;
+var time= [3000,7000,9000,11000];
+
+function callback(){
+for (var i = 0; i<3; i++){
+  console.log("point 3");
+ myArray = {id:200};
+delayedGreeting(myArray);
+setTimeout(time[i]);
+	console.log(time[i]);
+  if (myArray.id==200){
+  console.log("on--");}
+  else {
+  console.log("off--");}
+}
+}
+
+async function delayedGreeting(myArray) {
+  console.log("point 1");
+  await sleep(4000);
+  myArray.id = 400;
+  console.log("point 2");
+  if (myArray.id==200){
+  console.log("on-1");}
+  else {
+  console.log("off-2");}
+}
+
+callback()
+*/
 
 //////
+
