@@ -1684,43 +1684,6 @@ function SEQ(id) {
 
 }
 
-
-//function SEQ1() {
-//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":1}");
-//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-//  message_lightshow.qos = 0;
-//  client.send(message_lightshow);
-//}
-//
-//function SEQ2() {
-//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":2}");
-//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-//  message_lightshow.qos = 0;
-//  client.send(message_lightshow);
-//}
-//
-//function SEQ3() {
-//  var message_lightshow = new Paho.MQTT.Message("{\"seq\":3}");
-//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-//  //SingleColor/setSequence";
-//  message_lightshow.qos = 0;
-//  client.send(message_lightshow);
-//}
-//
-//function PLAYALL() {
-//  var message_lightshow = new Paho.MQTT.Message("{\"ptr\":0}");
-//  message_lightshow.destinationName = "LED88ESP32/PlayInSequence";
-//  message_lightshow.qos = 0;
-//  client.send(message_lightshow);
-//
-//  //else if (document.getElementById("ToggleLightShow").checked == false) {
-//  //    var message_lightshow = new Paho.MQTT.Message("{\"seq\":-1}");
-//  //    message_lightshow.destinationName = "LED88ESP32/SingleColor/setSequence";
-//  //    message_lightshow.qos = 0;
-//  //    client.send(message_lightshow);
-//  //  }
-//}
-
 /* TEST ASYNCHRONOUS COUNTER
 function sleep(ms) {
   return new Promise(
