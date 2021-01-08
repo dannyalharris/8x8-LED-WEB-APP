@@ -1689,29 +1689,31 @@ function sleep(ms) {
   );
 }
 
-var myArray;
+var myESP;
 var time= [3000,7000,9000,11000];
 
 function callback(){
 for (var i = 0; i<3; i++){
-  console.log("point 3");
- myArray = {id:200};
-delayedGreeting(myArray);
-setTimeout(time[i]);
-	console.log(time[i]);
-  if (myArray.id==200){
+  console.log("point");
+ myESP = {esp1:"on"};
+delayedGreeting(myESP);
+setTimeout(()=>{
+console.log(time[i]);
+  if (myESP.esp1=="on"){
   console.log("on--");}
   else {
   console.log("off--");}
+}, time[i]);
+	
 }
 }
 
-async function delayedGreeting(myArray) {
+async function delayedGreeting(myESP) {
   console.log("point 1");
   await sleep(4000);
-  myArray.id = 400;
+  myESP.esp1 = "off";
   console.log("point 2");
-  if (myArray.id==200){
+  if (myESP.esp1=="on"){
   console.log("on-1");}
   else {
   console.log("off-2");}
