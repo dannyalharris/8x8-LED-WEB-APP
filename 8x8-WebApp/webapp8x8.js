@@ -318,7 +318,7 @@ function ESP_Sleep() {
   var messagepayloadjson_ESPSleep = new Object();
   //messagepayloadjson_ESPSleep.br = 100;
   //messagepayloadjson_ESPSleep.adp = parseInt(EnergyOpt); //"1"
-  messagepayloadjson_ESPSleep.cmd = "sleep";
+  messagepayloadjson_ESPSleep.cmd = "GoSleep";
 
   var messagepayloadstring_ESPSleep = JSON.stringify(messagepayloadjson_ESPSleep);
   console.log(messagepayloadstring_ESPSleep);
