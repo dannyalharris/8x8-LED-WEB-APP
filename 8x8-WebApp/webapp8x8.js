@@ -22,6 +22,11 @@ localStorage.setItem("HTML", document.getElementById("HTML").innerHTML);
 var HTMLPage = localStorage.getItem("HTML");
 var MACAddress = localStorage.getItem("MACAddress");
 
+var sleephour = localStorage.getItem("sleephour");
+var sleepminute = localStorage.getItem("sleepminute");
+
+document.getElementById("sleephour").value = sleephour;
+document.getElementById("sleepminute").value = sleepminute;
 
 var EnergyOpt = localStorage.getItem("EnergyOpt");
 
@@ -311,14 +316,49 @@ function EnergyOpti_Toggle() {
   client.send(message_EnergyOpt);
 }
 
+
 //Send to let All ESP sets sleep
 function ESP_Sleep() {
+  if (localStorage.getItem("mqttestablished") == "false") {
+    alert("Please connect to the MQTT broker first!");
+  }
+
+  sleephour = document.getElementById("sleephour").value;
+  sleepminute = document.getElementById("sleepminute").value;
+
+  console.log(sleephour + ":" + sleepminute);
+  if (sleephour == null || sleephour == "") {
+    // document.getElementById("sleephour").value = "00";
+    sleephour = "00";
+    console.log(sleephour + ":" + sleepminute);
+  }
+  if (sleepminute == null || sleepminute == "") {
+    //document.getElementById("sleepminute").value = "05";
+    sleepminute = "05";
+    console.log(sleephour + ":" + sleepminute);
+  }
+  if (sleephour.match(/(^[\d]$)/g)) {
+    sleephour = "0" + sleephour;
+    console.log(":" + sleephour + ":" + sleepminute);
+  }
+  if (sleepminute.match(/(^[\d]$)/g)) {
+    sleepminute = "0" + sleepminute;
+    console.log(sleephour + ":" + sleepminute + ":");
+  }
+
+  document.getElementById("sleephour").value = sleephour;
+  document.getElementById("sleepminute").value = sleepminute;
+
+  localStorage.setItem("sleephour", sleephour);
+  localStorage.setItem("sleepminute", sleepminute);
 
   EnergyOpt = localStorage.getItem("EnergyOpt");
-  var messagepayloadjson_ESPSleep = new Object();
   //messagepayloadjson_ESPSleep.br = 100;
   //messagepayloadjson_ESPSleep.adp = parseInt(EnergyOpt); //"1"
+
+  var messagepayloadjson_ESPSleep = new Object();
   messagepayloadjson_ESPSleep.cmd = "GoSleep";
+  messagepayloadjson_ESPSleep.sleeptime = sleephour + ":" + sleepminute;
 
   var messagepayloadstring_ESPSleep = JSON.stringify(messagepayloadjson_ESPSleep);
   console.log(messagepayloadstring_ESPSleep);
@@ -569,7 +609,7 @@ function StatusDisplayTimeout() {
   for (var i = 1; i <= 16; i++) {
     if (i == adr) {
       //valueTimeout1[i - 1] = valueTimeout1[i - 1] + 1;
-	  valueTimeout1[i - 1] = 1;
+      valueTimeout1[i - 1] = 1;
       console.log("valueOn: " + valueTimeout1);
       mqttconnected = 0;
 
