@@ -569,7 +569,7 @@ var mqttconnected;
 
 function onMessageArrived(message) {
   console.log("onMessageArrived: " + message.payloadString + " " + message.destinationName);
-
+  
   var status = message.payloadString.toString();
   var StatusObj = JSON.parse(status);
   console.log("StatusObj.ADR: " + StatusObj.ADR + ", StatusObj.BAT: " + StatusObj.BAT + ", StatusObj.LDR: " + StatusObj.LDR);
@@ -582,7 +582,7 @@ function onMessageArrived(message) {
 
   localStorage.setItem("BatteryStatusSet" + BatteryStateSetAdr, BatteryStateSetValue);
   localStorage.setItem("LDRStatusSet" + LDRStateSetAdr, LDRStateSetValue);
-
+	
   BatteryStatusDisplay();
   LDRStatusDisplay();
   ConnectionStatusDisplay();
@@ -629,7 +629,16 @@ function StatusDisplayTimeout() {
       }
     }
   }
-  //console.log("valueOverall: ");
+	
+  var messagepayloadstring_MessageGet = JSON.stringify("0");
+  console.log(messagepayloadstring_MessageGet);
+  var message_MessageGet = new Paho.MQTT.Message(messagepayloadstring_MessageGet);
+  console.log(message_MessageGet);
+  message_MessageGet.destinationName = "LED88ESP32/WebActivity";
+  message_MessageGet.qos = 0;
+  client.send(message_MessageGet);
+ 
+  console.log("valueOverall: 0");
   //console.log(valueTimeout1);
 }
 
@@ -1082,7 +1091,7 @@ function LDRStatusDisplay() {
 // Display Connection Status in Setting
 function ConnectionStatusDisplay() {
   //var ConnectionStatusBattery = messageConnectionBattery.substring(3);
-  console.log("Try: " + localStorage.getItem("BatteryStatusSet1"));
+  //console.log("Try: " + localStorage.getItem("BatteryStatusSet1"));
   for (var i = 1; i <= 16; i++) {
     if (localStorage.getItem(("BatteryStatusSet" + i)) == null || localStorage.getItem(("BatteryStatusSet" + i)) == undefined) {
       localStorage.setItem("BatteryStatusSet" + i, "0");
@@ -1094,7 +1103,7 @@ function ConnectionStatusDisplay() {
   }
 
   BatteryStat[0] = parseInt(localStorage.getItem("BatteryStatusSet1"));
-  console.log("Set: " + " - " + BatteryStat[0]);
+  //console.log("Set: " + " - " + BatteryStat[0]);
   BatteryStat[1] = parseInt(localStorage.getItem("BatteryStatusSet2"));
   BatteryStat[2] = parseInt(localStorage.getItem("BatteryStatusSet3"));
   BatteryStat[3] = parseInt(localStorage.getItem("BatteryStatusSet4"));
@@ -1129,7 +1138,8 @@ function ConnectionStatusDisplay() {
   LDRStat[15] = parseInt(localStorage.getItem("LDRStatusSet16"));
 
   for (var i = 1; i <= 16; i++) {
-    console.log("Set: " + i + " - " + BatteryStat[i - 1]);
+    
+	 //console.log("Set: " + i + " - " + BatteryStat[i - 1]);
     if (BatteryStat[i - 1] != 0 || LDRStat[i - 1] != 0 /*|| i == mqttconnected*/ ) {
       document.getElementById("ConnectionSet" + i).src = "images/Connected.png";
       document.getElementById("ConnectionText" + i).innerHTML = "ON";
@@ -1149,7 +1159,7 @@ function ToTapToHome() {
 // In the Text Generator
 function openColorPicker() {
   document.getElementById("colorPicker_Modal").style.display = "block";
-  console.log("ColorPickerOpened");
+  //console.log("ColorPickerOpened");
 }
 
 function closeColorPicker() {
