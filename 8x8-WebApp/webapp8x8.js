@@ -479,9 +479,12 @@ if (localStorage.getItem("mqttestablished") == "true") {
 
 
 function MQTTConnect() {
+ // Multiple web-app client can be run at simultaneously to control the 8x8 led
   //client = new Paho.MQTT.Client("broker.hivemq.com", Number(8000), "clientId");
+  // Only one web-app client can be run at one time to prevent other user from controlling the 8x8 led
+  //client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "3136c683-88d2-4825-b3c3-f2ba14a28eae");
   console.log(MQTTBroker + " Number:" + MQTTPort);
-  client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "3136c683-88d2-4825-b3c3-f2ba14a28eae");
+  client = new Paho.MQTT.Client(MQTTBroker, Number(MQTTPort), "clientId");
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({
